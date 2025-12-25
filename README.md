@@ -22,6 +22,8 @@ Admin Dashboard: Built-in interface to upload PDFs and trigger model retraining 
 
 Source Citations: Every answer links back to the specific source document and page number for verification.
 
+Voice Interaction (Gemini-like): A fully hands-free conversational mode with real-time streaming transcription, auto-submit (silence detection), and anti-echo logic for a fluid voice-first experience.
+
 🛠️ Tech Stack
 
 Frontend
@@ -29,6 +31,8 @@ Frontend
 React.js: Modern, responsive user interface.
 
 CSS: Custom styling with animations and responsive design.
+
+Web Speech API: Native browser API used for low-latency Speech-to-Text (STT) and Text-to-Speech (TTS).
 
 Backend
 
@@ -159,3 +163,13 @@ rasa run --enable-api --cors "*"
 # Runs on http://localhost:5005
 
 
+# Runs on http://localhost:5005
+
+🧪 Testing Notes (`Shivam_test_zone`)
+
+A dedicated test environment exists in `Shivam_test_zone` to verify voice components in isolation:
+*   `TestSTT.html`: Tests real-time transcription and silence detection.
+*   `TestTTS.html`: Tests voice selection (English/Hindi) and playback.
+*   `TestCombined.html`: Verifies the complete hands-free loop (Anti-Echo & Auto-Resume).
+
+Open these files directly in a browser to debug voice logic without running the full backend.
