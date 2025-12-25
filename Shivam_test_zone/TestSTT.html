@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Zone - Solo STT</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="chat-card">
+            <div class="header">
+                <h1 class="header-title">STT Test Module</h1>
+                <p class="header-subtitle">Testing Speech-to-Text, Silence Detection & Language Switching</p>
+                <div style="margin-top: 10px;">
+                    <label style="font-size: 0.9rem; color: #475569; font-weight: 600;">Language: </label>
+                    <select id="languageSelect" style="padding: 5px; border-radius: 5px;">
+                        <option value="en-US">English (US)</option>
+                        <option value="hi-IN">Hindi (IN)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <div class="message-area" id="messageArea">
+                    <div class="message-row message-row-bot">
+                        <div class="message-bubble message-bubble-bot">
+                            <p>Hi! I'm the STT Test Bot. Speak to me, and I'll track your silence. I'll auto-submit after 2.5s of silence.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="padding: 0 1.5rem;">
+                    <div class="status-log" id="statusLog">System Ready...</div>
+                </div>
+
+                <div class="input-controls">
+                    <button class="icon-button" id="micButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>
+                    </button>
+                    <div class="input-form">
+                        <input type="text" class="input-field" id="inputField" placeholder="Listening..." autocomplete="off">
+                        <button class="send-button" id="sendButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Configuration ---
+        const SILENCE_TIMEOUT = 2500; // 2.5 seconds
+        let recognition;
+        let silenceTimer;
+        let isListening = false;
+        let finalTranscript = '';
+        
+        // --- Elements ---
+        const micButton = document.getElementById('micButton');
+        const inputField = document.getElementById('inputField');
+        const sendButton = document.getElementById('sendButton');
+        const messageArea = document.getElementById('messageArea');
+        const statusLog = document.getElementById('statusLog');
+        const languageSelect = document.getElementById('languageSelect');
+
+        // --- Logging Helper ---
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            statusLog.innerHTML = `[${time}] ${msg}<br>` + statusLog.innerHTML;
+        }
+
+        // --- Initialization ---
+        function initSTT() {
+            if (!('webkitSpeechRecognition' in window)) {
+                log('ERROR: Web Speech API not supported in this browser.');
+                return;
+            }
+
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = languageSelect.value;
+
+            recognition.onstart = () => {
+                isListening = true;
+                micButton.classList.add('active'); // Use CSS class for visual feedback
+                micButton.style.color = '#2563eb';
+                micButton.style.backgroundColor = '#e0e7ff';
+                log(`STT Started (${recognition.lang})`);
+            };
+
+            recognition.onend = () => {
+                isListening = false;
+                micButton.classList.remove('active');
+                micButton.style.color = '';
+                micButton.style.backgroundColor = '';
+                log('STT Stopped');
+            };
+
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                
+                // Rebuild transcript from current results
+                // NOTE: In continuous mode, we might want to just append new parts, 
+                // but usually getting the full sequence is safer for editing.
+                // However, user requirement says "Append... to current input field".
+                // Since this is a test tool, let's keep it simple: 
+                // We'll calculate the new text and update the input.
+                
+                let currentChunk = '';
+
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                        currentChunk += event.results[i][0].transcript;
+                    } else {
+                        interimTranscript += event.results[i][0].transcript;
+                        currentChunk += event.results[i][0].transcript;
+                    }
+                }
+
+                // Strategy: We can't easily "append" to existing text typed by keyboard IF we want to mix them perfectly.
+                // But for voice-first, we usually overwrite or strictly append.
+                // Here we will just visualize the recognized text in the input.
+                // Use a "base" text if we want to support mixing? 
+                // For simplicity in this test: 
+                // We maintain 'finalTranscript' and add 'interimTranscript' to it for display.
+                
+                inputField.value = finalTranscript + interimTranscript;
+
+                // --- Silence Detection Logic ---
+                log('User spoke...');
+                clearTimeout(silenceTimer);
+                silenceTimer = setTimeout(() => {
+                    log(`Silence detected (${SILENCE_TIMEOUT}ms). Auto-submitting...`);
+                    stopListeningAndSubmit();
+                }, SILENCE_TIMEOUT);
+            };
+
+            recognition.onerror = (event) => {
+                log(`STT Error: ${event.error}`);
+            };
+        }
+
+        function toggleListening() {
+            if (isListening) {
+                stopListeningAndSubmit(); // Or just stop? Requirement implies stick to auto-submit flow mainly.
+            } else {
+                finalTranscript = ''; // Reset for new turn? 
+                // If we want to append to existing text in input:
+                finalTranscript = inputField.value; 
+                if(finalTranscript && !finalTranscript.endsWith(' ')) finalTranscript += ' ';
+                
+                recognition.lang = languageSelect.value;
+                recognition.start();
+            }
+        }
+
+        function stopListeningAndSubmit() {
+            if (isListening) {
+                recognition.stop();
+            }
+            clearTimeout(silenceTimer);
+            
+            // Wait slightly for final result? Usually automatic.
+            setTimeout(() => {
+                if (inputField.value.trim()) {
+                    submitMessage(inputField.value);
+                }
+            }, 200);
+        }
+
+        function submitMessage(text) {
+            log(`MSG SUBMITTED: "${text}"`);
+            
+            // Add user message to chat
+            const userRow = document.createElement('div');
+            userRow.className = 'message-row message-row-user';
+            userRow.innerHTML = `<div class="message-bubble message-bubble-user"><p>${text}</p></div>`;
+            messageArea.appendChild(userRow);
+            
+            // Clear input
+            inputField.value = '';
+            finalTranscript = '';
+            
+            // Scroll to bottom
+            messageArea.scrollTop = messageArea.scrollHeight;
+        }
+
+        // --- Event Listeners ---
+        micButton.addEventListener('click', toggleListening);
+        sendButton.addEventListener('click', () => {
+            if (inputField.value.trim()) {
+                // If manually sending, stop listening first
+                if (isListening) recognition.stop();
+                submitMessage(inputField.value);
+            }
+        });
+        
+        languageSelect.addEventListener('change', () => {
+            log(`Language changed to ${languageSelect.value}`);
+            if (isListening) {
+                recognition.stop();
+                setTimeout(() => {
+                    recognition.lang = languageSelect.value;
+                    recognition.start();
+                }, 500);
+            }
+        });
+
+        // Initialize on load
+        initSTT();
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Zone - Solo TTS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <div class="chat-card">
+            <div class="header">
+                <h1 class="header-title">TTS Test Module</h1>
+                <p class="header-subtitle">Testing Text-to-Speech & Voice Selection</p>
+            </div>
+
+            <div class="chat-container">
+                <div class="message-area" id="messageArea">
+                    <div class="message-row message-row-bot">
+                        <div class="message-bubble message-bubble-bot">
+                            <p>Hi! I'm the TTS Test Bot. Type something below and I'll read it out.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding: 0 1.5rem;">
+                    <div class="status-log" id="statusLog">System Ready...</div>
+                </div>
+
+                <div class="input-controls" style="flex-direction: column; align-items: stretch;">
+                    <div style="margin-bottom: 10px; display: flex; gap: 10px;">
+                        <select id="languageSelect" style="padding: 5px; border-radius: 5px; flex: 1;">
+                            <option value="en-US">English (US)</option>
+                            <option value="hi-IN">Hindi (IN)</option>
+                        </select>
+                        <button id="loadVoicesBtn"
+                            style="padding: 5px 10px; border-radius: 5px; background: #f1f5f9; border: 1px solid #cbd5e1; cursor: pointer;">Reload
+                            Voices</button>
+                    </div>
+
+                    <div class="input-form">
+                        <input type="text" class="input-field" id="inputField" placeholder="Type text to speak..."
+                            autocomplete="off">
+                        <button class="send-button" id="speakButton">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Elements ---
+        const inputField = document.getElementById('inputField');
+        const speakButton = document.getElementById('speakButton');
+        const statusLog = document.getElementById('statusLog');
+        const languageSelect = document.getElementById('languageSelect');
+        const loadVoicesBtn = document.getElementById('loadVoicesBtn');
+
+        // --- Logging Helper ---
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            statusLog.innerHTML = `[${time}] ${msg}<br>` + statusLog.innerHTML;
+        }
+
+        // --- TTS Logic ---
+        let synth = window.speechSynthesis;
+        let voices = [];
+
+        function loadVoices() {
+            voices = synth.getVoices();
+            log(`Loaded ${voices.length} voices.`);
+            if (voices.length === 0) {
+                log('WARNING: No voices found. Some browsers need user interaction first.');
+            }
+        }
+
+        // Initial load (some browsers are async)
+        loadVoices();
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        loadVoicesBtn.addEventListener('click', loadVoices);
+
+        function speak(text) {
+            if (synth.speaking) {
+                log('Already speaking. Cancelling current...');
+                synth.cancel();
+            }
+
+            if (text === '') return;
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            const selectedLang = languageSelect.value;
+
+            // --- Crucial Voice Selection Logic ---
+            let targetVoice = null;
+
+            if (selectedLang === 'en-US') {
+                // Try to find Google US English
+                targetVoice = voices.find(v => v.name === 'Google US English');
+                // Fallback to any en-US
+                if (!targetVoice) targetVoice = voices.find(v => v.lang === 'en-US');
+            } else if (selectedLang === 'hi-IN') {
+                // Try to find Google Hindi
+                targetVoice = voices.find(v => v.name.includes('Google') && v.lang === 'hi-IN');
+                // Fallback to any Hindi
+                if (!targetVoice) targetVoice = voices.find(v => v.lang === 'hi-IN');
+            }
+
+            if (targetVoice) {
+                utterance.voice = targetVoice;
+                log(`Speaking with: ${targetVoice.name} (${targetVoice.lang})`);
+            } else {
+                log(`WARNING: Desired voice for ${selectedLang} not found. Using default.`);
+                utterance.lang = selectedLang; // Best effort
+            }
+
+            // Playback events
+            utterance.onstart = () => {
+                speakButton.style.backgroundColor = '#16a34a'; // Green when speaking
+            };
+
+            utterance.onend = () => {
+                log('Playback finished.');
+                speakButton.style.backgroundColor = ''; // Reset
+            };
+
+            utterance.onerror = (e) => {
+                log(`Playback Error: ${e.error}`);
+                speakButton.style.backgroundColor = '';
+            };
+
+            synth.speak(utterance);
+        }
+
+        // --- Event Listeners ---
+        speakButton.addEventListener('click', () => {
+            speak(inputField.value);
+        });
+
+        // Enter key to speak
+        inputField.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                speak(inputField.value);
+            }
+        });
+
+    </script>
+</body>
+
+</html>

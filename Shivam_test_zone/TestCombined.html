@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Zone - Combined Loop</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .listening-overlay {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(37, 99, 235, 0.9);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        .listening-overlay.visible {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app-container">
+        <div class="chat-card" style="position: relative;">
+            <div class="header">
+                <h1 class="header-title">Combined Loop Test</h1>
+                <p class="header-subtitle">Full Cycle: STT -> Silence -> Send -> TTS -> Resume STT</p>
+                <div style="margin-top: 10px;">
+                    <label style="font-size: 0.9rem; color: #475569; font-weight: 600;">Language: </label>
+                    <select id="languageSelect" style="padding: 5px; border-radius: 5px;">
+                        <option value="en-US">English (US)</option>
+                        <option value="hi-IN">Hindi (IN)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="chat-container">
+                <div class="message-area" id="messageArea">
+                    <div class="message-row message-row-bot">
+                        <div class="message-bubble message-bubble-bot">
+                            <p>Hi! Speak and I will echo you. Note how the Mic stops when I speak and resumes
+                                automatically.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="listening-overlay" id="listeningIndicator">Listening...</div>
+
+                <div style="padding: 0 1.5rem;">
+                    <div class="status-log" id="statusLog">System Ready...</div>
+                </div>
+
+                <div class="input-controls">
+                    <button class="icon-button" id="micButton">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                            <line x1="12" y1="19" x2="12" y2="23"></line>
+                            <line x1="8" y1="23" x2="16" y2="23"></line>
+                        </svg>
+                    </button>
+                    <div class="input-form">
+                        <input type="text" class="input-field" id="inputField" placeholder="Listening..."
+                            autocomplete="off">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Configuration ---
+        const SILENCE_TIMEOUT = 2500;
+        const RESUME_DELAY = 200; // ms to wait after TTS before resuming mic
+
+        let recognition;
+        let synth = window.speechSynthesis;
+        let silenceTimer;
+        let isListening = false;
+        let finalTranscript = '';
+        let voices = [];
+
+        // --- Elements ---
+        const micButton = document.getElementById('micButton');
+        const inputField = document.getElementById('inputField');
+        const messageArea = document.getElementById('messageArea');
+        const statusLog = document.getElementById('statusLog');
+        const languageSelect = document.getElementById('languageSelect');
+        const listeningIndicator = document.getElementById('listeningIndicator');
+
+        function log(msg) {
+            const time = new Date().toLocaleTimeString();
+            statusLog.innerHTML = `[${time}] ${msg}<br>` + statusLog.innerHTML;
+        }
+
+        // --- Voice Loading ---
+        function loadVoices() {
+            voices = synth.getVoices();
+            if (voices.length > 0) log(`Voices loaded: ${voices.length}`);
+        }
+        loadVoices();
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        // --- STT Initialization ---
+        function initSTT() {
+            if (!('webkitSpeechRecognition' in window)) {
+                log('Web Speech API not supported.');
+                return;
+            }
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = languageSelect.value;
+
+            recognition.onstart = () => {
+                isListening = true;
+                micButton.classList.add('active');
+                listeningIndicator.classList.add('visible');
+                log('<b>Mic STARTED</b>');
+            };
+
+            recognition.onend = () => {
+                isListening = false;
+                micButton.classList.remove('active');
+                listeningIndicator.classList.remove('visible');
+                // log('Mic Stopped'); // Too noisy if toggling often
+            };
+
+            recognition.onresult = (event) => {
+                let interimTranscript = '';
+                for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        finalTranscript += event.results[i][0].transcript;
+                    } else {
+                        interimTranscript += event.results[i][0].transcript;
+                    }
+                }
+                inputField.value = finalTranscript + interimTranscript;
+
+                // Reset silence timer on every speech event
+                clearTimeout(silenceTimer);
+                silenceTimer = setTimeout(() => {
+                    log('Silence detected. Sending...');
+                    stopMicAndProcess(inputField.value);
+                }, SILENCE_TIMEOUT);
+            };
+
+            recognition.onerror = (event) => {
+                log(`STT Error: ${event.error}`);
+            };
+        }
+
+        // --- Core Loop Logic ---
+
+        function toggleMic() {
+            if (isListening) {
+                recognition.stop();
+            } else {
+                startMic();
+            }
+        }
+
+        function startMic() {
+            finalTranscript = '';
+            inputField.value = '';
+            recognition.lang = languageSelect.value;
+            try {
+                recognition.start();
+            } catch (e) {
+                log('Mic start error (already active?)');
+            }
+        }
+
+        function stopMicAndProcess(text) {
+            // 1. Stop Mic immediately (Anti-Echo)
+            recognition.stop();
+            clearTimeout(silenceTimer);
+
+            if (!text.trim()) {
+                log('Empty input, restarting mic...');
+                startMic(); // Just restart if nothing was said
+                return;
+            }
+
+            // 2. Add User Message to UI
+            addMessage(text, 'user');
+
+            // 3. Simulate Bot Processing (Short delay)
+            setTimeout(() => {
+                // Mock response: Echo the user
+                const botResponse = "You said: " + text;
+                addMessage(botResponse, 'bot');
+
+                // 4. TTS Speaks
+                speakResponse(botResponse);
+            }, 500);
+        }
+
+        function speakResponse(text) {
+            // Ensure any current speech is cancelled
+            synth.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            const selectedLang = languageSelect.value;
+
+            // Voice Selection (Same as TestTTS.html)
+            let targetVoice = null;
+            if (selectedLang === 'en-US') {
+                targetVoice = voices.find(v => v.name === 'Google US English') || voices.find(v => v.lang === 'en-US');
+            } else if (selectedLang === 'hi-IN') {
+                targetVoice = voices.find(v => v.name.includes('Google') && v.lang === 'hi-IN') || voices.find(v => v.lang === 'hi-IN');
+            }
+            if (targetVoice) utterance.voice = targetVoice;
+
+            utterance.onstart = () => {
+                log(`Bot speaking (${text.substring(0, 15)}...)...`);
+            };
+
+            // 5. Auto-Resume Mic after TTS
+            utterance.onend = () => {
+                log('Bot finished speaking.');
+                setTimeout(() => {
+                    log('<b>Auto-Resuming Mic...</b>');
+                    startMic();
+                }, RESUME_DELAY);
+            };
+
+            synth.speak(utterance);
+        }
+
+        function addMessage(text, sender) {
+            const row = document.createElement('div');
+            row.className = `message-row message-row-${sender}`;
+            const bubble = document.createElement('div');
+            bubble.className = `message-bubble message-bubble-${sender}`;
+            bubble.innerHTML = `<p>${text}</p>`;
+            row.appendChild(bubble);
+            messageArea.appendChild(row);
+            messageArea.scrollTop = messageArea.scrollHeight;
+        }
+
+        // --- Event Listeners ---
+        micButton.addEventListener('click', toggleMic);
+
+        // Manual send (overrides auto-logic)
+        inputField.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                stopMicAndProcess(inputField.value);
+            }
+        });
+
+        initSTT();
+
+    </script>
+</body>
+
+</html>
