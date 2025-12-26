@@ -1,0 +1,8 @@
+Feature  Goal       Python Code       File Key Step
+STT      Convert 
+         Audio 
+         to Text    stt_script.py    "Load audio, send to client.recognize(), extract text from response."
+
+TTS      Convert 
+         Text 
+         to Audio   tts_script.py    "Create a text input, define voice/audio settings, send to client.synthesize_speech(), save binary data to an MP3 file."
