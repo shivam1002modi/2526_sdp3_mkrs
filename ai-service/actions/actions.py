@@ -64,7 +64,7 @@ class ActionQueryDoc(Action):
         try:
             if os.path.exists(DB_FAISS_PATH):
                 print(f"Loading FAISS vector store from: {DB_FAISS_PATH}")
-                self.db = FAISS.load_local(DB_FAISS_PATH, self.embeddings, allow_dangerous_deserialization=True)
+                self.db = FAISS.load_local(DB_FAISS_PATH, self.embeddings)
                 print("Vector store loaded successfully.")
             else:
                 print("WARNING: Vector store not found. The bot cannot answer document questions until it's retrained.")

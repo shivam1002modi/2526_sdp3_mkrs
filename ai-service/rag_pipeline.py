@@ -12,7 +12,21 @@ from langchain_community.vectorstores import FAISS
 import torch
 
 def print_flush(*args, **kwargs):
-    print(*args, **kwargs)
+    # Sanitize args to avoid Windows UnicodeEncodeError
+    new_args = []
+    for arg in args:
+        if isinstance(arg, str):
+            try:
+                # Try to print normally
+                arg.encode(sys.stdout.encoding or 'utf-8')
+                new_args.append(arg)
+            except UnicodeEncodeError:
+                # Fallback: force ascii with replacement
+                new_args.append(arg.encode('ascii', 'replace').decode('ascii'))
+        else:
+            new_args.append(arg)
+            
+    print(*new_args, **kwargs)
     sys.stdout.flush()
 
 # Paths relative to this file
@@ -37,36 +51,56 @@ def create_vector_db():
             sys.exit(0)
 
         print_flush(f"Loading PDFs from: {PDFS_PATH}")
-        loader = PyPDFDirectoryLoader(PDFS_PATH)
-        documents = loader.load()
-
-        if not documents:
-            print_flush("WARNING: No documents were found in the 'pdfs' folder.")
-            print_flush("--- RAG pipeline finished: No new vector store created. ---")
+        print_flush(f"Loading PDFs from: {PDFS_PATH}")
+        
+        # --- ROBUST LOADING: Load files one by one to catch errors ---
+        from langchain_community.document_loaders import PyPDFLoader
+        
+        documents = []
+        pdf_files = [f for f in os.listdir(PDFS_PATH) if f.lower().endswith('.pdf')]
+        
+        if not pdf_files:
+            print_flush("WARNING: No PDF files found in the 'pdfs' folder.")
             return
 
-        print_flush(f"Successfully loaded content from {len(documents)} pages (loader output).")
+        print_flush(f"Found {len(pdf_files)} PDF files. Processing...")
 
-        # Ensure metadata contains 'source' (filename) and 'page' when possible.
-        normalized_docs = []
-        for doc in documents:
-            # The loader typically sets doc.metadata['source'] to the filepath.
-            metadata = doc.metadata or {}
-            # Derive nice source filename
-            source = metadata.get('source') or metadata.get('filename') or getattr(doc, "source", None)
-            if source:
-                source_name = os.path.basename(str(source))
-            else:
-                source_name = "unknown.pdf"
+        for pdf_file in pdf_files:
+            file_path = os.path.join(PDFS_PATH, pdf_file)
+            try:
+                # Load single PDF
+                loader = PyPDFLoader(file_path)
+                file_docs = loader.load()
+                
+                # Check for empty docs
+                if not file_docs:
+                    print_flush(f"  [WARN] Skipped empty file: {pdf_file}")
+                    continue
 
-            # Try to capture page info - loaders sometimes include 'page'
-            page = metadata.get("page") or metadata.get("page_number") or metadata.get("pageno")
-            # Update metadata in-place
-            metadata["source"] = source_name
-            if page:
-                metadata["page"] = page
-            doc.metadata = metadata
-            normalized_docs.append(doc)
+                # Normalize metadata immediately
+                for doc in file_docs:
+                    meta = doc.metadata or {}
+                    # Ensure source is just the filename, not full path
+                    meta["source"] = pdf_file 
+                    # Normalize page number (some loaders use 'page', some 'page_number')
+                    page = meta.get("page") or meta.get("page_number") or meta.get("pageno")
+                    if page is not None:
+                        meta["page"] = page
+                    doc.metadata = meta
+                    documents.append(doc)
+                
+                print_flush(f"  [OK] Loaded {pdf_file} ({len(file_docs)} pages)")
+
+            except Exception as e:
+                print_flush(f"  [ERROR] Failed to load {pdf_file}: {str(e)[:100]}...")
+                continue
+
+        if not documents:
+            print_flush("ERROR: No valid documents were loaded after checking all files.")
+            return
+
+        normalized_docs = documents 
+
 
         print_flush("Splitting documents into smaller text chunks...")
         text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
