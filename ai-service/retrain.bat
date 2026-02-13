@@ -2,7 +2,7 @@
 ECHO --- Starting Full Retraining Process ---
 
 REM Activate the virtual environment
-CALL .\venv\Scripts\activate.bat
+CALL ..\.venv\Scripts\activate.bat
 
 ECHO.
 ECHO --- Step 1 of 2: Re-building document knowledge base (RAG Pipeline)... ---

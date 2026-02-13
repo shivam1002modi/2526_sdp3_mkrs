@@ -16,7 +16,12 @@ Thumbs.db
 
 # Python (AI Service) - CRITICAL
 **/venv
-**/.venv
+# Tools and Editors
+.agent
+.agents
+.cursor
+.vscode
+.venv
 **/__pycache__
 **/*.pyc
 
