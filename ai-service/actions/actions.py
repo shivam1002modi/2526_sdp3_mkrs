@@ -7,7 +7,7 @@ from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.vectorstores import FAISS
+from langchain_community.vectorstores import Chroma
 
 from langdetect import detect, LangDetectException
 from transformers import pipeline
@@ -62,15 +62,19 @@ class ActionQueryDoc(Action):
             self.embeddings = None
 
         try:
-            if os.path.exists(DB_FAISS_PATH):
-                print(f"Loading FAISS vector store from: {DB_FAISS_PATH}")
-                self.db = FAISS.load_local(DB_FAISS_PATH, self.embeddings, allow_dangerous_deserialization=True)
+            # DB Path
+            # Fix NameError: Use relative path from actions.py to documents/chroma_db
+            chroma_path = os.path.join(os.path.dirname(__file__), "..", "documents", "chroma_db")
+            
+            if os.path.exists(chroma_path):
+                print(f"Loading ChromaDB from: {chroma_path}")
+                self.db = Chroma(persist_directory=chroma_path, embedding_function=self.embeddings)
                 print("Vector store loaded successfully.")
             else:
                 print("WARNING: Vector store not found. The bot cannot answer document questions until it's retrained.")
                 self.db = None
         except Exception as e:
-            print("FATAL: Failed to load FAISS vector store:", e)
+            print("FATAL: Failed to load ChromaDB:", e)
             traceback.print_exc()
             self.db = None
 
