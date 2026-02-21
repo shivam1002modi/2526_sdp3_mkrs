@@ -10,7 +10,19 @@ DocuBot is a professional-grade Retrieval-Augmented Generation (RAG) system desi
 
 Key Differentiator: It runs entirely locally using open-source models. No data leaves your server, and no external API keys (like OpenAI or Google) are required, ensuring maximum privacy and zero recurring costs.
 
-✨ Key Features
+### 🧠 Context-Aware Ingestion (DeepDive V4)
+
+Our RAG pipeline doesn't just "read" text; it understands the layout. This ensures high accuracy even for complex documents:
+
+1.  **Layout Awareness**: Using Y-Axis and X-Axis Histograms, the system detects horizontal bands and columns. This prevents "column bleeding" where text from different columns is mixed together.
+2.  **Artifact Removal**: Statistically analyzes headers and footers across the entire document to remove repetitive noisy artifacts.
+3.  **Table Reconstruction**: Detects tables and converts them into structured Markdown format. These tables are treated as "atomic units" during ingestion.
+4.  **Smart Chunking**: Unlike standard splitters that might break a table in half, our `SmartChunker` ensures that Markdown tables stay together in a single chunk, preserving the context and relationships between data cells.
+5.  **Multilingual Support**: Automatically detects input language and maintains context across translations.
+
+---
+
+### ✨ Key Features
 
 100% Local Intelligence: Powered by local Deep Learning models for retrieval, re-ranking, and text generation.
 
@@ -68,102 +80,61 @@ graph TD
     RasaActions <-->|Local Inference| LocalModels[Hugging Face Models]
 
 
-💻 How to Run Locally
+### 🛠️ Automated Setup & Run (Recommended)
 
-This system uses a microservices architecture. You will need to run 5 separate terminals to start the complete system.
+To make it easier for new users, we've included automation scripts:
 
-Prerequisites
+1.  **Clone & Initial Setup**:
+    ```powershell
+    git clone https://github.com/shivam1002modi/language-agnostic-chatbot.git
+    cd language-agnostic-chatbot
+    ```
 
-Node.js & npm
+2.  **One-Click Installation**:
+    Follow the manual steps below to install Node and Python dependencies once.
 
-Python 3.8+
+3.  **One-Click Launch**:
+    Instead of opening 5 terminals, simply run:
+    ```powershell
+    ./start_system.bat
+    ```
+    This will launch all 5 microservices in separate windows automatically.
 
-Git
+---
 
-1. Clone the Repository
+### 💻 Manual Run (Step-by-Step)
 
-git clone [https://github.com/shivam1002modi/language-agnostic-chatbot.git](https://github.com/shivam1002modi/language-agnostic-chatbot.git)
-cd language-agnostic-chatbot
+This system uses a microservices architecture. If you prefer manual control, follow these steps:
 
+#### Prerequisites
+*   **Node.js & npm**: For Frontend and Backend Proxy.
+*   **Python 3.8 - 3.10**: Required for Rasa and AI Service.
+*   **Virtual Environment**: Strongly recommended to avoid dependency conflicts.
 
-2. Setup AI Environment
-
-Open a terminal in the ai-service folder to install Python dependencies.
-
+#### 1. Setup AI Environment
+Open a terminal in the `ai-service` folder.
+```powershell
 cd ai-service
 python -m venv venv
-.\venv\Scripts\activate  # Windows
-# source venv/bin/activate # Mac/Linux
+.\venv\Scripts\activate
 pip install -r requirements.txt
+```
 
+#### 2. Start the Servers
+Run each in a separate terminal OR use `start_system.bat`.
 
-3. Start the Servers (5 Terminals)
+*   **Terminal 1: Frontend (UI)**: `cd frontend && npm install && npm start` (Port 3000)
+*   **Terminal 2: Backend (Proxy)**: `cd backend && npm install && node server.js` (Port 5001)
+*   **Terminal 3: AI Admin Server**: `cd ai-service && python admin_server.py` (Port 8000)
+*   **Terminal 4: Rasa Actions**: `cd ai-service && rasa run actions` (Port 5055)
+*   **Terminal 5: Rasa NLU**: `cd ai-service && rasa run --enable-api --cors "*"` (Port 5005)
 
-Run each command block in a separate terminal window.
+---
 
-Terminal 1: Frontend (UI)
-
-cd frontend
-
-npm install
-
-npm start
-
-# Runs on http://localhost:3000
-
-
-
-Terminal 2: Backend (API Proxy)
-
-cd backend
-
-npm install
-
-node server.js
-
-# Runs on http://localhost:5001
-
-
-
-Terminal 3: AI Admin Server
-
-
-cd ai-service
-
-.\venv\Scripts\activate
-
-python admin_server.py
-
-# Runs on http://localhost:8000
-
-
-
-Terminal 4: Rasa Action Server (RAG Pipeline)
-
-
-cd ai-service
-
-.\venv\Scripts\activate
-
-rasa run actions
-
-# Runs on http://localhost:5055
-
-
-
-Terminal 5: Rasa NLU Server
-
-
-cd ai-service
-
-.\venv\Scripts\activate
-
-rasa run --enable-api --cors "*"
-
-# Runs on http://localhost:5005
-
-
-# Runs on http://localhost:5005
+### 📦 Key Dependencies
+*   **Python**: `langchain`, `rasa`, `transformers`, `torch`, `faiss-cpu`, `chromadb`.
+*   **Node.js**: `express`, `mongoose`, `multer`, `axios`, `react`.
+*   **Models**: The system downloads models from Hugging Face on first run (Multi-lingual Bi-Encoder, Cross-Encoder, and BART-CNN).
 
 🧪 Testing Notes (`Shivam_test_zone`)
 
