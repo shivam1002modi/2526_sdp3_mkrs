@@ -1,0 +1,480 @@
+{
+    "mbs_version": "1.0",
+    "test_name": "BASELINE",
+    "timestamp": "2026-02-21 19:28:13",
+    "tms_score": 68.2,
+    "breakdown": {
+        "avg_rhr": 0.75,
+        "avg_sec": 0.4667,
+        "avg_neg": 0.9,
+        "avg_latency_s": 3.845,
+        "vram_mb": 0,
+        "lat_score": 0.5201,
+        "vram_score": 1.0
+    },
+    "system_snapshot": {
+        "embedding_model": "paraphrase-xlm-r-multilingual-v1",
+        "embedding_library": "sentence-transformers via langchain HuggingFaceEmbeddings",
+        "embedding_dims": 768,
+        "generation_model": "sshleifer/distilbart-cnn-12-6",
+        "generation_pipeline": "summarization",
+        "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+        "confidence_threshold": 0.1,
+        "retrieval_k": 10,
+        "translation_models": {
+            "hi": "Helsinki-NLP/opus-mt-en-hi"
+        },
+        "chunk_size": 500,
+        "chunk_overlap": 50,
+        "ingestion_method": "SmartIngest (: )",
+        "nlu_model": "bert-base-multilingual-cased",
+        "vector_store": "ChromaDB",
+        "vector_store_path": "D:\\MKRS\\ai-service\\documents\\chroma_db",
+        "vector_store_exists": true,
+        "pdf_count": 12,
+        "pdf_files": [
+            "1759248623779-navratri.pdf",
+            "1765007523589-delhi_.pdf",
+            "Black Holes â A Knowledge Guide.pdf",
+            "dinasours.pdf",
+            "love.pdf",
+            "sih 2025 prototype (1).pdf",
+            "sih 2025 prototype (2).pdf",
+            "sih 2025 prototype.pdf",
+            "SIH_2025_Blueprint.pdf",
+            "stress_test.pdf",
+            "Untitled document (5).pdf",
+            "Untitled document (6).pdf"
+        ],
+        "device": "CPU",
+        "gpu_name": "N/A (CPU fallback)"
+    },
+    "per_question": [
+        {
+            "id": "Q01",
+            "query": "What is a black hole?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 0.333,
+            "neg": 1,
+            "latency": 8.672,
+            "answer_preview": " black holes are among the most mysterious objects in the universe . they form when massive stars collapse under their own gravity after exhausting th",
+            "keywords_found": [
+                "gravity"
+            ],
+            "keywords_expected": [
+                "gravity",
+                "escape",
+                "region"
+            ],
+            "sources_found": [
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf"
+            ]
+        },
+        {
+            "id": "Q02",
+            "query": "Who coined the term black hole and when?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 6.849,
+            "answer_preview": " the concept of a black hole dates back to the late 18th century . einstein’s theory of general relativity predicted regions where gravity could becom",
+            "keywords_found": [
+                "wheeler",
+                "1967"
+            ],
+            "keywords_expected": [
+                "wheeler",
+                "1967"
+            ],
+            "sources_found": [
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf"
+            ]
+        },
+        {
+            "id": "Q03",
+            "query": "What is the Event Horizon of a black hole?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 0.0,
+            "neg": 1,
+            "latency": 5.746,
+            "answer_preview": " the concept of a black hole dates back to the late 18th century when john michell and pierre-simon laplace suggested the existence of “dark stars” ei",
+            "keywords_found": [],
+            "keywords_expected": [
+                "point",
+                "return",
+                "escape"
+            ],
+            "sources_found": [
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf"
+            ]
+        },
+        {
+            "id": "Q04",
+            "query": "What is Hawking Radiation?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.992,
+            "answer_preview": " black holes usually form from supernova explosions . stephen hawking proposed that black holes are not entirely black . due to quantum effects near t",
+            "keywords_found": [
+                "hawking",
+                "radiation"
+            ],
+            "keywords_expected": [
+                "hawking",
+                "radiation"
+            ],
+            "sources_found": [
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
+                "Untitled document (6).pdf"
+            ]
+        },
+        {
+            "id": "Q05",
+            "query": "What is Sagittarius A star?",
+            "is_stress": false,
+            "rhr": 0,
+            "sec": 0.0,
+            "neg": 1,
+            "latency": 0.236,
+            "answer_preview": "i found some documents, but i'm not confident they contain the right answer for your question.",
+            "keywords_found": [],
+            "keywords_expected": [
+                "milky",
+                "supermassive"
+            ],
+            "sources_found": []
+        },
+        {
+            "id": "Q06",
+            "query": "What is the historical significance of Delhi?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 0.0,
+            "neg": 1,
+            "latency": 4.397,
+            "answer_preview": " the city’s roots can be traced back to the epic mahabharata, where it is believed to be the site of the epic epic . the history of delhi is as comple",
+            "keywords_found": [],
+            "keywords_expected": [
+                "capital",
+                "mughal",
+                "sultanate"
+            ],
+            "sources_found": [
+                "1765007523589-delhi_.pdf",
+                "1765007523589-delhi_.pdf",
+                "1765007523589-delhi_.pdf"
+            ]
+        },
+        {
+            "id": "Q07",
+            "query": "Who built the Red Fort and what city did they found?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 0.0,
+            "neg": 1,
+            "latency": 6.236,
+            "answer_preview": " the trajectory of the city changed drastically in 1911 when the british raj announced the shift of the capital from calcutta to delhi . this led to t",
+            "keywords_found": [],
+            "keywords_expected": [
+                "shah",
+                "jahan",
+                "shahjahanabad"
+            ],
+            "sources_found": [
+                "1765007523589-delhi_.pdf",
+                "1765007523589-delhi_.pdf",
+                "Untitled document (6).pdf"
+            ]
+        },
+        {
+            "id": "Q08",
+            "query": "When did the British shift India's capital to Delhi?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 6.442,
+            "answer_preview": " the trajectory of the city changed drastically in 1911 when the british raj announced the shift of the capital from calcutta to delhi . this led to t",
+            "keywords_found": [
+                "1911",
+                "calcutta"
+            ],
+            "keywords_expected": [
+                "1911",
+                "calcutta"
+            ],
+            "sources_found": [
+                "1765007523589-delhi_.pdf",
+                "1765007523589-delhi_.pdf",
+                "1765007523589-delhi_.pdf"
+            ]
+        },
+        {
+            "id": "Q09",
+            "query": "What is Navratri festival?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 0.667,
+            "neg": 1,
+            "latency": 3.473,
+            "answer_preview": " navratri, which literally translates to \"nine nights\" in sanskrit, is a major hindu festival celebrating the divine feminine power . it spans nine ni",
+            "keywords_found": [
+                "nine",
+                "durga"
+            ],
+            "keywords_expected": [
+                "nine",
+                "durga",
+                "shakti"
+            ],
+            "sources_found": [
+                "1759248623779-navratri.pdf",
+                "1759248623779-navratri.pdf",
+                "1759248623779-navratri.pdf"
+            ]
+        },
+        {
+            "id": "Q10",
+            "query": "Who is Mahishasura in the Navratri legend?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 0.333,
+            "neg": 1,
+            "latency": 4.057,
+            "answer_preview": " navratri, which literally translates to \"nine nights\" in sanskrit, is a major hindu festival celebrating the divine feminine power or shakti . it spa",
+            "keywords_found": [
+                "durga"
+            ],
+            "keywords_expected": [
+                "demon",
+                "mahishasura",
+                "durga"
+            ],
+            "sources_found": [
+                "1759248623779-navratri.pdf",
+                "1759248623779-navratri.pdf",
+                "1759248623779-navratri.pdf"
+            ]
+        },
+        {
+            "id": "Q11",
+            "query": "What is RAG's role in the SIH 2025 chatbot?",
+            "is_stress": false,
+            "rhr": 0,
+            "sec": 0.0,
+            "neg": 1,
+            "latency": 0.239,
+            "answer_preview": "i found some documents, but i'm not confident they contain the right answer for your question.",
+            "keywords_found": [],
+            "keywords_expected": [
+                "retrieval",
+                "augmented",
+                "pdf"
+            ],
+            "sources_found": []
+        },
+        {
+            "id": "Q12",
+            "query": "What caused dinosaur extinction 66 million years ago?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 4.876,
+            "answer_preview": " scientists believe that around 66 million years ago, most dinosaurs went extinct, likely due to a massive asteroid impact combined with volcanic acti",
+            "keywords_found": [
+                "asteroid",
+                "extinct",
+                "impact"
+            ],
+            "keywords_expected": [
+                "asteroid",
+                "extinct",
+                "impact"
+            ],
+            "sources_found": [
+                "1759166598694-dinasours.pdf",
+                "1759166685360-dinasours.pdf",
+                "dinasours.pdf"
+            ]
+        },
+        {
+            "id": "Q13",
+            "query": "What is Robert Sternberg's Triangular Theory of Love?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 4.317,
+            "answer_preview": " robert sternberg proposed the triangular theory of love, which defines love through three components: intimacy, passion, and commitment . in psycholo",
+            "keywords_found": [
+                "triangular",
+                "intimacy",
+                "passion"
+            ],
+            "keywords_expected": [
+                "triangular",
+                "intimacy",
+                "passion"
+            ],
+            "sources_found": [
+                "love.pdf",
+                "love.pdf",
+                "love.pdf"
+            ]
+        },
+        {
+            "id": "Q14",
+            "query": "What is the Mars Mission about?",
+            "is_stress": true,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 0,
+            "latency": 3.831,
+            "answer_preview": " the mars mission is critical for humanity . the rocket uses liquid hydrogen fuel . gravity on mars is 38% of earth's . to make a perfect apple pie, s",
+            "keywords_found": [
+                "mars",
+                "humanity",
+                "rocket"
+            ],
+            "keywords_expected": [
+                "mars",
+                "humanity",
+                "rocket"
+            ],
+            "sources_found": [
+                "stress_test.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf"
+            ]
+        },
+        {
+            "id": "Q15",
+            "query": "What type of fuel does the Mars rocket use?",
+            "is_stress": true,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 4.465,
+            "answer_preview": " the mars mission is critical for humanity . the rocket uses liquid hydrogen fuel . gravity on mars is 38% of earth's . to make a perfect apple pie, s",
+            "keywords_found": [
+                "liquid",
+                "hydrogen",
+                "fuel"
+            ],
+            "keywords_expected": [
+                "liquid",
+                "hydrogen",
+                "fuel"
+            ],
+            "sources_found": [
+                "stress_test.pdf",
+                "sih 2025 prototype.pdf",
+                "Untitled document (6).pdf"
+            ]
+        },
+        {
+            "id": "Q16",
+            "query": "What is the landing zone for the Mars mission?",
+            "is_stress": true,
+            "rhr": 0,
+            "sec": 0.0,
+            "neg": 1,
+            "latency": 0.296,
+            "answer_preview": "i found some documents, but i'm not confident they contain the right answer for your question.",
+            "keywords_found": [],
+            "keywords_expected": [
+                "jezero",
+                "crater"
+            ],
+            "sources_found": []
+        },
+        {
+            "id": "Q17",
+            "query": "How long do you bake Apple Pie?",
+            "is_stress": true,
+            "rhr": 1,
+            "sec": 0.0,
+            "neg": 0,
+            "latency": 3.551,
+            "answer_preview": " question: how long do you bake apple pie? the mars mission is critical for humanity . to make a perfect apple pie, start with dough .",
+            "keywords_found": [],
+            "keywords_expected": [
+                "45",
+                "golden"
+            ],
+            "sources_found": [
+                "stress_test.pdf",
+                "Untitled document (6).pdf",
+                "sih 2025 prototype.pdf"
+            ]
+        },
+        {
+            "id": "Q18",
+            "query": "What temperature to preheat oven for Apple Pie?",
+            "is_stress": true,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 4.682,
+            "answer_preview": " question: what temperature to preheat oven for apple pie? the mars mission is critical for humanity . preheat the oven to 375 degrees . peel and slic",
+            "keywords_found": [
+                "375",
+                "degrees"
+            ],
+            "keywords_expected": [
+                "375",
+                "degrees"
+            ],
+            "sources_found": [
+                "stress_test.pdf",
+                "Untitled document (6).pdf",
+                "sih 2025 prototype.pdf"
+            ]
+        },
+        {
+            "id": "Q19",
+            "query": "Which department had the highest profit in Q3 2025?",
+            "is_stress": true,
+            "rhr": 0,
+            "sec": 0.0,
+            "neg": 1,
+            "latency": 0.278,
+            "answer_preview": "i found some documents, but i'm not confident they contain the right answer for your question.",
+            "keywords_found": [],
+            "keywords_expected": [
+                "security",
+                "400"
+            ],
+            "sources_found": []
+        },
+        {
+            "id": "Q20",
+            "query": "Which department has the lowest margin in the Q3 2025 report?",
+            "is_stress": true,
+            "rhr": 0,
+            "sec": 0.0,
+            "neg": 1,
+            "latency": 0.267,
+            "answer_preview": "i found some documents, but i'm not confident they contain the right answer for your question.",
+            "keywords_found": [],
+            "keywords_expected": [
+                "logistics",
+                "margin"
+            ],
+            "sources_found": []
+        }
+    ]
+}
