@@ -1,0 +1,97 @@
+[
+    {
+        "config": [
+            10,
+            3,
+            300,
+            0.0,
+            1.1
+        ],
+        "score": 69.16,
+        "breakdown": {
+            "avg_rhr": 0.75,
+            "avg_sec": 0.4834,
+            "avg_neg": 0.95,
+            "avg_latency_s": 3.873,
+            "vram_mb": 0,
+            "lat_score": 0.5164,
+            "vram_score": 1.0
+        }
+    },
+    {
+        "config": [
+            10,
+            3,
+            300,
+            0.1,
+            1.1
+        ],
+        "score": 70.9,
+        "breakdown": {
+            "avg_rhr": 0.75,
+            "avg_sec": 0.5333,
+            "avg_neg": 0.95,
+            "avg_latency_s": 3.703,
+            "vram_mb": 0,
+            "lat_score": 0.5401,
+            "vram_score": 1.0
+        }
+    },
+    {
+        "config": [
+            15,
+            3,
+            300,
+            0.05,
+            1.1
+        ],
+        "score": 68.76,
+        "breakdown": {
+            "avg_rhr": 0.75,
+            "avg_sec": 0.4667,
+            "avg_neg": 0.9,
+            "avg_latency_s": 3.475,
+            "vram_mb": 0,
+            "lat_score": 0.5755,
+            "vram_score": 1.0
+        }
+    },
+    {
+        "config": [
+            15,
+            4,
+            300,
+            0.05,
+            1.1
+        ],
+        "score": 69.22,
+        "breakdown": {
+            "avg_rhr": 0.75,
+            "avg_sec": 0.5,
+            "avg_neg": 0.9,
+            "avg_latency_s": 3.835,
+            "vram_mb": 0,
+            "lat_score": 0.5215,
+            "vram_score": 1.0
+        }
+    },
+    {
+        "config": [
+            10,
+            3,
+            200,
+            0.05,
+            1.1
+        ],
+        "score": 68.96,
+        "breakdown": {
+            "avg_rhr": 0.75,
+            "avg_sec": 0.45,
+            "avg_neg": 0.95,
+            "avg_latency_s": 3.355,
+            "vram_mb": 0,
+            "lat_score": 0.5962,
+            "vram_score": 1.0
+        }
+    }
+]

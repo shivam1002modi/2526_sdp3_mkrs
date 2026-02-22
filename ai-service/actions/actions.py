@@ -2,6 +2,8 @@
 import os
 import re
 import time
+import json
+import requests
 from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
@@ -22,9 +24,13 @@ DB_FAISS_PATH = os.path.join(os.path.dirname(__file__), "..", "documents", "vect
 TRANSLATION_MODEL_MAP = {
     'hi': 'Helsinki-NLP/opus-mt-en-hi',
 }
-# Confidence score threshold for the re-ranker. If the best document is below this,
-# we conclude that we don't have a good enough answer.
-CONFIDENCE_THRESHOLD = 0.1
+# Lowered to 0.02 for better RHR on difficult Stress Tests.
+CONFIDENCE_THRESHOLD = 0.02
+
+# --- Ollama Generation Service Configuration ---
+OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "mashriram/sarvam-1")
+OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", "120"))  # seconds
 
 def clean_text(text: str) -> str:
     """
@@ -87,24 +93,139 @@ class ActionQueryDoc(Action):
             print(f"WARNING: Could not load local Re-ranking model: {e}.")
             self.reranker = None
 
+        # --- Ollama Connection Check ---
+        self.ollama_available = False
         try:
-            print("Loading local summarization model...")
-            device_id = 0 if self.device == 'cuda' else -1
-            self.summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6", device=device_id)
-            print("Summarization model loaded successfully.")
+            print(f"Checking Ollama service at {OLLAMA_URL}...")
+            health_check = requests.get(f"{OLLAMA_URL}/api/tags", timeout=5)
+            if health_check.status_code == 200:
+                models = health_check.json().get("models", [])
+                model_names = [m.get("name", "") for m in models]
+                print(f"Ollama is running. Available models: {model_names}")
+                if any(OLLAMA_MODEL in name for name in model_names):
+                    self.ollama_available = True
+                    print(f"✅ Ollama model '{OLLAMA_MODEL}' is ready for generation.")
+                else:
+                    print(f"⚠️ WARNING: Model '{OLLAMA_MODEL}' not found in Ollama. "
+                          f"Available: {model_names}. Run: ollama pull {OLLAMA_MODEL}")
+            else:
+                print(f"WARNING: Ollama returned status {health_check.status_code}.")
+        except requests.exceptions.ConnectionError:
+            print(f"⚠️ WARNING: Ollama is NOT running at {OLLAMA_URL}. "
+                  f"Generation will fall back to raw text retrieval. "
+                  f"Install Ollama: https://ollama.com/download/windows")
         except Exception as e:
-            print(f"WARNING: Could not load local summarization model: {e}. Will fall back to direct text retrieval.")
-            self.summarizer = None
+            print(f"WARNING: Ollama health check failed: {e}")
+
+        # --- Ollama Warmup: Pre-load model into memory to eliminate cold-start ---
+        # Q01 was taking 19.6s (cold-start) vs ~4s (warm). This fixes that.
+        if self.ollama_available:
+            try:
+                print("Warming up Ollama model (pre-loading into memory)...")
+                warmup_resp = requests.post(
+                    f"{OLLAMA_URL}/api/generate",
+                    json={"model": OLLAMA_MODEL, "prompt": "Hi", "stream": False,
+                          "options": {"num_predict": 1}},
+                    timeout=60
+                )
+                if warmup_resp.status_code == 200:
+                    print("✅ Ollama model warmed up — ready for fast inference.")
+                else:
+                    print(f"WARNING: Ollama warmup returned {warmup_resp.status_code}")
+            except Exception as e:
+                print(f"WARNING: Ollama warmup failed: {e}")
 
         self.translator_cache = {}
-        print("ActionQueryDoc initialized successfully (Pro Mode).")
+        print("ActionQueryDoc initialized successfully (Pro Mode — Ollama Generation).")
 
     def name(self) -> Text:
         return "action_query_doc"
 
+    def generate_with_ollama(self, question: str, context: str) -> str:
+        """
+        Sends a structured RAG prompt to Ollama and returns the generated answer.
+        Falls back to returning the raw context if Ollama is unavailable.
+        """
+        if not self.ollama_available:
+            print("Ollama not available — returning raw context as answer.")
+            return context
+
+        # Structured RAG prompt optimized for FACT ACCURACY (SEC score)
+        # KEY INSIGHT from 8 tests: the baseline model scored better SEC because
+        # it quoted context verbatim. Sarvam-1 paraphrases and loses keywords.
+        # Solution: force the model to QUOTE directly from the documents.
+        # SUPER CONFIG: NO PREAMBLE + VERBATIM QUOTE (Targeting 72+ TMS)
+        prompt = (
+            "You are a document assistant that answers questions by DIRECTLY QUOTING "
+            "from the provided context documents.\n\n"
+            "RULES:\n"
+            "1. NO PREAMBLE. Do NOT say 'Based on the context' or 'The document states'. Start the answer immediately.\n"
+            "2. QUOTE VERBATIM. Use the EXACT words, names, dates, and numbers. Do NOT paraphrase.\n"
+            "3. Include ALL technical details provided (like specific chemicals, years, and city names).\n"
+            "4. Only use facts from the document relevant to the question.\n"
+            "5. If the answer is not present, say exactly: 'The documents do not contain this information.'\n"
+            "6. Max 3 sentences. Focus only on the direct answer.\n\n"
+            f"CONTEXT:\n{context}\n\n"
+            f"QUESTION: {question}\n\n"
+            "ANSWER (verbatim quote, no preamble):"
+        )
+
+        try:
+            response = requests.post(
+                f"{OLLAMA_URL}/api/generate",
+                json={
+                    "model": OLLAMA_MODEL,
+                    "prompt": prompt,
+                    "stream": False,
+                    "keep_alive": "10m",
+                    "options": {
+                        "temperature": 0.0,
+                        "top_p": 0.8,
+                        "num_predict": 350,
+                        "repeat_penalty": 1.05,
+                    }
+                },
+                timeout=OLLAMA_TIMEOUT
+            )
+            if response.status_code == 200:
+                result = response.json()
+                answer = result.get("response", "").strip()
+                if answer:
+                    print(f"Ollama generated answer ({len(answer)} chars): '{answer[:100]}...'")
+                    return answer
+                else:
+                    print("WARNING: Ollama returned empty response. Falling back to context.")
+                    return context
+            else:
+                print(f"ERROR: Ollama returned HTTP {response.status_code}: {response.text[:200]}")
+                return context
+        except requests.exceptions.Timeout:
+            print(f"ERROR: Ollama timed out after {OLLAMA_TIMEOUT}s. Returning raw context.")
+            return context
+        except requests.exceptions.ConnectionError:
+            print("ERROR: Lost connection to Ollama. Returning raw context.")
+            self.ollama_available = False  # Disable for subsequent requests
+            return context
+        except Exception as e:
+            print(f"ERROR: Ollama generation failed: {e}")
+            return context
+
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        original_query = tracker.latest_message.get("text", "").strip()
-        print(f"\n--- New Request Received ---\nOriginal Query: '{original_query}'")
+        raw_query = tracker.latest_message.get("text", "").strip()
+        
+        # --- Query Normalization ---
+        temp_query = raw_query
+        if temp_query.isupper() and len(temp_query) > 3:
+            temp_query = temp_query.lower()
+        
+        # Strip leading articles which often confuse small context-matching models
+        temp_query = re.sub(r'^(a|an|the)\s+', '', temp_query, flags=re.IGNORECASE).strip()
+        
+        original_query = temp_query
+
+        print(f"\n--- New Request Received ---\nRaw Query: '{raw_query}'")
+        if original_query != raw_query:
+             print(f"Normalized to: '{original_query}'")
 
         if not self.db:
             dispatcher.utter_message(text="Sorry, the AI's knowledge base is currently unavailable. Please ask an administrator to check the system.")
@@ -116,10 +237,9 @@ class ActionQueryDoc(Action):
             lang = 'en'
         print(f"Detected language: '{lang}'")
 
-        # --- UPGRADED RAG PIPELINE ---
-        # 1. RETRIEVE: Get a wide pool of potential documents (k=10)
+        # 1. RETRIEVE: k=12 (Final optimized depth)
         try:
-            retrieved_docs = self.db.similarity_search(original_query, k=10)
+            retrieved_docs = self.db.similarity_search(original_query, k=15)
         except Exception as e:
             print(f"ERROR: Document similarity_search failed: {e}")
             retrieved_docs = []
@@ -132,7 +252,6 @@ class ActionQueryDoc(Action):
         if self.reranker:
             passages = [doc.page_content for doc in retrieved_docs]
             rerank_scores = self.reranker.predict([(original_query, passage) for passage in passages])
-            
             scored_docs = list(zip(rerank_scores, retrieved_docs))
             scored_docs.sort(key=lambda x: x[0], reverse=True)
             
@@ -141,34 +260,34 @@ class ActionQueryDoc(Action):
                 dispatcher.utter_message(text="I found some documents, but I'm not confident they contain the right answer for your question.")
                 return []
             
-            final_docs = [doc for score, doc in scored_docs[:3]]
-            best_doc = final_docs[0]
             print(f"Re-ranked top document score: {top_score:.4f}")
         else:
-            final_docs = retrieved_docs[:3]
-            best_doc = final_docs[0]
+            # Fallback to simple similarity scores if reranker is missing
+            scored_docs = [(1.0, doc) for doc in retrieved_docs]
 
-        # 3. GENERATE: Create the answer using ONLY the single best document's context.
-        focused_context = clean_text(best_doc.page_content)
-        english_answer = ""
+        # 3. GENERATE: Create the answer using Ollama LLM (or fallback to raw text).
         
-        if self.summarizer:
-            try:
-                input_for_model = f"Question: {original_query} \n\nContext: {focused_context} \n\nAnswer:"
-                summary_output = self.summarizer(input_for_model, max_length=150, min_length=20, do_sample=False)
-                english_answer = summary_output[0]['summary_text']
-                print(f"Locally generated answer: '{english_answer[:100]}...'")
-            except Exception as e:
-                print(f"ERROR: Local generation failed: {e}. Falling back to direct text retrieval.")
-                english_answer = focused_context
-        else:
-            english_answer = focused_context
+        # Build structured context: Label each chunk so the LLM knows which doc it's from.
+        # This prevents "Context Bleed" (hallucinating facts from one doc into another).
+        context_parts = []
+        final_docs = []
+        for i, (score, d) in enumerate(scored_docs[:3]): # top-3 for speed (latency is killing TMS)
+            final_docs.append(d)
+            metadata = getattr(d, "metadata", {})
+            source_name = os.path.basename(str(metadata.get("source", "Unknown")))
+            page_no = metadata.get("page", "?")
+            
+            content = clean_text(d.page_content)
+            context_parts.append(f"### DOCUMENT {i+1}: {source_name} (Page {page_no})\n{content}")
+            
+        combined_context = "\n\n".join(context_parts)
+        english_answer = self.generate_with_ollama(original_query, combined_context)
 
         sources = []
         for i, doc in enumerate(final_docs):
             metadata = getattr(doc, "metadata", {})
             source_filename = metadata.get("source", "Unknown")
-            page_no = metadata.get("page", 0) + 1
+            page_no = metadata.get("page", "?")
             sources.append({
                 "source": os.path.basename(str(source_filename)),
                 "page": page_no,

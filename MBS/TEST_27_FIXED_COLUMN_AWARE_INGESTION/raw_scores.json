@@ -1,15 +1,15 @@
 {
     "mbs_version": "1.0",
-    "test_name": "PHASE_2A_GOLDEN_RUN",
-    "timestamp": "2026-02-22 16:26:31",
-    "tms_score": 75.69,
+    "test_name": "Fixed Column Aware Ingestion",
+    "timestamp": "2026-02-22 15:21:20",
+    "tms_score": 77.96,
     "breakdown": {
         "avg_rhr": 0.95,
-        "avg_sec": 0.45,
+        "avg_sec": 0.5167,
         "avg_neg": 0.95,
-        "avg_latency_s": 4.261,
+        "avg_latency_s": 4.03,
         "vram_mb": 0,
-        "lat_score": 0.4693,
+        "lat_score": 0.4962,
         "vram_score": 1.0
     },
     "system_snapshot": {
@@ -29,7 +29,7 @@
         "ingestion_method": "SmartIngest (: )",
         "nlu_model": "bert-base-multilingual-cased",
         "vector_store": "ChromaDB",
-        "vector_store_path": "d:\\MKRS\\ai-service\\documents\\chroma_db",
+        "vector_store_path": "D:\\MKRS\\ai-service\\documents\\chroma_db",
         "vector_store_exists": true,
         "pdf_count": 12,
         "pdf_files": [
@@ -55,13 +55,14 @@
             "query": "What is a black hole?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.667,
+            "sec": 1.0,
             "neg": 1,
-            "latency": 12.743,
-            "answer_preview": "a black hole is an object in space that has so much gravity that nothing can escape its pull once it gets too close. this includes light, which means ",
+            "latency": 7.069,
+            "answer_preview": "black holes are regions in space where gravity is so strong that nothing not even light can escape. they form when massive stars collapse under their ",
             "keywords_found": [
                 "gravity",
-                "escape"
+                "escape",
+                "region"
             ],
             "keywords_expected": [
                 "gravity",
@@ -81,7 +82,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.857,
+            "latency": 6.607,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -99,13 +100,11 @@
             "query": "What is the Event Horizon of a black hole?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.333,
             "neg": 1,
-            "latency": 6.704,
-            "answer_preview": "the event horizon of a black hole is the point of no return once crossed. it represents the boundary beyond which nothing can escape, including light ",
+            "latency": 6.629,
+            "answer_preview": "the event horizon of a black hole is the boundary within which its gravitational pull becomes so strong that nothing can escape its grasp. this includ",
             "keywords_found": [
-                "point",
-                "return",
                 "escape"
             ],
             "keywords_expected": [
@@ -126,7 +125,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.382,
+            "latency": 4.372,
             "answer_preview": "stephen hawking proposed that black holes are not entirely black. due to quantum effects near the event horizon, they emit radiation now called hawkin",
             "keywords_found": [
                 "hawking",
@@ -149,7 +148,7 @@
             "rhr": 0,
             "sec": 0.0,
             "neg": 1,
-            "latency": 0.518,
+            "latency": 0.411,
             "answer_preview": "i found some documents, but i'm not confident they contain the right answer for your question.",
             "keywords_found": [],
             "keywords_expected": [
@@ -163,11 +162,13 @@
             "query": "What is the historical significance of Delhi?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.0,
+            "sec": 0.333,
             "neg": 1,
-            "latency": 3.818,
-            "answer_preview": "the historical tapestry the history of delhi is as complex as it is ancient. often described as a \"palimpsest\" a manuscript on which earlier writing h",
-            "keywords_found": [],
+            "latency": 5.089,
+            "answer_preview": "the historical significance of delhi lies in its role as the capital city of india and its status as a testament to the country's resilience. it has b",
+            "keywords_found": [
+                "capital"
+            ],
             "keywords_expected": [
                 "capital",
                 "mughal",
@@ -186,8 +187,8 @@
             "rhr": 1,
             "sec": 0.667,
             "neg": 1,
-            "latency": 3.503,
-            "answer_preview": "the red fort was built by emperor shah jahan in 1639, located within delhi's walled city.",
+            "latency": 5.074,
+            "answer_preview": "the red fort was founded by emperor shah jahan in 17th century delhi, bestowing it with the magnificent red fort and the jama masjid. this era cemente",
             "keywords_found": [
                 "shah",
                 "jahan"
@@ -210,7 +211,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 3.056,
+            "latency": 2.853,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -228,13 +229,14 @@
             "query": "What is Navratri festival?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.667,
+            "sec": 1.0,
             "neg": 1,
-            "latency": 5.715,
-            "answer_preview": "the festival of navratri celebrates the divine feminine power and honors goddess durga. it spans nine nights and ten days, with each night dedicated t",
+            "latency": 4.216,
+            "answer_preview": "the festival of navratri celebrates the divine feminine power, or shakti, which represents good over evil. it spans nine nights and ten days, with eac",
             "keywords_found": [
                 "nine",
-                "durga"
+                "durga",
+                "shakti"
             ],
             "keywords_expected": [
                 "nine",
@@ -254,8 +256,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.152,
-            "answer_preview": "the goddess durga defeated a powerful buffalo-demon named mahishasura.",
+            "latency": 4.113,
+            "answer_preview": "the person referred to as \"mahishasura\" in the context documents is a significant figure from hindu mythology. he was a powerful demon who wreaked hav",
             "keywords_found": [
                 "demon",
                 "mahishasura",
@@ -279,8 +281,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.111,
-            "answer_preview": "rag (retrieval-augmented generation) is a core technology used in the sih 2025 chatbot. it enables multilingual support by fetching updated answers fr",
+            "latency": 4.103,
+            "answer_preview": "the document states that rag (retrieval-augmented generation) is used to fetch updated answers from uploaded circulars, pdfs, notices, and faqs. it al",
             "keywords_found": [
                 "retrieval",
                 "augmented",
@@ -293,8 +295,8 @@
             ],
             "sources_found": [
                 "sih 2025 prototype (1).pdf",
-                "SIH_2025_Blueprint.pdf",
-                "sih 2025 prototype.pdf"
+                "sih 2025 prototype (1).pdf",
+                "SIH_2025_Blueprint.pdf"
             ]
         },
         {
@@ -304,7 +306,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 3.006,
+            "latency": 3.03,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -325,8 +327,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.665,
-            "answer_preview": "robert sternberg's triangular theory of love defines love as a combination of three components: intimacy, passion, and commitment. these components ca",
+            "latency": 3.775,
+            "answer_preview": "robert sternberg proposed the triangular theory of love, which suggests that love can be categorized into three distinct forms: eros (romantic, passio",
             "keywords_found": [
                 "triangular",
                 "intimacy",
@@ -350,7 +352,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.527,
+            "latency": 3.49,
             "answer_preview": "the mars mission is critical for humanity. the rocket uses liquid hydrogen fuel. launch is scheduled for 0900 hours. astronauts must wear pressurized ",
             "keywords_found": [
                 "mars",
@@ -375,7 +377,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 2.993,
+            "latency": 3.146,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -385,7 +387,7 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
+                "stress_test.pdf",
                 "Black Holes â A Knowledge Guide.pdf"
             ]
         },
@@ -396,7 +398,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.042,
+            "latency": 3.001,
             "answer_preview": "the landing zone for the mars mission is jezero crater.",
             "keywords_found": [
                 "jezero",
@@ -408,7 +410,7 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
+                "stress_test.pdf",
                 "Black Holes â A Knowledge Guide.pdf"
             ]
         },
@@ -418,9 +420,9 @@
             "is_stress": true,
             "rhr": 1,
             "sec": 0.0,
-            "neg": 1,
-            "latency": 3.175,
-            "answer_preview": "the documents do not contain this information.",
+            "neg": 0,
+            "latency": 3.785,
+            "answer_preview": "column a: space mission - the mars mission is critical for humanity. to make a perfect apple pie, start with dough. the rocket uses liquid hydrogen fu",
             "keywords_found": [],
             "keywords_expected": [
                 "45",
@@ -429,7 +431,7 @@
             "sources_found": [
                 "stress_test.pdf",
                 "stress_test.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
+                "stress_test.pdf"
             ]
         },
         {
@@ -437,11 +439,14 @@
             "query": "What temperature to preheat oven for Apple Pie?",
             "is_stress": true,
             "rhr": 1,
-            "sec": 0.0,
-            "neg": 0,
-            "latency": 3.897,
-            "answer_preview": "column a: space mission the mars mission is critical for humanity. the rocket uses liquid hydrogen fuel. launch is scheduled for 0900 hours. astronaut",
-            "keywords_found": [],
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.638,
+            "answer_preview": "column a: space mission column b: apple pie the mars mission is critical for humanity. to make a perfect apple pie, start with dough. the rocket uses ",
+            "keywords_found": [
+                "375",
+                "degrees"
+            ],
             "keywords_expected": [
                 "375",
                 "degrees"
@@ -449,7 +454,7 @@
             "sources_found": [
                 "stress_test.pdf",
                 "stress_test.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
+                "stress_test.pdf"
             ]
         },
         {
@@ -459,7 +464,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 3.245,
+            "latency": 3.154,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -468,7 +473,7 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "SIH_2025_Blueprint.pdf",
+                "stress_test.pdf",
                 "1759248623779-navratri.pdf"
             ]
         },
@@ -479,7 +484,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 3.118,
+            "latency": 3.054,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -488,8 +493,8 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "SIH_2025_Blueprint.pdf",
-                "1759248623779-navratri.pdf"
+                "stress_test.pdf",
+                "SIH_2025_Blueprint.pdf"
             ]
         }
     ]

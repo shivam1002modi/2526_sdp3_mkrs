@@ -29,21 +29,23 @@ class SmartChunker:
             table_pattern = r'(\|[^\n]+\|\n\|[\s:\-]+\|\n(?:\|[^\n]+\|\n)+)'
             parts = re.split(table_pattern, text)
             
+            last_text_part = ""
             for part in parts:
                 if not part.strip(): continue
                 
                 # Check if this part is a table
                 if "|" in part and "---" in part:
-                    # Case A: It's a table -> Keep it whole if possible
-                    # If table is huge, we might have to split it, but ideally we don't.
-                    # We create a separate chunk just for this table to preserve its grid structure.
+                    # Case A: It's a table -> Prepend last text part as context
                     table_doc = doc.copy()
-                    table_doc.page_content = part.strip()
+                    # Add context from the preceding text (last 200 chars)
+                    context = last_text_part[-200:].strip() if last_text_part else ""
+                    table_doc.page_content = f"{context}\n\n{part.strip()}" if context else part.strip()
                     table_doc.metadata["type"] = "table"
                     final_chunks.append(table_doc)
+                    last_text_part = "" # Reset context after use
                 else:
-                    # Case B: Standard Text -> Use Semantic Splitter
-                    # Only split if it's large
+                    # Case B: Standard Text
+                    last_text_part = part.strip()
                     text_doc = doc.copy()
                     text_doc.page_content = part.strip()
                     text_doc.metadata["type"] = "text"

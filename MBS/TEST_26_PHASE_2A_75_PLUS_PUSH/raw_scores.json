@@ -1,15 +1,15 @@
 {
     "mbs_version": "1.0",
-    "test_name": "PHASE_2A_GOLDEN_RUN",
-    "timestamp": "2026-02-22 16:26:31",
-    "tms_score": 75.69,
+    "test_name": "PHASE_2A_75_PLUS_PUSH",
+    "timestamp": "2026-02-22 14:28:04",
+    "tms_score": 75.55,
     "breakdown": {
         "avg_rhr": 0.95,
-        "avg_sec": 0.45,
+        "avg_sec": 0.4167,
         "avg_neg": 0.95,
-        "avg_latency_s": 4.261,
+        "avg_latency_s": 3.606,
         "vram_mb": 0,
-        "lat_score": 0.4693,
+        "lat_score": 0.5546,
         "vram_score": 1.0
     },
     "system_snapshot": {
@@ -55,13 +55,14 @@
             "query": "What is a black hole?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.667,
+            "sec": 1.0,
             "neg": 1,
-            "latency": 12.743,
-            "answer_preview": "a black hole is an object in space that has so much gravity that nothing can escape its pull once it gets too close. this includes light, which means ",
+            "latency": 6.641,
+            "answer_preview": "a black hole is an object in space where gravity is so strong that nothing can escape its pull, not even light. the idea of black holes challenges our",
             "keywords_found": [
                 "gravity",
-                "escape"
+                "escape",
+                "region"
             ],
             "keywords_expected": [
                 "gravity",
@@ -81,7 +82,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.857,
+            "latency": 5.098,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -101,7 +102,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.704,
+            "latency": 5.862,
             "answer_preview": "the event horizon of a black hole is the point of no return once crossed. it represents the boundary beyond which nothing can escape, including light ",
             "keywords_found": [
                 "point",
@@ -124,14 +125,11 @@
             "query": "What is Hawking Radiation?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.0,
             "neg": 1,
-            "latency": 6.382,
-            "answer_preview": "stephen hawking proposed that black holes are not entirely black. due to quantum effects near the event horizon, they emit radiation now called hawkin",
-            "keywords_found": [
-                "hawking",
-                "radiation"
-            ],
+            "latency": 2.882,
+            "answer_preview": "the documents do not contain this information.",
+            "keywords_found": [],
             "keywords_expected": [
                 "hawking",
                 "radiation"
@@ -149,7 +147,7 @@
             "rhr": 0,
             "sec": 0.0,
             "neg": 1,
-            "latency": 0.518,
+            "latency": 0.454,
             "answer_preview": "i found some documents, but i'm not confident they contain the right answer for your question.",
             "keywords_found": [],
             "keywords_expected": [
@@ -165,8 +163,8 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 3.818,
-            "answer_preview": "the historical tapestry the history of delhi is as complex as it is ancient. often described as a \"palimpsest\" a manuscript on which earlier writing h",
+            "latency": 4.547,
+            "answer_preview": "the city's history is as complex as it is ancient. often described as a \"palimpsest,\" delhi has been built, destroyed, and rebuilt at least seven time",
             "keywords_found": [],
             "keywords_expected": [
                 "capital",
@@ -186,8 +184,8 @@
             "rhr": 1,
             "sec": 0.667,
             "neg": 1,
-            "latency": 3.503,
-            "answer_preview": "the red fort was built by emperor shah jahan in 1639, located within delhi's walled city.",
+            "latency": 3.591,
+            "answer_preview": "the red fort was built by emperor shah jahan in the 17th century, bestowing it with the magnificent structure of the red fort. this era cemented delhi",
             "keywords_found": [
                 "shah",
                 "jahan"
@@ -210,7 +208,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 3.056,
+            "latency": 2.95,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -230,8 +228,8 @@
             "rhr": 1,
             "sec": 0.667,
             "neg": 1,
-            "latency": 5.715,
-            "answer_preview": "the festival of navratri celebrates the divine feminine power and honors goddess durga. it spans nine nights and ten days, with each night dedicated t",
+            "latency": 4.529,
+            "answer_preview": "the festival of navratri celebrates the divine feminine power and its triumph over evil. it spans nine nights and ten days, with each night dedicated ",
             "keywords_found": [
                 "nine",
                 "durga"
@@ -254,8 +252,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.152,
-            "answer_preview": "the goddess durga defeated a powerful buffalo-demon named mahishasura.",
+            "latency": 3.046,
+            "answer_preview": "the goddess durga defeated a powerful buffalo demon named mahishasura.",
             "keywords_found": [
                 "demon",
                 "mahishasura",
@@ -279,8 +277,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.111,
-            "answer_preview": "rag (retrieval-augmented generation) is a core technology used in the sih 2025 chatbot. it enables multilingual support by fetching updated answers fr",
+            "latency": 4.646,
+            "answer_preview": "rag (retrieval-augmented generation) plays a crucial role in the sih 2025 chatbot. it retrieves and stores updated answers from uploaded circulars, pd",
             "keywords_found": [
                 "retrieval",
                 "augmented",
@@ -304,7 +302,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 3.006,
+            "latency": 2.966,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -325,8 +323,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.665,
-            "answer_preview": "robert sternberg's triangular theory of love defines love as a combination of three components: intimacy, passion, and commitment. these components ca",
+            "latency": 3.431,
+            "answer_preview": "robert sternberg's triangular theory of love defines love through three components: intimacy, passion, and commitment. different combinations of these",
             "keywords_found": [
                 "triangular",
                 "intimacy",
@@ -349,9 +347,9 @@
             "is_stress": true,
             "rhr": 1,
             "sec": 1.0,
-            "neg": 1,
-            "latency": 3.527,
-            "answer_preview": "the mars mission is critical for humanity. the rocket uses liquid hydrogen fuel. launch is scheduled for 0900 hours. astronauts must wear pressurized ",
+            "neg": 0,
+            "latency": 3.627,
+            "answer_preview": "the mars mission is critical for humanity. to make a perfect apple pie, start with dough. the rocket uses liquid hydrogen fuel. mix flour and butter u",
             "keywords_found": [
                 "mars",
                 "humanity",
@@ -364,7 +362,7 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
+                "stress_test.pdf",
                 "Black Holes â A Knowledge Guide.pdf"
             ]
         },
@@ -375,7 +373,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 2.993,
+            "latency": 2.958,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -385,7 +383,7 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
+                "stress_test.pdf",
                 "Black Holes â A Knowledge Guide.pdf"
             ]
         },
@@ -396,7 +394,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.042,
+            "latency": 3.065,
             "answer_preview": "the landing zone for the mars mission is jezero crater.",
             "keywords_found": [
                 "jezero",
@@ -419,7 +417,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 3.175,
+            "latency": 2.961,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -438,9 +436,9 @@
             "is_stress": true,
             "rhr": 1,
             "sec": 0.0,
-            "neg": 0,
-            "latency": 3.897,
-            "answer_preview": "column a: space mission the mars mission is critical for humanity. the rocket uses liquid hydrogen fuel. launch is scheduled for 0900 hours. astronaut",
+            "neg": 1,
+            "latency": 2.87,
+            "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
                 "375",
@@ -459,7 +457,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 3.245,
+            "latency": 3.097,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -479,7 +477,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 3.118,
+            "latency": 2.905,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
