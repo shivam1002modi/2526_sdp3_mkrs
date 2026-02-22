@@ -82,6 +82,160 @@ const ChatPanel = () => {
   const recognitionRef = useRef(null);
   const silenceTimerRef = useRef(null);
   const isAutoRestarting = useRef(false); // To distinguish manual stop vs auto-restart
+  const baseInputRef = useRef("");
+
+  // --- Helper Functions (Moved up to avoid ReferenceErrors in useEffect) ---
+  const speakText = (text) => {
+    if (!speechEnabled || !synthesisRef.current) return;
+
+    // ANTI-ECHO: Stop Mic
+    if (recognitionRef.current && isListening) {
+      isAutoRestarting.current = false;
+      recognitionRef.current.stop();
+    }
+
+    // Cancel current
+    synthesisRef.current.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    // Voice Selection
+    const voices = synthesisRef.current.getVoices();
+    let preferredVoice = null;
+
+    if (language === 'hi-IN') {
+      preferredVoice = voices.find(v => v.name.includes("Google") && v.lang === "hi-IN") || voices.find(v => v.lang === "hi-IN");
+    } else {
+      preferredVoice = voices.find(voice => voice.name.includes("Google US English")) || voices.find(v => v.lang === 'en-US');
+    }
+
+    if (preferredVoice) utterance.voice = preferredVoice;
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+
+    // AUTO-RESUME
+    utterance.onend = () => {
+      // Wait 200ms then restart mic
+      setTimeout(() => {
+        if (recognitionRef.current) {
+          isAutoRestarting.current = true; // Mark as auto-restart
+          try {
+            baseInputRef.current = "";
+            recognitionRef.current.start();
+          } catch (e) { console.log("Mic restart ignored", e); }
+        }
+      }, 200);
+    };
+
+    synthesisRef.current.speak(utterance);
+  };
+
+  const pushBotMessage = (botMsg) => {
+    let messageText = "I received a response, but it was empty.";
+    let sources = [];
+
+    if (botMsg.custom) {
+      messageText = botMsg.custom.text || messageText;
+      sources = botMsg.custom.sources || [];
+    } else if (botMsg.text) {
+      messageText = botMsg.text;
+    }
+
+    speakText(messageText);
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        text: messageText,
+        sender: "bot",
+        sources: sources,
+      },
+    ]);
+  };
+
+  const sendMessage = async (e) => {
+    if (e) e.preventDefault();
+    if (!input.trim() || isLoading) return;
+
+    // Silence the bot
+    if (synthesisRef.current) synthesisRef.current.cancel();
+    // Stop mic if manual send
+    if (isListening && recognitionRef.current) {
+      isAutoRestarting.current = false;
+      recognitionRef.current.stop();
+    }
+
+    const userMessage = { text: input, sender: "user" };
+    setMessages((prev) => [...prev, userMessage]);
+
+    const query = input;
+    setInput("");
+    baseInputRef.current = ""; // Reset base
+    setIsLoading(true);
+
+    try {
+      const response = await axios.post(`${API_BASE}/api/chat`, {
+        message: query,
+        sender: sessionId,
+      });
+
+      let messageReceived = false;
+      if (response.data && Array.isArray(response.data) && response.data.length > 0) {
+        response.data.forEach((botMsg) => {
+          if (botMsg.custom || botMsg.text) {
+            pushBotMessage(botMsg);
+            messageReceived = true;
+          }
+        });
+      }
+
+      if (!messageReceived) {
+        const errorMsg = "Sorry, I didn’t get a specific response.";
+        setMessages((prev) => [...prev, { text: errorMsg, sender: "bot" }]);
+        speakText(errorMsg);
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      const errorText = error.response?.data?.error || "Sorry, I cannot connect to the AI brain.";
+      setMessages((prev) => [...prev, { text: String(errorText), sender: "bot" }]);
+      speakText(String(errorText));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const toggleMic = () => {
+    if (!recognitionRef.current) return;
+
+    if (isListening) {
+      isAutoRestarting.current = false;
+      recognitionRef.current.stop();
+    } else {
+      baseInputRef.current = input; // Capture existing text
+      recognitionRef.current.start();
+    }
+  };
+
+  const stopMicAndSend = () => {
+    if (recognitionRef.current) {
+      isAutoRestarting.current = false;
+      recognitionRef.current.stop();
+    }
+    setTimeout(() => {
+      document.querySelector('.submit-trigger-btn')?.click();
+    }, 200);
+  };
+
+
+  // Safe Cleanup for Speech Synthesis
+  useEffect(() => {
+    const synth = synthesisRef.current;
+    return () => {
+      if (synth) synth.cancel();
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+      if (recognitionRef.current) recognitionRef.current.abort();
+    };
+  }, []);
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -186,172 +340,7 @@ const ChatPanel = () => {
     };
   }, [language]); // Re-init if language changes
 
-  // Base input tracking
-  const baseInputRef = useRef("");
 
-  const toggleMic = () => {
-    if (!recognitionRef.current) return;
-
-    if (isListening) {
-      // Manual stop
-      isAutoRestarting.current = false;
-      recognitionRef.current.stop();
-    } else {
-      // Start
-      baseInputRef.current = input; // Capture existing text
-      recognitionRef.current.start();
-    }
-  };
-
-  const stopMicAndSend = () => {
-    // Stop mic
-    if (recognitionRef.current) {
-      isAutoRestarting.current = false; // Don't restart yet
-      recognitionRef.current.stop();
-    }
-    // Submit (we need to trigger the send logic, which uses 'input' state)
-    // We use a slight timeout to allow the 'final' transcript to settle in state?
-    // Actually, onresult updates state.
-    setTimeout(() => {
-      // trigger send
-      // We can't access updated 'input' easily inside this closure without ref,
-      // but 'sendMessage' uses current state if we call it via button click simulation or effect.
-      // Let's call a wrapper.
-      document.querySelector('.submit-trigger-btn')?.click();
-    }, 200);
-  };
-
-  // Safe Cleanup for Speech Synthesis
-  useEffect(() => {
-    const synth = synthesisRef.current;
-    return () => {
-      if (synth) synth.cancel();
-      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
-      if (recognitionRef.current) recognitionRef.current.abort();
-    };
-  }, []);
-
-  // --- TTS Logic ---
-  const speakText = (text) => {
-    if (!speechEnabled || !synthesisRef.current) return;
-
-    // ANTI-ECHO: Stop Mic
-    if (recognitionRef.current && isListening) {
-      isAutoRestarting.current = false;
-      recognitionRef.current.stop();
-    }
-
-    // Cancel current
-    synthesisRef.current.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-
-    // Voice Selection
-    const voices = synthesisRef.current.getVoices();
-    let preferredVoice = null;
-
-    if (language === 'hi-IN') {
-      preferredVoice = voices.find(v => v.name.includes("Google") && v.lang === "hi-IN") || voices.find(v => v.lang === "hi-IN");
-    } else {
-      preferredVoice = voices.find(voice => voice.name.includes("Google US English")) || voices.find(v => v.lang === 'en-US');
-    }
-
-    if (preferredVoice) utterance.voice = preferredVoice;
-    utterance.rate = 1.0;
-    utterance.pitch = 1.0;
-
-    // AUTO-RESUME
-    utterance.onend = () => {
-      // Wait 200ms then restart mic
-      setTimeout(() => {
-        if (recognitionRef.current) {
-          isAutoRestarting.current = true; // Mark as auto-restart
-          try {
-            // Update base input so we don't duplicate old text if we continue speaking
-            // But usually, after sending, input is cleared.
-            baseInputRef.current = "";
-            recognitionRef.current.start();
-          } catch (e) { console.log("Mic restart ignored", e); }
-        }
-      }, 200);
-    };
-
-    synthesisRef.current.speak(utterance);
-  };
-
-  const pushBotMessage = (botMsg) => {
-    let messageText = "I received a response, but it was empty.";
-    let sources = [];
-
-    if (botMsg.custom) {
-      messageText = botMsg.custom.text || messageText;
-      sources = botMsg.custom.sources || [];
-    } else if (botMsg.text) {
-      messageText = botMsg.text;
-    }
-
-    speakText(messageText);
-
-    setMessages((prev) => [
-      ...prev,
-      {
-        text: messageText,
-        sender: "bot",
-        sources: sources,
-      },
-    ]);
-  };
-
-  const sendMessage = async (e) => {
-    if (e) e.preventDefault();
-    if (!input.trim() || isLoading) return;
-
-    // Silence the bot
-    if (synthesisRef.current) synthesisRef.current.cancel();
-    // Stop mic if manual send
-    if (isListening && recognitionRef.current) {
-      isAutoRestarting.current = false;
-      recognitionRef.current.stop();
-    }
-
-    const userMessage = { text: input, sender: "user" };
-    setMessages((prev) => [...prev, userMessage]);
-
-    const query = input;
-    setInput("");
-    baseInputRef.current = ""; // Reset base
-    setIsLoading(true);
-
-    try {
-      const response = await axios.post(`${API_BASE}/api/chat`, {
-        message: query,
-        sender: sessionId,
-      });
-
-      let messageReceived = false;
-      if (response.data && Array.isArray(response.data) && response.data.length > 0) {
-        response.data.forEach((botMsg) => {
-          if (botMsg.custom || botMsg.text) {
-            pushBotMessage(botMsg);
-            messageReceived = true;
-          }
-        });
-      }
-
-      if (!messageReceived) {
-        const errorMsg = "Sorry, I didn’t get a specific response.";
-        setMessages((prev) => [...prev, { text: errorMsg, sender: "bot" }]);
-        speakText(errorMsg);
-      }
-    } catch (error) {
-      console.error("Error sending message:", error);
-      const errorText = error.response?.data?.error || "Sorry, I cannot connect to the AI brain.";
-      setMessages((prev) => [...prev, { text: String(errorText), sender: "bot" }]);
-      speakText(String(errorText));
-    } finally {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <div className="chat-container">
