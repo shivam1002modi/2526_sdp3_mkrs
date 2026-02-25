@@ -140,9 +140,14 @@ def scan_system_snapshot():
     snapshot = {}
 
     # 1. Embedding Model
-    snapshot["embedding_model"] = "paraphrase-xlm-r-multilingual-v1"
-    snapshot["embedding_library"] = "sentence-transformers via langchain HuggingFaceEmbeddings"
-    snapshot["embedding_dims"] = 768
+    if os.path.exists(os.path.join(SCRIPT_DIR, "indic_embeddings.py")):
+        snapshot["embedding_model"] = "ai4bharat/IndicBERT-v3-1B"
+        snapshot["embedding_library"] = "Custom Wrapper (Transformers + Mean Pooling)"
+        snapshot["embedding_dims"] = 1024
+    else:
+        snapshot["embedding_model"] = "paraphrase-xlm-r-multilingual-v1"
+        snapshot["embedding_library"] = "sentence-transformers via langchain HuggingFaceEmbeddings"
+        snapshot["embedding_dims"] = 768
 
     # 2. Generation Model — parse from actions.py
     actions_path = os.path.join(SCRIPT_DIR, "actions", "actions.py")

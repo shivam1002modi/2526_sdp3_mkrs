@@ -1,26 +1,26 @@
 {
     "mbs_version": "1.0",
-    "test_name": "RECORD_BREAKER_V1",
-    "timestamp": "2026-02-26 01:40:32",
-    "tms_score": 84.7,
+    "test_name": "INDICBERT_UI_UPGRADE_V4",
+    "timestamp": "2026-02-26 01:12:28",
+    "tms_score": 76.57,
     "breakdown": {
-        "avg_rhr": 1.0,
-        "avg_sec": 0.7084,
+        "avg_rhr": 0.85,
+        "avg_sec": 0.6,
         "avg_neg": 1.0,
-        "avg_latency_s": 5.793,
+        "avg_latency_s": 4.377,
         "vram_mb": 0,
-        "lat_score": 0.3452,
+        "lat_score": 0.457,
         "vram_score": 1.0
     },
     "system_snapshot": {
-        "embedding_model": "ai4bharat/IndicBERT-v3-1B",
-        "embedding_library": "Custom Wrapper (Transformers + Mean Pooling)",
-        "embedding_dims": 1024,
+        "embedding_model": "paraphrase-xlm-r-multilingual-v1",
+        "embedding_library": "sentence-transformers via langchain HuggingFaceEmbeddings",
+        "embedding_dims": 768,
         "generation_model": "unknown",
         "generation_pipeline": "unknown",
         "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
-        "confidence_threshold": 0.0,
-        "retrieval_k": 60,
+        "confidence_threshold": 0.02,
+        "retrieval_k": 25,
         "translation_models": {
             "hi": "Helsinki-NLP/opus-mt-en-hi"
         },
@@ -57,8 +57,8 @@
             "rhr": 1,
             "sec": 0.667,
             "neg": 1,
-            "latency": 12.283,
-            "answer_preview": "a black hole is an object in space with such strong gravity that nothing can escape its pull once it crosses the event horizon. this includes light an",
+            "latency": 10.656,
+            "answer_preview": "a black hole is an object in space that has so much gravity that nothing can escape its pull once it gets too close. this includes light, which means ",
             "keywords_found": [
                 "gravity",
                 "escape"
@@ -79,12 +79,13 @@
             "query": "Who coined the term black hole and when?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.5,
+            "sec": 1.0,
             "neg": 1,
-            "latency": 5.062,
-            "answer_preview": "the person who coined the term \"black hole\" is john archibald wheeler. he introduced the concept in his book \"geons: the quest for the limits of cosmi",
+            "latency": 4.374,
+            "answer_preview": "the person who coined the term \"black hole\" was john archibald wheeler. he first used the term in his work on general relativity in 1967.",
             "keywords_found": [
-                "wheeler"
+                "wheeler",
+                "1967"
             ],
             "keywords_expected": [
                 "wheeler",
@@ -103,8 +104,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.938,
-            "answer_preview": "the event horizon of a black hole is the point of no return beyond which even light cannot escape its immense gravity. it marks the boundary where the",
+            "latency": 4.441,
+            "answer_preview": "the event horizon of a black hole is the point of no return. it marks the boundary beyond which nothing can escape the gravitational pull of the black",
             "keywords_found": [
                 "point",
                 "return",
@@ -128,8 +129,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.408,
-            "answer_preview": "black holes are not entirely black. they emit radiation now called hawking radiation due to quantum effects near the event horizon. this suggests that",
+            "latency": 4.489,
+            "answer_preview": "black holes are not just invisible; they also emit radiation that can be observed through telescopes. this phenomenon was first proposed by stephen ha",
             "keywords_found": [
                 "hawking",
                 "radiation"
@@ -148,36 +149,28 @@
             "id": "Q05",
             "query": "What is Sagittarius A star?",
             "is_stress": false,
-            "rhr": 1,
-            "sec": 1.0,
+            "rhr": 0,
+            "sec": 0.0,
             "neg": 1,
-            "latency": 5.351,
-            "answer_preview": "the answer is \"sagittarius a star\" because the question asks about a specific astronomical object - a supermassive black hole located in the center of",
-            "keywords_found": [
-                "milky",
-                "supermassive"
-            ],
+            "latency": 1.168,
+            "answer_preview": "i found some documents, but i'm not confident they contain the right answer for your question.",
+            "keywords_found": [],
             "keywords_expected": [
                 "milky",
                 "supermassive"
             ],
-            "sources_found": [
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
-                "1759248623779-navratri.pdf"
-            ]
+            "sources_found": []
         },
         {
             "id": "Q06",
             "query": "What is the historical significance of Delhi?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.667,
+            "sec": 0.333,
             "neg": 1,
-            "latency": 7.319,
-            "answer_preview": "the answer to your question is that delhi has a rich and varied history spanning over seven centuries. it was founded by emperor bakhtiyar khalji in t",
+            "latency": 8.091,
+            "answer_preview": "the historical significance of delhi lies in its unique blend of ancient heritage and modern infrastructure. it serves as a bridge between india's ric",
             "keywords_found": [
-                "capital",
                 "mughal"
             ],
             "keywords_expected": [
@@ -196,14 +189,13 @@
             "query": "Who built the Red Fort and what city did they found?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.667,
             "neg": 1,
-            "latency": 7.771,
-            "answer_preview": "the red fort was constructed by shah jahan in the 17th century, specifically during his reign as the mughal emperor. he founded the walled city of sha",
+            "latency": 4.796,
+            "answer_preview": "the red fort was constructed by shah jahan in 1639 ce, and it is located in delhi.",
             "keywords_found": [
                 "shah",
-                "jahan",
-                "shahjahanabad"
+                "jahan"
             ],
             "keywords_expected": [
                 "shah",
@@ -213,7 +205,7 @@
             "sources_found": [
                 "1765007523589-delhi_.pdf",
                 "1765007523589-delhi_.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
+                "love.pdf"
             ]
         },
         {
@@ -223,8 +215,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.627,
-            "answer_preview": "the british shifted india's capital from calcutta to delhi in 1911.",
+            "latency": 4.359,
+            "answer_preview": "the british raj announced the shift of the capital from calcutta to delhi in 1911.",
             "keywords_found": [
                 "1911",
                 "calcutta"
@@ -246,8 +238,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.333,
-            "answer_preview": "the festival of navratri celebrates the divine feminine power or shakti, marking a victory over evil and good. it spans nine nights and ten days, with",
+            "latency": 4.688,
+            "answer_preview": "the festival of navratri celebrates the divine feminine power or shakti and honors goddess durga's triumph over mahishasura. it spans nine nights and ",
             "keywords_found": [
                 "nine",
                 "durga",
@@ -271,8 +263,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.578,
-            "answer_preview": "the central figure of the festival is goddess durga, who is often referred to as \"mahishasura-vijayi,\" or the victor over mahishasura. this victory sy",
+            "latency": 4.116,
+            "answer_preview": "the goddess durga's triumph over the powerful buffalo demon, mahishasura.",
             "keywords_found": [
                 "demon",
                 "mahishasura",
@@ -294,13 +286,12 @@
             "query": "What is RAG's role in the SIH 2025 chatbot?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.667,
+            "sec": 0.333,
             "neg": 1,
-            "latency": 6.795,
-            "answer_preview": "the rag (retrieval-augmented generation) component of the sih 2025 chatbot is responsible for retrieving and providing answers to students' queries in",
+            "latency": 6.025,
+            "answer_preview": "rag's role in the sih 2025 chatbot is to retrieve and generate answers from uploaded documents. the bot can fetch information from pdfs, notices, faqs",
             "keywords_found": [
-                "retrieval",
-                "augmented"
+                "pdf"
             ],
             "keywords_expected": [
                 "retrieval",
@@ -318,15 +309,11 @@
             "query": "What caused dinosaur extinction 66 million years ago?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.0,
             "neg": 1,
-            "latency": 5.107,
-            "answer_preview": "dinosaurs went extinct approximately 66 million years ago due to a massive asteroid impact combined with volcanic activity and climate changes. this e",
-            "keywords_found": [
-                "asteroid",
-                "extinct",
-                "impact"
-            ],
+            "latency": 3.64,
+            "answer_preview": "the documents do not contain this information.",
+            "keywords_found": [],
             "keywords_expected": [
                 "asteroid",
                 "extinct",
@@ -345,8 +332,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.709,
-            "answer_preview": "the triangular theory of love proposed by psychologist robert sternberg suggests that love can be categorized into three components: intimacy, passion",
+            "latency": 4.432,
+            "answer_preview": "the triangular theory of love proposes that love can be categorized into three components: intimacy, passion, and commitment. these elements combine i",
             "keywords_found": [
                 "triangular",
                 "intimacy",
@@ -368,13 +355,14 @@
             "query": "What is the Mars Mission about?",
             "is_stress": true,
             "rhr": 1,
-            "sec": 0.667,
+            "sec": 1.0,
             "neg": 1,
-            "latency": 5.757,
-            "answer_preview": "the mars mission is a critical mission for humanity that will take place in 2021. it involves launching a spacecraft to explore the planet mars and se",
+            "latency": 4.547,
+            "answer_preview": "the mars mission is critical for humanity. the rocket uses liquid hydrogen fuel. launch is scheduled for 0900 hours. astronauts must wear pressurized ",
             "keywords_found": [
                 "mars",
-                "humanity"
+                "humanity",
+                "rocket"
             ],
             "keywords_expected": [
                 "mars",
@@ -384,7 +372,7 @@
             "sources_found": [
                 "stress_test.pdf",
                 "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
+                "1765007523589-delhi_.pdf"
             ]
         },
         {
@@ -394,7 +382,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.823,
+            "latency": 3.914,
             "answer_preview": "the mars rocket uses liquid hydrogen fuel.",
             "keywords_found": [
                 "liquid",
@@ -408,8 +396,8 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
-                "love.pdf"
+                "love.pdf",
+                "Untitled document (6).pdf"
             ]
         },
         {
@@ -419,7 +407,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.067,
+            "latency": 3.933,
             "answer_preview": "the landing zone for the mars mission is jezero crater.",
             "keywords_found": [
                 "jezero",
@@ -431,7 +419,7 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "love.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
                 "love.pdf"
             ]
         },
@@ -442,7 +430,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.574,
+            "latency": 3.709,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -451,8 +439,8 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "1759248623779-navratri.pdf",
-                "love.pdf"
+                "love.pdf",
+                "1759248623779-navratri.pdf"
             ]
         },
         {
@@ -462,7 +450,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.849,
+            "latency": 3.836,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -471,7 +459,7 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "1759248623779-navratri.pdf",
+                "love.pdf",
                 "love.pdf"
             ]
         },
@@ -479,41 +467,33 @@
             "id": "Q19",
             "query": "Which department had the highest profit in Q3 2025?",
             "is_stress": true,
-            "rhr": 1,
+            "rhr": 0,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.97,
-            "answer_preview": "the documents do not contain this information.",
+            "latency": 1.279,
+            "answer_preview": "i found some documents, but i'm not confident they contain the right answer for your question.",
             "keywords_found": [],
             "keywords_expected": [
                 "security",
                 "400"
             ],
-            "sources_found": [
-                "stress_test.pdf",
-                "SIH_2025_Blueprint.pdf",
-                "love.pdf"
-            ]
+            "sources_found": []
         },
         {
             "id": "Q20",
             "query": "Which department has the lowest margin in the Q3 2025 report?",
             "is_stress": true,
-            "rhr": 1,
+            "rhr": 0,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.538,
-            "answer_preview": "the documents do not contain this information.",
+            "latency": 1.04,
+            "answer_preview": "i found some documents, but i'm not confident they contain the right answer for your question.",
             "keywords_found": [],
             "keywords_expected": [
                 "logistics",
                 "margin"
             ],
-            "sources_found": [
-                "stress_test.pdf",
-                "SIH_2025_Blueprint.pdf",
-                "1759248623779-navratri.pdf"
-            ]
+            "sources_found": []
         }
     ]
 }

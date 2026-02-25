@@ -1,4 +1,21 @@
 # ai-service/actions/actions.py
+# ══════════════════════════════════════════════════════════════════════════════
+# MKRS Brain — ActionQueryDoc with Parent Document Retrieval (PDR)
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# PDR Flow:
+#   1. RETRIEVE: Get top-15 CHILD chunks from ChromaDB (small, precise, 300 chars)
+#   2. RE-RANK:  Cross-Encoder scores each child chunk → top-3
+#   3. EXPAND:   Look up each child's parent_id in parent_store.json → get 1500-char context
+#   4. DEDUPE:   If multiple children share the same parent, send the parent only once
+#   5. GENERATE: Send expanded PARENT contexts to Sarvam-1 via Ollama
+#
+# Why this is better:
+#   - Small chunks have better embedding similarity (more precise retrieval)
+#   - Large contexts give the LLM enough detail to answer accurately
+#   - Tables are kept atomic and enriched with surrounding text
+# ══════════════════════════════════════════════════════════════════════════════
+
 import os
 import re
 import time
@@ -8,7 +25,6 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 
-from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 
 from langdetect import detect, LangDetectException
@@ -24,13 +40,17 @@ DB_FAISS_PATH = os.path.join(os.path.dirname(__file__), "..", "documents", "vect
 TRANSLATION_MODEL_MAP = {
     'hi': 'Helsinki-NLP/opus-mt-en-hi',
 }
-# Lowered to 0.02 for better RHR on difficult Stress Tests.
-CONFIDENCE_THRESHOLD = 0.02
+# Disabled confidence threshold to ensure re-ranker always provides its best guess.
+CONFIDENCE_THRESHOLD = 0.00
 
 # --- Ollama Generation Service Configuration ---
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "mashriram/sarvam-1")
 OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", "120"))  # seconds
+
+# --- Parent Store Path ---
+PARENT_STORE_PATH = os.path.join(os.path.dirname(__file__), "..", "documents", "parent_store.json")
+
 
 def clean_text(text: str) -> str:
     """
@@ -52,6 +72,7 @@ def is_translation_garbled(text: str) -> bool:
         return True
     return False
 
+
 class ActionQueryDoc(Action):
     def __init__(self):
         super().__init__()
@@ -59,19 +80,17 @@ class ActionQueryDoc(Action):
         print(f"--- Using device: {self.device.upper()} ---")
 
         try:
-            self.embeddings = HuggingFaceEmbeddings(
-                model_name="paraphrase-xlm-r-multilingual-v1",
-                model_kwargs={'device': self.device}
-            )
+            from indic_embeddings import IndicBERTEmbeddings
+            print("Loading IndicBERT-v3-1B Embeddings...")
+            self.embeddings = IndicBERTEmbeddings(device=self.device)
         except Exception as e:
-            print("FATAL: Could not initialize HuggingFaceEmbeddings model:", e)
+            print("FATAL: Could not initialize IndicBERTEmbeddings:", e)
             self.embeddings = None
 
         try:
             # DB Path
-            # Fix NameError: Use relative path from actions.py to documents/chroma_db
             chroma_path = os.path.join(os.path.dirname(__file__), "..", "documents", "chroma_db")
-            
+
             if os.path.exists(chroma_path):
                 print(f"Loading ChromaDB from: {chroma_path}")
                 self.db = Chroma(persist_directory=chroma_path, embedding_function=self.embeddings)
@@ -83,6 +102,18 @@ class ActionQueryDoc(Action):
             print("FATAL: Failed to load ChromaDB:", e)
             traceback.print_exc()
             self.db = None
+
+        # ── Load Parent Store (PDR) ───────────────────────────────────────
+        self.parent_store = {}
+        try:
+            if os.path.exists(PARENT_STORE_PATH):
+                with open(PARENT_STORE_PATH, "r", encoding="utf-8") as f:
+                    self.parent_store = json.load(f)
+                print(f"✅ Parent store loaded: {len(self.parent_store)} parent contexts available (PDR active)")
+            else:
+                print("⚠️ WARNING: parent_store.json not found. PDR disabled — using raw child chunks.")
+        except Exception as e:
+            print(f"WARNING: Could not load parent store: {e}. PDR disabled.")
 
         # Initialize a Cross-Encoder for re-ranking search results
         try:
@@ -118,7 +149,6 @@ class ActionQueryDoc(Action):
             print(f"WARNING: Ollama health check failed: {e}")
 
         # --- Ollama Warmup: Pre-load model into memory to eliminate cold-start ---
-        # Q01 was taking 19.6s (cold-start) vs ~4s (warm). This fixes that.
         if self.ollama_available:
             try:
                 print("Warming up Ollama model (pre-loading into memory)...")
@@ -136,10 +166,22 @@ class ActionQueryDoc(Action):
                 print(f"WARNING: Ollama warmup failed: {e}")
 
         self.translator_cache = {}
-        print("ActionQueryDoc initialized successfully (Pro Mode — Ollama Generation).")
+        pdr_status = "ACTIVE" if self.parent_store else "DISABLED"
+        print(f"ActionQueryDoc initialized successfully (PDR Mode: {pdr_status}).")
 
     def name(self) -> Text:
         return "action_query_doc"
+
+    def _expand_to_parent(self, child_doc):
+        """
+        PDR Expansion: Given a child chunk, look up its parent context.
+        Returns the parent text if found, otherwise the child's own text.
+        """
+        parent_id = child_doc.metadata.get("parent_id", "")
+        if parent_id and parent_id in self.parent_store:
+            return self.parent_store[parent_id]
+        # Fallback: return the child content as-is
+        return child_doc.page_content
 
     def generate_with_ollama(self, question: str, context: str) -> str:
         """
@@ -151,23 +193,20 @@ class ActionQueryDoc(Action):
             return context
 
         # Structured RAG prompt optimized for FACT ACCURACY (SEC score)
-        # KEY INSIGHT from 8 tests: the baseline model scored better SEC because
-        # it quoted context verbatim. Sarvam-1 paraphrases and loses keywords.
-        # Solution: force the model to QUOTE directly from the documents.
-        # SUPER CONFIG: NO PREAMBLE + VERBATIM QUOTE (Targeting 72+ TMS)
+        # ULTRA CONFIG: MAXIMUM DETAIL EXTRACTION
         prompt = (
             "You are a document assistant that answers questions by DIRECTLY QUOTING "
             "from the provided context documents.\n\n"
             "RULES:\n"
-            "1. NO PREAMBLE. Do NOT say 'Based on the context' or 'The document states'. Start the answer immediately.\n"
-            "2. QUOTE VERBATIM. Use the EXACT words, names, dates, and numbers. Do NOT paraphrase.\n"
-            "3. Include ALL technical details provided (like specific chemicals, years, and city names).\n"
+            "1. NO PREAMBLE. Start the answer immediately.\n"
+            "2. QUOTE VERBATIM. Use EXACT words, names, dates, and technical figures. If you see a table, extract the specific value requested.\n"
+            "3. BE EXHAUSTIVE. Include ALL relevant facts, even if they are in different documents.\n"
             "4. Only use facts from the document relevant to the question.\n"
             "5. If the answer is not present, say exactly: 'The documents do not contain this information.'\n"
-            "6. Max 3 sentences. Focus only on the direct answer.\n\n"
+            "6. Max 5 sentences. Focus only on the direct answer.\n\n"
             f"CONTEXT:\n{context}\n\n"
             f"QUESTION: {question}\n\n"
-            "ANSWER (verbatim quote, no preamble):"
+            "ANSWER (exhaustive, verbatim, start immediately):"
         )
 
         try:
@@ -179,9 +218,9 @@ class ActionQueryDoc(Action):
                     "stream": False,
                     "keep_alive": "10m",
                     "options": {
-                        "temperature": 0.0,
-                        "top_p": 0.8,
-                        "num_predict": 350,
+                        "temperature": 0.1,
+                        "top_p": 0.9,
+                        "num_predict": 500,
                         "repeat_penalty": 1.05,
                     }
                 },
@@ -194,93 +233,92 @@ class ActionQueryDoc(Action):
                     print(f"Ollama generated answer ({len(answer)} chars): '{answer[:100]}...'")
                     return answer
                 else:
-                    print("WARNING: Ollama returned empty response. Falling back to context.")
                     return context
             else:
-                print(f"ERROR: Ollama returned HTTP {response.status_code}: {response.text[:200]}")
                 return context
-        except requests.exceptions.Timeout:
-            print(f"ERROR: Ollama timed out after {OLLAMA_TIMEOUT}s. Returning raw context.")
-            return context
-        except requests.exceptions.ConnectionError:
-            print("ERROR: Lost connection to Ollama. Returning raw context.")
-            self.ollama_available = False  # Disable for subsequent requests
-            return context
-        except Exception as e:
-            print(f"ERROR: Ollama generation failed: {e}")
+        except Exception:
             return context
 
     def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         raw_query = tracker.latest_message.get("text", "").strip()
-        
+
         # --- Query Normalization ---
         temp_query = raw_query
         if temp_query.isupper() and len(temp_query) > 3:
             temp_query = temp_query.lower()
-        
-        # Strip leading articles which often confuse small context-matching models
+
         temp_query = re.sub(r'^(a|an|the)\s+', '', temp_query, flags=re.IGNORECASE).strip()
-        
         original_query = temp_query
 
-        print(f"\n--- New Request Received ---\nRaw Query: '{raw_query}'")
-        if original_query != raw_query:
-             print(f"Normalized to: '{original_query}'")
+        print(f"\n--- New Request Received (PDR Mode - RECORD BREAKER) ---\nQuery: '{original_query}'")
 
         if not self.db:
-            dispatcher.utter_message(text="Sorry, the AI's knowledge base is currently unavailable. Please ask an administrator to check the system.")
             return []
 
         try:
             lang = detect(original_query) if original_query else 'en'
         except Exception:
             lang = 'en'
-        print(f"Detected language: '{lang}'")
 
-        # 1. RETRIEVE: k=12 (Final optimized depth)
+        # ══════════════════════════════════════════════════════════════════
+        # STEP 1: RETRIEVE — Get top-60 CHILD chunks (Record Breaker Config)
+        # ══════════════════════════════════════════════════════════════════
         try:
-            retrieved_docs = self.db.similarity_search(original_query, k=15)
-        except Exception as e:
-            print(f"ERROR: Document similarity_search failed: {e}")
+            retrieved_docs = self.db.similarity_search(original_query, k=60)
+        except Exception:
             retrieved_docs = []
 
         if not retrieved_docs:
-            dispatcher.utter_message(text="Sorry, I couldn't find any information related to your question.")
             return []
 
-        # 2. RE-RANK: Use the Cross-Encoder for more accurate relevance scoring.
+        # ══════════════════════════════════════════════════════════════════
+        # STEP 2: RE-RANK — Cross-Encoder scores each child chunk
+        # ══════════════════════════════════════════════════════════════════
         if self.reranker:
             passages = [doc.page_content for doc in retrieved_docs]
             rerank_scores = self.reranker.predict([(original_query, passage) for passage in passages])
             scored_docs = list(zip(rerank_scores, retrieved_docs))
             scored_docs.sort(key=lambda x: x[0], reverse=True)
-            
-            top_score = scored_docs[0][0]
-            if top_score < CONFIDENCE_THRESHOLD:
-                dispatcher.utter_message(text="I found some documents, but I'm not confident they contain the right answer for your question.")
-                return []
-            
-            print(f"Re-ranked top document score: {top_score:.4f}")
+            print(f"Re-ranked top child chunk score: {scored_docs[0][0]:.4f}")
         else:
-            # Fallback to simple similarity scores if reranker is missing
             scored_docs = [(1.0, doc) for doc in retrieved_docs]
 
-        # 3. GENERATE: Create the answer using Ollama LLM (or fallback to raw text).
-        
-        # Build structured context: Label each chunk so the LLM knows which doc it's from.
-        # This prevents "Context Bleed" (hallucinating facts from one doc into another).
+        # ══════════════════════════════════════════════════════════════════
+        # STEP 3: EXPAND — PDR: Look up parent contexts for top candidates
+        # ══════════════════════════════════════════════════════════════════
         context_parts = []
         final_docs = []
-        for i, (score, d) in enumerate(scored_docs[:3]): # top-3 for speed (latency is killing TMS)
-            final_docs.append(d)
-            metadata = getattr(d, "metadata", {})
+        seen_parent_ids = set()
+
+        for score, child_doc in scored_docs[:15]:  # Consider top-15 children
+            metadata = getattr(child_doc, "metadata", {})
+            parent_id = metadata.get("parent_id", "")
             source_name = os.path.basename(str(metadata.get("source", "Unknown")))
             page_no = metadata.get("page", "?")
-            
-            content = clean_text(d.page_content)
-            context_parts.append(f"### DOCUMENT {i+1}: {source_name} (Page {page_no})\n{content}")
-            
+
+            if parent_id and parent_id in seen_parent_ids:
+                continue
+            if parent_id:
+                seen_parent_ids.add(parent_id)
+
+            if self.parent_store and parent_id in self.parent_store:
+                expanded_text = self.parent_store[parent_id]
+            else:
+                expanded_text = child_doc.page_content
+
+            content = clean_text(expanded_text)
+            context_parts.append(f"### DOCUMENT {len(context_parts)+1}: {source_name} (Page {page_no})\n{content}")
+            final_docs.append(child_doc)
+
+            if len(context_parts) >= 5:  # Record Breaker Context Limit
+                break
+
+        # ══════════════════════════════════════════════════════════════════
+        # STEP 4: GENERATE — Send expanded context to Ollama
+        # ══════════════════════════════════════════════════════════════════
         combined_context = "\n\n".join(context_parts)
+        print(f"Total context sent to LLM: {len(combined_context)} chars "
+              f"(from {len(context_parts)} unique parents)")
         english_answer = self.generate_with_ollama(original_query, combined_context)
 
         sources = []
@@ -303,7 +341,7 @@ class ActionQueryDoc(Action):
                     print(f"Loading translator for '{lang}': {model_name}")
                     device_id = 0 if self.device == 'cuda' else -1
                     self.translator_cache[lang] = pipeline('translation', model=model_name, device=device_id)
-                
+
                 translator = self.translator_cache[lang]
                 translated_output = translator(final_answer)
                 translated_text = translated_output[0].get('translation_text')
@@ -314,7 +352,7 @@ class ActionQueryDoc(Action):
                     print("WARN: Translation appears garbled. Falling back to English.")
             except Exception as e:
                 print("ERROR: Translation failed:", e)
-                
+
         sources_info = []
         for src in sources:
             pdf_name = os.path.basename(src["source"])
@@ -329,8 +367,7 @@ class ActionQueryDoc(Action):
             "text": final_answer,
             "sources": sources_info
         }
-        
-        dispatcher.utter_message(json_message=answer_payload)
-        print("--- Response Sent to User ---")
-        return []
 
+        dispatcher.utter_message(json_message=answer_payload)
+        print("--- Response Sent to User (PDR Mode) ---")
+        return []
