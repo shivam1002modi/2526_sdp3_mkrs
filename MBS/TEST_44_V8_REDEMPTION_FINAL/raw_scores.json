@@ -1,15 +1,15 @@
 {
     "mbs_version": "1.0",
-    "test_name": "ULTRA_REFINER_V5_RESTORED",
-    "timestamp": "2026-02-27 01:26:45",
-    "tms_score": 84.86,
+    "test_name": "V8_REDEMPTION_FINAL",
+    "timestamp": "2026-02-27 00:18:48",
+    "tms_score": 84.38,
     "breakdown": {
         "avg_rhr": 1.0,
-        "avg_sec": 0.7084,
-        "avg_neg": 1.0,
-        "avg_latency_s": 5.544,
+        "avg_sec": 0.7167,
+        "avg_neg": 0.95,
+        "avg_latency_s": 5.91,
         "vram_mb": 0,
-        "lat_score": 0.3608,
+        "lat_score": 0.3384,
         "vram_score": 1.0
     },
     "system_snapshot": {
@@ -55,13 +55,14 @@
             "query": "What is a black hole?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.667,
+            "sec": 1.0,
             "neg": 1,
-            "latency": 10.816,
-            "answer_preview": "a black hole is an object in space with such strong gravity that nothing can escape its pull once it crosses the event horizon. this includes light an",
+            "latency": 7.911,
+            "answer_preview": "a black hole is a region in space where gravity is so strong that nothing, not even light, can escape. the idea of black holes challenges our understa",
             "keywords_found": [
                 "gravity",
-                "escape"
+                "escape",
+                "region"
             ],
             "keywords_expected": [
                 "gravity",
@@ -81,8 +82,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.208,
-            "answer_preview": "the person who coined the term \"black hole\" is john archibald wheeler. he introduced the concept in his work published in 1967.",
+            "latency": 4.296,
+            "answer_preview": "the final answer is \"john wheeler coined the term black hole in 1967.\"",
             "keywords_found": [
                 "wheeler",
                 "1967"
@@ -104,8 +105,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.354,
-            "answer_preview": "the event horizon of a black hole is the point of no return beyond which even light cannot escape its gravitational pull. it marks the boundary where ",
+            "latency": 6.246,
+            "answer_preview": "the event horizon of a black hole is the point of no return, beyond which nothing can escape, not even light. it is the boundary beyond which the blac",
             "keywords_found": [
                 "point",
                 "return",
@@ -129,8 +130,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.874,
-            "answer_preview": "the answer to the question \"what is hawking radiation?\" is that it is a phenomenon proposed by stephen hawking in which black holes emit radiation due",
+            "latency": 5.33,
+            "answer_preview": "hawking radiation is a theoretical phenomenon proposed by stephen hawking in 1974. it suggests that black holes emit radiation due to the quantum effe",
             "keywords_found": [
                 "hawking",
                 "radiation"
@@ -152,8 +153,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.401,
-            "answer_preview": "the provided context documents are from the black holes section of \"a knowledge guide\" on page 3. they discuss various aspects of black holes, includi",
+            "latency": 6.566,
+            "answer_preview": "sagittarius a star is a supermassive black hole located in the center of the milky way galaxy. it is the closest supermassive black hole to earth, loc",
             "keywords_found": [
                 "milky",
                 "supermassive"
@@ -173,14 +174,11 @@
             "query": "What is the historical significance of Delhi?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.667,
+            "sec": 0.0,
             "neg": 1,
-            "latency": 7.149,
-            "answer_preview": "the historical significance of delhi can be traced back to its roots in ancient times, where it was a center for trade and culture. however, its impor",
-            "keywords_found": [
-                "capital",
-                "mughal"
-            ],
+            "latency": 6.337,
+            "answer_preview": "the historical significance of delhi is its role as the political, economic, and cultural hub of india. it serves as the seat of the government of ind",
+            "keywords_found": [],
             "keywords_expected": [
                 "capital",
                 "mughal",
@@ -197,13 +195,14 @@
             "query": "Who built the Red Fort and what city did they found?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.667,
+            "sec": 1.0,
             "neg": 1,
-            "latency": 4.754,
-            "answer_preview": "the red fort was constructed by shah jahan in the year 1639 ce, located within the walls of delhi.",
+            "latency": 4.94,
+            "answer_preview": "the red fort and the city of shahjahanabad (old delhi) were built by the mughal empire, specifically by emperor shah jahan, in the 17th century.",
             "keywords_found": [
                 "shah",
-                "jahan"
+                "jahan",
+                "shahjahanabad"
             ],
             "keywords_expected": [
                 "shah",
@@ -223,8 +222,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.493,
-            "answer_preview": "the british shifted india's capital from calcutta to delhi in 1911.",
+            "latency": 5.091,
+            "answer_preview": "the british shifted india's capital to delhi in 1911, following the announcement of the shift of the capital from calcutta to delhi. this event marked",
             "keywords_found": [
                 "1911",
                 "calcutta"
@@ -246,8 +245,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.307,
-            "answer_preview": "the festival of navratri celebrates the divine feminine power or shakti. it spans nine nights and ten days and is dedicated to the worship of goddess ",
+            "latency": 6.703,
+            "answer_preview": "navratri is a major hindu festival celebrating the divine feminine power, or shakti. it spans nine nights and ten days and is dedicated to the worship",
             "keywords_found": [
                 "nine",
                 "durga",
@@ -271,8 +270,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.851,
-            "answer_preview": "the goddess durga's triumph over the powerful buffalo demon, mahishasura, symbolizes the ultimate victory of good over evil.",
+            "latency": 4.949,
+            "answer_preview": "the legend of goddess durga's triumph over the powerful buffalo demon, mahishasura, is a central theme of the festival of navratri.",
             "keywords_found": [
                 "demon",
                 "mahishasura",
@@ -294,13 +293,12 @@
             "query": "What is RAG's role in the SIH 2025 chatbot?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.667,
+            "sec": 0.333,
             "neg": 1,
-            "latency": 6.433,
-            "answer_preview": "the answer to your question is \"rag's role in the sih 2025 chatbot\". rag (retrieval-augmented generation) is a component of the chatbot that fetch inf",
+            "latency": 5.868,
+            "answer_preview": "the final answer is \"rag's role in the sih 2025 chatbot is to retrieve answers from uploaded pdfs/faqs in the user's language.\"",
             "keywords_found": [
-                "retrieval",
-                "augmented"
+                "pdf"
             ],
             "keywords_expected": [
                 "retrieval",
@@ -318,11 +316,15 @@
             "query": "What caused dinosaur extinction 66 million years ago?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.0,
+            "sec": 1.0,
             "neg": 1,
-            "latency": 4.432,
-            "answer_preview": "the document does not contain this information.",
-            "keywords_found": [],
+            "latency": 8.678,
+            "answer_preview": "the information provided in document 1: dinasours.pdf (page 1) suggests that dinosaurs went extinct 66 million years ago, likely due to a massive aste",
+            "keywords_found": [
+                "asteroid",
+                "extinct",
+                "impact"
+            ],
             "keywords_expected": [
                 "asteroid",
                 "extinct",
@@ -341,8 +343,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.707,
-            "answer_preview": "the triangular theory of love proposed by psychologist robert sternberg suggests that love can be categorized into three components: intimacy, passion",
+            "latency": 5.805,
+            "answer_preview": "robert sternberg's triangular theory of love is a widely recognized framework for understanding the complexities of love. it suggests that love is a c",
             "keywords_found": [
                 "triangular",
                 "intimacy",
@@ -366,8 +368,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.104,
-            "answer_preview": "the mars mission is critical for humanity. the rocket uses liquid hydrogen fuel. launch is scheduled for 0900 hours. astronauts must wear pressurized ",
+            "latency": 8.857,
+            "answer_preview": "the mars mission is about the launch of the space mission. the space mission is about using liquid hydrogen fuel, launching at 0900 hours, and the lau",
             "keywords_found": [
                 "mars",
                 "humanity",
@@ -391,7 +393,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.484,
+            "latency": 4.261,
             "answer_preview": "the mars rocket uses liquid hydrogen fuel.",
             "keywords_found": [
                 "liquid",
@@ -414,14 +416,11 @@
             "query": "What is the landing zone for the Mars mission?",
             "is_stress": true,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.0,
             "neg": 1,
             "latency": 4.553,
-            "answer_preview": "the landing zone for the mars mission is jezero crater.",
-            "keywords_found": [
-                "jezero",
-                "crater"
-            ],
+            "answer_preview": "the landing zone for the mars mission is 0900 hours.",
+            "keywords_found": [],
             "keywords_expected": [
                 "jezero",
                 "crater"
@@ -439,8 +438,8 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.388,
-            "answer_preview": "the documents do not contain this information.",
+            "latency": 8.662,
+            "answer_preview": "the information provided in document 1: stress_test.pdf (page 1) and document 2: 1759248623779-navratri.pdf (page 1) suggests that the process of baki",
             "keywords_found": [],
             "keywords_expected": [
                 "45",
@@ -459,8 +458,8 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.516,
-            "answer_preview": "the documents do not contain this information.",
+            "latency": 4.317,
+            "answer_preview": "0900 hours",
             "keywords_found": [],
             "keywords_expected": [
                 "375",
@@ -479,8 +478,8 @@
             "rhr": 1,
             "sec": 0.5,
             "neg": 1,
-            "latency": 6.851,
-            "answer_preview": "the document assistant has directly quoted from document 1: stress_test.pdf on page 2 of sih_2025_blueprint. this section provides the financial data ",
+            "latency": 4.583,
+            "answer_preview": "the highest-profit department in q3 2025 was the \"security\" sector.",
             "keywords_found": [
                 "security"
             ],
@@ -499,11 +498,13 @@
             "query": "Which department has the lowest margin in the Q3 2025 report?",
             "is_stress": true,
             "rhr": 1,
-            "sec": 0.0,
-            "neg": 1,
-            "latency": 4.199,
-            "answer_preview": "the documents do not contain this information.",
-            "keywords_found": [],
+            "sec": 0.5,
+            "neg": 0,
+            "latency": 4.242,
+            "answer_preview": "the department with the lowest margin in the q3 2025 report is security.",
+            "keywords_found": [
+                "margin"
+            ],
             "keywords_expected": [
                 "logistics",
                 "margin"
