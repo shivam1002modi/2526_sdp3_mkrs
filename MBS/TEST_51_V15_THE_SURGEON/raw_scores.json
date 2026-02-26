@@ -1,15 +1,15 @@
 {
     "mbs_version": "1.0",
-    "test_name": "ULTRA_REFINER_V5_RESTORED",
-    "timestamp": "2026-02-27 01:26:45",
-    "tms_score": 84.86,
+    "test_name": "V15_THE_SURGEON",
+    "timestamp": "2026-02-27 01:00:36",
+    "tms_score": 83.39,
     "breakdown": {
         "avg_rhr": 1.0,
-        "avg_sec": 0.7084,
-        "avg_neg": 1.0,
-        "avg_latency_s": 5.544,
+        "avg_sec": 0.6751,
+        "avg_neg": 0.95,
+        "avg_latency_s": 5.495,
         "vram_mb": 0,
-        "lat_score": 0.3608,
+        "lat_score": 0.3639,
         "vram_score": 1.0
     },
     "system_snapshot": {
@@ -57,8 +57,8 @@
             "rhr": 1,
             "sec": 0.667,
             "neg": 1,
-            "latency": 10.816,
-            "answer_preview": "a black hole is an object in space with such strong gravity that nothing can escape its pull once it crosses the event horizon. this includes light an",
+            "latency": 9.74,
+            "answer_preview": "a black hole is an object in space with gravity so strong that nothing, not even light, can escape its pull once it crosses the event horizon.",
             "keywords_found": [
                 "gravity",
                 "escape"
@@ -79,13 +79,12 @@
             "query": "Who coined the term black hole and when?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.5,
             "neg": 1,
-            "latency": 5.208,
-            "answer_preview": "the person who coined the term \"black hole\" is john archibald wheeler. he introduced the concept in his work published in 1967.",
+            "latency": 5.24,
+            "answer_preview": "the person who coined the term \"black hole\" is john wheeler (1917 - 2008). he introduced the concept in his book, \"exploring black holes,\" published i",
             "keywords_found": [
-                "wheeler",
-                "1967"
+                "wheeler"
             ],
             "keywords_expected": [
                 "wheeler",
@@ -104,8 +103,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.354,
-            "answer_preview": "the event horizon of a black hole is the point of no return beyond which even light cannot escape its gravitational pull. it marks the boundary where ",
+            "latency": 5.975,
+            "answer_preview": "the event horizon of a black hole is the point of no return, beyond which nothing can escape its gravitational pull. it marks the boundary where the c",
             "keywords_found": [
                 "point",
                 "return",
@@ -129,8 +128,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.874,
-            "answer_preview": "the answer to the question \"what is hawking radiation?\" is that it is a phenomenon proposed by stephen hawking in which black holes emit radiation due",
+            "latency": 5.473,
+            "answer_preview": "hawking radiation refers to the theoretical process where black holes emit energy due to quantum effects near their event horizons. this phenomenon wa",
             "keywords_found": [
                 "hawking",
                 "radiation"
@@ -150,14 +149,11 @@
             "query": "What is Sagittarius A star?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.0,
             "neg": 1,
-            "latency": 6.401,
-            "answer_preview": "the provided context documents are from the black holes section of \"a knowledge guide\" on page 3. they discuss various aspects of black holes, includi",
-            "keywords_found": [
-                "milky",
-                "supermassive"
-            ],
+            "latency": 7.059,
+            "answer_preview": "the answer to your query about the information regarding the existence of black holes in relation to their potential preservation or transmission into",
+            "keywords_found": [],
             "keywords_expected": [
                 "milky",
                 "supermassive"
@@ -175,8 +171,8 @@
             "rhr": 1,
             "sec": 0.667,
             "neg": 1,
-            "latency": 7.149,
-            "answer_preview": "the historical significance of delhi can be traced back to its roots in ancient times, where it was a center for trade and culture. however, its impor",
+            "latency": 6.327,
+            "answer_preview": "the historical significance of delhi can be traced back to its roots in ancient indian mythology and history, specifically from the epic mahabharata. ",
             "keywords_found": [
                 "capital",
                 "mughal"
@@ -199,8 +195,8 @@
             "rhr": 1,
             "sec": 0.667,
             "neg": 1,
-            "latency": 4.754,
-            "answer_preview": "the red fort was constructed by shah jahan in the year 1639 ce, located within the walls of delhi.",
+            "latency": 5.104,
+            "answer_preview": "the red fort was built by shah jahan in delhi, india, and he founded new delhi after shifting the capital from calcutta to delhi.",
             "keywords_found": [
                 "shah",
                 "jahan"
@@ -223,7 +219,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.493,
+            "latency": 4.75,
             "answer_preview": "the british shifted india's capital from calcutta to delhi in 1911.",
             "keywords_found": [
                 "1911",
@@ -244,15 +240,11 @@
             "query": "What is Navratri festival?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.0,
             "neg": 1,
-            "latency": 5.307,
-            "answer_preview": "the festival of navratri celebrates the divine feminine power or shakti. it spans nine nights and ten days and is dedicated to the worship of goddess ",
-            "keywords_found": [
-                "nine",
-                "durga",
-                "shakti"
-            ],
+            "latency": 4.692,
+            "answer_preview": "the answer to your query is \"navratri\"",
+            "keywords_found": [],
             "keywords_expected": [
                 "nine",
                 "durga",
@@ -271,8 +263,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.851,
-            "answer_preview": "the goddess durga's triumph over the powerful buffalo demon, mahishasura, symbolizes the ultimate victory of good over evil.",
+            "latency": 5.177,
+            "answer_preview": "the goddess durga's triumph over the powerful buffalo demon, mahishasura, symbolizes the ultimate victory of dharma (righteousness) over adharma (evil",
             "keywords_found": [
                 "demon",
                 "mahishasura",
@@ -296,8 +288,8 @@
             "rhr": 1,
             "sec": 0.667,
             "neg": 1,
-            "latency": 6.433,
-            "answer_preview": "the answer to your question is \"rag's role in the sih 2025 chatbot\". rag (retrieval-augmented generation) is a component of the chatbot that fetch inf",
+            "latency": 5.988,
+            "answer_preview": "the answer to your question is \"rag (retrieval-augmented generation)\". this is a crucial component of the sih 2025 prototype, as it allows the chatbot",
             "keywords_found": [
                 "retrieval",
                 "augmented"
@@ -318,11 +310,14 @@
             "query": "What caused dinosaur extinction 66 million years ago?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.0,
+            "sec": 0.667,
             "neg": 1,
-            "latency": 4.432,
-            "answer_preview": "the document does not contain this information.",
-            "keywords_found": [],
+            "latency": 4.483,
+            "answer_preview": "the precise answer to the query is \"asteroid impact combined with volcanic activity and climate changes.\"",
+            "keywords_found": [
+                "asteroid",
+                "impact"
+            ],
             "keywords_expected": [
                 "asteroid",
                 "extinct",
@@ -341,8 +336,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.707,
-            "answer_preview": "the triangular theory of love proposed by psychologist robert sternberg suggests that love can be categorized into three components: intimacy, passion",
+            "latency": 5.87,
+            "answer_preview": "the triangular theory of love proposed by robert sternberg suggests that love can be categorized into three components: intimacy, passion, and commitm",
             "keywords_found": [
                 "triangular",
                 "intimacy",
@@ -364,14 +359,13 @@
             "query": "What is the Mars Mission about?",
             "is_stress": true,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.667,
             "neg": 1,
-            "latency": 5.104,
-            "answer_preview": "the mars mission is critical for humanity. the rocket uses liquid hydrogen fuel. launch is scheduled for 0900 hours. astronauts must wear pressurized ",
+            "latency": 4.589,
+            "answer_preview": "the mars mission is critical for humanity.",
             "keywords_found": [
                 "mars",
-                "humanity",
-                "rocket"
+                "humanity"
             ],
             "keywords_expected": [
                 "mars",
@@ -391,7 +385,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.484,
+            "latency": 4.873,
             "answer_preview": "the mars rocket uses liquid hydrogen fuel.",
             "keywords_found": [
                 "liquid",
@@ -416,7 +410,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.553,
+            "latency": 5.087,
             "answer_preview": "the landing zone for the mars mission is jezero crater.",
             "keywords_found": [
                 "jezero",
@@ -437,11 +431,13 @@
             "query": "How long do you bake Apple Pie?",
             "is_stress": true,
             "rhr": 1,
-            "sec": 0.0,
+            "sec": 0.5,
             "neg": 1,
-            "latency": 4.388,
-            "answer_preview": "the documents do not contain this information.",
-            "keywords_found": [],
+            "latency": 4.729,
+            "answer_preview": "the answer to the query \"how long do you bake apple pie?\" would be \"45 minutes.\"",
+            "keywords_found": [
+                "45"
+            ],
             "keywords_expected": [
                 "45",
                 "golden"
@@ -457,11 +453,14 @@
             "query": "What temperature to preheat oven for Apple Pie?",
             "is_stress": true,
             "rhr": 1,
-            "sec": 0.0,
+            "sec": 1.0,
             "neg": 1,
-            "latency": 4.516,
-            "answer_preview": "the documents do not contain this information.",
-            "keywords_found": [],
+            "latency": 4.951,
+            "answer_preview": "the precise answer to the query \"what temperature to preheat oven for apple pie?\" is 375 degrees.",
+            "keywords_found": [
+                "375",
+                "degrees"
+            ],
             "keywords_expected": [
                 "375",
                 "degrees"
@@ -479,8 +478,8 @@
             "rhr": 1,
             "sec": 0.5,
             "neg": 1,
-            "latency": 6.851,
-            "answer_preview": "the document assistant has directly quoted from document 1: stress_test.pdf on page 2 of sih_2025_blueprint. this section provides the financial data ",
+            "latency": 5.402,
+            "answer_preview": "the top-performing department in q3 2025 was security, with a significant increase in profits.",
             "keywords_found": [
                 "security"
             ],
@@ -500,9 +499,9 @@
             "is_stress": true,
             "rhr": 1,
             "sec": 0.0,
-            "neg": 1,
-            "latency": 4.199,
-            "answer_preview": "the documents do not contain this information.",
+            "neg": 0,
+            "latency": 4.399,
+            "answer_preview": "the highest profit-generating sector was security (m)",
             "keywords_found": [],
             "keywords_expected": [
                 "logistics",

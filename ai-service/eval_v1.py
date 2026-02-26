@@ -620,9 +620,16 @@ def run_benchmark(test_name="BASELINE"):
             "sources_found": [s.get("title", "?") for s in sources[:3]],
         })
 
-        status = "✓" if rhr else "✗"
-        trap_info = f" | TRAP:{'✗HALL' if neg == 0 else '✓ok'}" if tc["is_stress"] else ""
-        print(f"  {tag} {qid} [{status}RHR | SEC:{sec:.2f} | {latency:.2f}s{trap_info}]  '{query[:55]}'")
+        status = "[RHR_OK]" if rhr else "[RHR_FAIL]"
+        trap_info = f" | TRAP:{'HALLUCINATION' if neg == 0 else 'OK'}" if tc["is_stress"] else ""
+        
+        # Determine simple tag
+        tag = "GOOD" if rhr == 1 and sec >= 0.7 else ("WARN" if rhr == 1 else "FAIL")
+        
+        try:
+            print(f"  {tag} {qid} [{status} | SEC:{sec:.2f} | {latency:.2f}s{trap_info}]  '{query[:55]}'")
+        except Exception:
+            print(f"  {qid} SEC:{sec:.2f} | RHR:{rhr}")
 
     # ── 3. Calculate aggregate scores ─────────────────────────────────────────
     avg_rhr = sum(r["rhr"] for r in results) / len(results)
@@ -643,17 +650,19 @@ def run_benchmark(test_name="BASELINE"):
     print("\n" + "=" * 60)
     print(f"  MKRS BRAIN SCORE (TMS): {tms} / 100")
     print("=" * 60)
-    print(f"  ├─ RHR  (Retrieval Hit):     {avg_rhr*100:.1f}%  ×40 = {avg_rhr*40:.1f}")
-    print(f"  ├─ SEC  (Fact Accuracy):     {avg_sec*100:.1f}%  ×30 = {avg_sec*30:.1f}")
-    print(f"  ├─ NEG  (No Hallucination):  {avg_neg*100:.1f}%  ×10 = {avg_neg*10:.1f}")
-    print(f"  ├─ LAT  (Speed, {avg_lat:.2f}s avg): {lat_score:.2f}  ×10 = {lat_score*10:.1f}")
-    print(f"  └─ VRAM ({vram_mb:.0f} MB):           {vram_score:.2f}  ×10 = {vram_score*10:.1f}")
+    print(f"  |-- RHR  (Retrieval Hit):     {avg_rhr*100:.1f}%  x40 = {avg_rhr*40:.1f}")
+    print(f"  |-- SEC  (Fact Accuracy):     {avg_sec*100:.1f}%  x30 = {avg_sec*30:.1f}")
+    print(f"  |-- NEG  (No Hallucination):  {avg_neg*100:.1f}%  x10 = {avg_neg*10:.1f}")
+    print(f"  |-- LAT  (Speed, {avg_lat:.2f}s avg): {lat_score:.2f}  x10 = {lat_score*10:.1f}")
+    print(f"  \\-- VRAM ({vram_mb:.0f} MB):           {vram_score:.2f}  x10 = {vram_score*10:.1f}")
     print("=" * 60)
 
     # Grade
-    for threshold, label in [(89, "🏆 EXCELLENT"), (76, "🟢 GOOD"), (61, "🟠 MODERATE"), (41, "🟡 WEAK"), (0, "🔴 CRITICAL")]:
+    for threshold, label in [(89, "EXCELLENT (🏆)"), (76, "GOOD (🟢)"), (61, "MODERATE (🟠)"), (41, "WEAK (🟡)"), (0, "CRITICAL (🔴)")]:
         if tms >= threshold:
-            print(f"  Grade: {label}")
+            # Strip emojis for terminal print but keep for report
+            clean_label = label.split(' (')[0]
+            print(f"  Grade: {clean_label}")
             break
 
     # ── 4. Build summary dict ─────────────────────────────────────────────────

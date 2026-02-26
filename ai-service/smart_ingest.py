@@ -102,6 +102,11 @@ class SmartIngest:
                         logger.debug(f"Page {page_num}: No chars, skipping")
                         continue
 
+                    # Calculate average font size for the page to detect headings
+                    all_sizes = [c['size'] for c in page.chars]
+                    avg_font_size = sum(all_sizes) / len(all_sizes) if all_sizes else 10
+                    header_threshold = avg_font_size * self.HEADER_FONT_RATIO
+
                     width, height = page.width, page.height
                     logger.info(f"--- Page {page_num}/{total_pages} ({width:.0f}x{height:.0f}) ---")
 
@@ -180,30 +185,28 @@ class SmartIngest:
                             # Detect columns within THIS band
                             columns = self._detect_columns_in_band(
                                 band_words, width, band_start, band_end, page_num
-                            )
+                             )
 
                             # Read each column independently, top-to-bottom
-                            # KEY: When multiple columns exist, we offset Y for
-                            # later columns so they sort AFTER earlier columns.
-                            # Without this, both columns share the same Y range
-                            # and lines would interleave when sorted by Y.
                             is_multi_col = len(columns) > 1
                             for col_idx, col_words in enumerate(columns):
                                 col_label = chr(65 + col_idx)
-                                lines = self._words_to_lines(col_words)
+                                # Capture font size info
+                                lines_with_data = self._words_to_lines_v2(col_words)
                                 logger.debug(
-                                    f"  Column {col_label}: {len(lines)} lines"
+                                    f"  Column {col_label}: {len(lines_with_data)} lines"
                                 )
 
-                                # For multi-column: offset Y so Col B comes after Col A
-                                # Use band boundary to calculate offset
                                 if is_multi_col:
                                     band_height = band_end - band_start
                                     y_offset = col_idx * (band_height + 1)
                                 else:
                                     y_offset = 0
 
-                                for y, text in lines:
+                                for y, text, max_size in lines_with_data:
+                                    # Mark potential headings
+                                    if max_size >= header_threshold and len(text.split()) < 15:
+                                        text = f"[# {text.strip()}]"
                                     layout_items.append((y + y_offset, text))
 
                     # ── Step E: Sort by Y Position & Filter ───────────────
@@ -216,7 +219,6 @@ class SmartIngest:
                             continue
                         # Remove artifacts
                         if artifacts and line in artifacts:
-                            logger.debug(f"Page {page_num}: Artifact removed: '{line[:50]}'")
                             continue
                         # Remove page numbers and doc numbers
                         if re.match(r'^(Page\s+\d+|^\d+$|DOC NO:.*)', line, re.I):
@@ -225,27 +227,21 @@ class SmartIngest:
 
                     final_text = "\n".join(final_lines)
                     # Clean non-ASCII (keep Devanagari)
-                    final_text = re.sub(r'[^\x00-\x7F\u0900-\u097F\n]+', ' ', final_text)
+                    final_text = re.sub(r'[^\x00-\x7F\u0900-\u097F\n\[\]:]+', ' ', final_text)
                     final_text = re.sub(r'[ \t]+', ' ', final_text).strip()
 
                     if not final_text:
                         continue
 
-                    logger.info(
-                        f"Page {page_num}: Final text = {len(final_text)} chars"
-                    )
-                    logger.debug(
-                        f"Page {page_num}: Preview: '{final_text[:300]}...'"
-                    )
-
                     meta = {
                         "source": self.filename,
                         "page": page_num,
-                        "ingestion_method": "ColumnAware_V10",
+                        "ingestion_method": "ColumnAware_V11_Zonal",
                     }
                     documents.append(
                         Document(page_content=final_text, metadata=meta)
                     )
+
 
         except Exception as e:
             logger.error(f"FATAL: Ingestion failed on {self.filename}: {e}")
@@ -447,6 +443,43 @@ class SmartIngest:
             line_text = " ".join([ww['text'] for ww in current_line_words])
             avg_y = sum(ww['top'] for ww in current_line_words) / len(current_line_words)
             lines.append((avg_y, line_text))
+
+        return lines
+
+    def _words_to_lines_v2(self, words):
+        """
+        Version 2 of words_to_lines that also returns the maximum font size in each line.
+        Returns: list of (y_position, line_text, max_font_size)
+        """
+        if not words:
+            return []
+
+        words.sort(key=lambda w: (w['top'], w['x0']))
+
+        lines = []
+        current_line_words = [words[0]]
+        current_y = words[0]['top']
+
+        for w in words[1:]:
+            y_delta = abs(w['top'] - current_y)
+            if y_delta <= self.LINE_HEIGHT_PX * 2:
+                current_line_words.append(w)
+            else:
+                current_line_words.sort(key=lambda ww: ww['x0'])
+                line_text = " ".join([ww['text'] for ww in current_line_words])
+                avg_y = sum(ww['top'] for ww in current_line_words) / len(current_line_words)
+                max_size = max([ww.get('size', 0) for ww in current_line_words])
+                lines.append((avg_y, line_text, max_size))
+
+                current_line_words = [w]
+                current_y = w['top']
+
+        if current_line_words:
+            current_line_words.sort(key=lambda ww: ww['x0'])
+            line_text = " ".join([ww['text'] for ww in current_line_words])
+            avg_y = sum(ww['top'] for ww in current_line_words) / len(current_line_words)
+            max_size = max([ww.get('size', 0) for ww in current_line_words])
+            lines.append((avg_y, line_text, max_size))
 
         return lines
 
