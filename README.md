@@ -58,13 +58,13 @@ Python (FastAPI): Handles asynchronous admin tasks and model retraining.
 
 LangChain & FAISS: Vector database management for efficient document retrieval.
 
-Hugging Face Transformers (Local Models):
+Hugging Face & Ollama Models (Local):
 
-Retrieval: paraphrase-xlm-r-multilingual-v1 (Bi-Encoder)
+Retrieval: ai4bharat/IndicBERT-v3-1B (Bi-Encoder)
 
 Re-ranking: cross-encoder/ms-marco-MiniLM-L-6-v2 (Cross-Encoder)
 
-Generation: sshleifer/distilbart-cnn-12-6 (Summarization)
+Generation: mashriram/sarvam-1 (via Ollama)
 
 🧠 System Architecture
 
@@ -80,9 +80,9 @@ graph TD
     RasaActions <-->|Local Inference| LocalModels[Hugging Face Models]
 
 
-### 🛠️ Automated Setup & Run (Recommended)
+### 🛠️ One-Click Setup & Run (Recommended)
 
-To make it easier for new users, we've included automation scripts:
+To make it easier for new users, we've included automation scripts for the entire system:
 
 1.  **Clone & Initial Setup**:
     ```powershell
@@ -90,15 +90,21 @@ To make it easier for new users, we've included automation scripts:
     cd language-agnostic-chatbot
     ```
 
-2.  **One-Click Installation**:
-    Follow the manual steps below to install Node and Python dependencies once.
+2.  **Run One-Click Installation**:
+    Run the following command from the root directory. This will automatically create the Python virtual environment, install all Python dependencies (`requirements.txt`), and install all Node.js dependencies (`npm install`) for both the frontend and backend.
+    ```powershell
+    .\setup_system.bat
+    ```
 
 3.  **One-Click Launch**:
-    Instead of opening 5 terminals, simply run:
+    Once setup is finished, pull the LLM and start all services:
     ```powershell
-    ./start_system.bat
+    # Pull the LLM (Requires Ollama running)
+    ollama pull mashriram/sarvam-1
+
+    # Launch all 5 microservices automatically
+    .\start_system.bat
     ```
-    This will launch all 5 microservices in separate windows automatically.
 
 ---
 
@@ -135,6 +141,20 @@ Run each in a separate terminal OR use `start_system.bat`.
 *   **Python**: `langchain`, `rasa`, `transformers`, `torch`, `faiss-cpu`, `chromadb`.
 *   **Node.js**: `express`, `mongoose`, `multer`, `axios`, `react`.
 *   **Models**: The system downloads models from Hugging Face on first run (Multi-lingual Bi-Encoder, Cross-Encoder, and BART-CNN).
+
+---
+
+📊 **MKRS Benchmark System (MBS)**
+
+We've included a comprehensive benchmarking suite to measure the "Brain" quality across multiple dimensions.
+
+**To Run a Benchmark:**
+```powershell
+cd ai-service
+.\venv\Scripts\python.exe eval_v1.py
+```
+*   **Metrics measured**: Retrieval Hit Rate (RHR), Fact Accuracy (SEC), Hallucination Detection (NEG), Latency, and Memory usage.
+*   **Output**: Automatically generates reports in `MBS/TEST_XX/REPORT.md`.
 
 🧪 Testing Notes (`Shivam_test_zone`)
 

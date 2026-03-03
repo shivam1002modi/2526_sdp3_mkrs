@@ -18,6 +18,7 @@ langdetect==1.0.9
 python-dotenv==1.2.1
 fastapi==0.99.1
 uvicorn==0.41.0
+requests
 
 # Deep Dive Upgrade Dependencies
 scikit-learn==1.1.3
