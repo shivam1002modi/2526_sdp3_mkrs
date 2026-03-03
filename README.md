@@ -86,8 +86,8 @@ To make it easier for new users, we've included automation scripts for the entir
 
 1.  **Clone & Initial Setup**:
     ```powershell
-    git clone https://github.com/shivam1002modi/language-agnostic-chatbot.git
-    cd language-agnostic-chatbot
+    git clone https://github.com/shivam1002modi/2526_sdp3_mkrs.git
+    cd 2526_sdp3_mkrs
     ```
 
 2.  **Run One-Click Installation**:
