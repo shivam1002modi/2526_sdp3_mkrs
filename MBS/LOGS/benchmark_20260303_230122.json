@@ -1,15 +1,15 @@
 {
     "mbs_version": "1.0",
     "test_name": "BASELINE",
-    "timestamp": "2026-03-03 23:06:23",
-    "tms_score": 81.6,
+    "timestamp": "2026-03-03 23:01:22",
+    "tms_score": 82.06,
     "breakdown": {
         "avg_rhr": 1.0,
-        "avg_sec": 0.6,
+        "avg_sec": 0.6167,
         "avg_neg": 1.0,
-        "avg_latency_s": 5.555,
+        "avg_latency_s": 5.622,
         "vram_mb": 0,
-        "lat_score": 0.36,
+        "lat_score": 0.3557,
         "vram_score": 1.0
     },
     "system_snapshot": {
@@ -57,8 +57,8 @@
             "rhr": 1,
             "sec": 0.667,
             "neg": 1,
-            "latency": 10.322,
-            "answer_preview": "a black hole is an object in space with such strong gravity that nothing can escape its pull once it crosses the event horizon. this includes light an",
+            "latency": 9.178,
+            "answer_preview": "a black hole is an object in space that has so much gravity that nothing can escape its pull once it gets too close. this includes light and matter. t",
             "keywords_found": [
                 "gravity",
                 "escape"
@@ -81,7 +81,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.274,
+            "latency": 5.613,
             "answer_preview": "the person who coined the term \"black hole\" is john archibald wheeler. he introduced the concept in his book \"geons: the quest for the theory of grand",
             "keywords_found": [
                 "wheeler",
@@ -104,8 +104,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.315,
-            "answer_preview": "the event horizon of a black hole is the point of no return beyond which even light cannot escape its gravitational pull. it marks the boundary where ",
+            "latency": 6.007,
+            "answer_preview": "the event horizon of a black hole is the point of no return beyond which even light cannot escape its immense gravity. it marks the boundary where the",
             "keywords_found": [
                 "point",
                 "return",
@@ -129,7 +129,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.502,
+            "latency": 4.897,
             "answer_preview": "the answer to the question \"what is hawking radiation?\" is that it is a phenomenon proposed by stephen hawking in which black holes emit radiation due",
             "keywords_found": [
                 "hawking",
@@ -152,8 +152,8 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 9.041,
-            "answer_preview": "the provided context documents are from the black holes section of \"a knowledge guide\" published by the event horizon telescope in 2019. these documen",
+            "latency": 8.075,
+            "answer_preview": "the provided context documents are from the \"black holes\" section of the knowledge guide for black holes. these documents provide information about th",
             "keywords_found": [],
             "keywords_expected": [
                 "milky",
@@ -170,13 +170,14 @@
             "query": "What is the historical significance of Delhi?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.667,
+            "sec": 1.0,
             "neg": 1,
-            "latency": 9.625,
-            "answer_preview": "the historical significance of delhi can be traced back to its roots in ancient india and its transformation over time into a cultural hub that reflec",
+            "latency": 7.335,
+            "answer_preview": "the historical significance of delhi is as complex and ancient as its roots can be traced back to the epic mahabharata, where it was believed to be th",
             "keywords_found": [
                 "capital",
-                "mughal"
+                "mughal",
+                "sultanate"
             ],
             "keywords_expected": [
                 "capital",
@@ -196,8 +197,8 @@
             "rhr": 1,
             "sec": 0.667,
             "neg": 1,
-            "latency": 4.869,
-            "answer_preview": "the red fort was built by shah jahan in the 17th century, specifically during his reign as the mughal emperor. it is located in delhi, india, and serv",
+            "latency": 5.28,
+            "answer_preview": "the red fort was constructed by shah jahan in the 17th century, specifically during his reign as the mughal emperor. it is located within new delhi, i",
             "keywords_found": [
                 "shah",
                 "jahan"
@@ -220,8 +221,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.5,
-            "answer_preview": "the british shifted india's capital from calcutta to delhi in 1911, marking a significant event that had profound cultural and political implications.",
+            "latency": 4.764,
+            "answer_preview": "the british shifted india's capital from calcutta to delhi in 1911.",
             "keywords_found": [
                 "1911",
                 "calcutta"
@@ -243,7 +244,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.953,
+            "latency": 5.538,
             "answer_preview": "the festival of navratri celebrates the divine feminine power or shakti and honors goddess durga's triumph over mahishasura. it spans nine nights and ",
             "keywords_found": [
                 "nine",
@@ -268,7 +269,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.667,
+            "latency": 5.17,
             "answer_preview": "the goddess durga's triumph over the powerful buffalo demon, mahishasura, symbolizes the ultimate victory of dharma over adharma.",
             "keywords_found": [
                 "demon",
@@ -293,7 +294,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 5.323,
+            "latency": 5.891,
             "answer_preview": "the answer to your question is \"rag's role in the sih 2025 chatbot\". you can find this information directly from the provided context documents.",
             "keywords_found": [],
             "keywords_expected": [
@@ -314,7 +315,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.451,
+            "latency": 4.598,
             "answer_preview": "the document does not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -335,7 +336,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.607,
+            "latency": 5.882,
             "answer_preview": "the triangular theory of love proposed by psychologist robert sternberg suggests that love can be categorized into three components: intimacy, passion",
             "keywords_found": [
                 "triangular",
@@ -360,7 +361,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.083,
+            "latency": 5.333,
             "answer_preview": "the mars mission is critical for humanity. the rocket uses liquid hydrogen fuel. launch is scheduled for 0900 hours. astronauts must wear pressurized ",
             "keywords_found": [
                 "mars",
@@ -385,7 +386,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.339,
+            "latency": 4.722,
             "answer_preview": "the mars rocket uses liquid hydrogen fuel.",
             "keywords_found": [
                 "liquid",
@@ -410,7 +411,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.627,
+            "latency": 4.979,
             "answer_preview": "the landing zone for the mars mission is jezero crater.",
             "keywords_found": [
                 "jezero",
@@ -433,7 +434,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.354,
+            "latency": 4.565,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -453,7 +454,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.408,
+            "latency": 4.808,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
@@ -473,8 +474,8 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.734,
-            "answer_preview": "the documents do not contain this information.",
+            "latency": 5.455,
+            "answer_preview": "the document assistant has directly quoted from the provided context documents to provide a direct answer to the question. the information is specific",
             "keywords_found": [],
             "keywords_expected": [
                 "security",
@@ -493,7 +494,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 4.113,
+            "latency": 4.354,
             "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
