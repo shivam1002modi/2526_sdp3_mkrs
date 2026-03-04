@@ -57,7 +57,7 @@ cd ..
 
 :: --- Ollama Model Pull ---
 echo [5/5] Ensuring Ollama model is available...
-echo Attempting to pull llama3.2:3b (this may take a while if not present)...
+echo Attempting to pull llama3.2:3b (Balanced Config - Test 62)...
 ollama pull llama3.2:3b
 if %errorlevel% neq 0 (
     echo [WARNING] Could not pull model automatically. 
@@ -68,11 +68,12 @@ if %errorlevel% neq 0 (
 echo.
 echo ============================================================
 echo   SETUP COMPLETED SUCCESSFULLY!
+echo   Target Config: Test 62 Balanced (k=50, 3B Model)
 echo ============================================================
 echo.
 echo IMPORTANT:
 echo 1. Ensure Ollama is installed and running (https://ollama.com/)
-echo 2. Verified model: llama3.2:3b
+echo 2. Verified model: llama3.2:3b [GOLDEN]
 echo 3. Run 'start_system.bat' to launch all microservices
 echo.
 pause

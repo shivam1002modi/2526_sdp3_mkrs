@@ -29,8 +29,8 @@ from langchain_community.vectorstores import Chroma
 
 from langdetect import detect, LangDetectException
 from transformers import pipeline
-# Import FlashRank for high-performance re-ranking
-from flashrank import Ranker, RerankRequest
+# Import the CrossEncoder model for re-ranking
+from sentence_transformers.cross_encoder import CrossEncoder
 import torch
 import traceback
 
@@ -115,14 +115,13 @@ class ActionQueryDoc(Action):
         except Exception as e:
             print(f"WARNING: Could not load parent store: {e}. PDR disabled.")
 
-        # Initialize FlashRank for high-speed CPU-optimized re-ranking
+        # Initialize a Cross-Encoder for re-ranking search results
         try:
-            print("Loading FlashRank (ONNX Optimized) Re-ranker...")
-            # Use a lightweight but powerful model for elite speed
-            self.reranker = Ranker(model_name="ms-marco-MiniLM-L-6-v2")
-            print("FlashRank loaded successfully (CPU Optimized).")
+            print("Loading local Re-ranking model (Cross-Encoder)...")
+            self.reranker = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2', device=self.device)
+            print("Re-ranking model loaded successfully.")
         except Exception as e:
-            print(f"WARNING: Could not load FlashRank: {e}.")
+            print(f"WARNING: Could not load local Re-ranking model: {e}.")
             self.reranker = None
 
         # --- Ollama Connection Check ---
@@ -263,7 +262,7 @@ class ActionQueryDoc(Action):
             lang = 'en'
 
         # ══════════════════════════════════════════════════════════════════
-        # STEP 1: RETRIEVE — Get top-50 CHILD chunks (Hybrid Config)
+        # STEP 1: RETRIEVE — Get top-50 CHILD chunks (Balanced Precision)
         # ══════════════════════════════════════════════════════════════════
         try:
             retrieved_docs = self.db.similarity_search(original_query, k=50)
@@ -274,26 +273,16 @@ class ActionQueryDoc(Action):
             return []
 
         # ══════════════════════════════════════════════════════════════════
-        # STEP 2: RE-RANK — FlashRank scores chunks with elite efficiency
+        # STEP 2: RE-RANK — Cross-Encoder scores each child chunk
         # ══════════════════════════════════════════════════════════════════
-        if self.reranker and retrieved_docs:
-            # Prepare passages in the format FlashRank expects
-            passages = [
-                {"id": i, "text": doc.page_content, "metadata": doc.metadata}
-                for i, doc in enumerate(retrieved_docs)
-            ]
-            
-            rerank_request = RerankRequest(query=original_query, passages=passages)
-            rerank_results = self.reranker.rerank(rerank_request)
-            
-            # Map back to original document objects with new scores
-            scored_docs = []
-            for res in rerank_results:
-                original_idx = res["id"]
-                score = res["score"]
-                scored_docs.append((score, retrieved_docs[original_idx]))
-            
-            print(f"FlashRank re-ranked {len(scored_docs)} docs. Top score: {scored_docs[0][0]:.4f}")
+        if self.reranker:
+            # OPTIMIZATION: Only re-rank top-25 instead of full k=50 to save CPU cycles
+            top_candidates = retrieved_docs[:25]
+            passages = [doc.page_content for doc in top_candidates]
+            rerank_scores = self.reranker.predict([(original_query, passage) for passage in passages])
+            scored_docs = list(zip(rerank_scores, top_candidates))
+            scored_docs.sort(key=lambda x: x[0], reverse=True)
+            print(f"Re-ranked top child chunk score: {scored_docs[0][0]:.4f}")
         else:
             scored_docs = [(1.0, doc) for doc in retrieved_docs]
 
