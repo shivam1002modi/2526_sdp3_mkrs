@@ -1,26 +1,26 @@
 {
     "mbs_version": "1.0",
-    "test_name": "Lat-Optimized Llama3 (k40, Relaxed Prompt)",
-    "timestamp": "2026-03-04 17:08:13",
-    "tms_score": 85.87,
+    "test_name": "Sarvam-1 Comparison (Temp 0.0)",
+    "timestamp": "2026-03-04 08:10:50",
+    "tms_score": 85.13,
     "breakdown": {
-        "avg_rhr": 0.9,
-        "avg_sec": 0.9,
+        "avg_rhr": 1.0,
+        "avg_sec": 0.725,
         "avg_neg": 1.0,
-        "avg_latency_s": 6.958,
+        "avg_latency_s": 5.912,
         "vram_mb": 0,
-        "lat_score": 0.2875,
+        "lat_score": 0.3383,
         "vram_score": 1.0
     },
     "system_snapshot": {
         "embedding_model": "ai4bharat/IndicBERT-v3-1B",
         "embedding_library": "Custom Wrapper (Transformers + Mean Pooling)",
         "embedding_dims": 1024,
-        "generation_model": "llama3.2:3b",
+        "generation_model": "mashriram/sarvam-1",
         "generation_pipeline": "unknown",
         "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
         "confidence_threshold": 0.0,
-        "retrieval_k": 40,
+        "retrieval_k": 60,
         "translation_models": {
             "hi": "Helsinki-NLP/opus-mt-en-hi"
         },
@@ -57,8 +57,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 12.148,
-            "answer_preview": "black holes are regions in space where gravity is so strong that nothing, not even light, can escape. they form when massive stars collapse under thei",
+            "latency": 12.118,
+            "answer_preview": "a black hole is an object in space with such strong gravity that nothing can escape its pull once it crosses the event horizon. this includes light an",
             "keywords_found": [
                 "gravity",
                 "escape",
@@ -92,8 +92,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.234,
-            "answer_preview": "john wheeler coined the term \"black hole\" in 1967.",
+            "latency": 4.6,
+            "answer_preview": "the person who coined the term \"black hole\" is john archibald wheeler. he introduced the concept in his book \"geons: the quest for the theory of grand",
             "keywords_found": [
                 "wheeler",
                 "1967"
@@ -118,8 +118,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.85,
-            "answer_preview": "the event horizon is the point of no return once crossed, beyond which nothing can escape.",
+            "latency": 5.781,
+            "answer_preview": "the event horizon of a black hole is the point of no return beyond which even light cannot escape its gravitational pull. it marks the boundary where ",
             "keywords_found": [
                 "point",
                 "return",
@@ -152,8 +152,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.74,
-            "answer_preview": "in 1974, stephen hawking proposed that black holes are not entirely black. due to quantum effects near the event horizon, they emit radiation now call",
+            "latency": 4.537,
+            "answer_preview": "the answer to the question \"what is hawking radiation?\" is that it is a phenomenon proposed by stephen hawking in which black holes emit radiation due",
             "keywords_found": [
                 "hawking",
                 "radiation"
@@ -177,12 +177,11 @@
             "query": "What is Sagittarius A star?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.5,
             "neg": 1,
-            "latency": 6.572,
-            "answer_preview": "sagittarius a* is a supermassive black hole at the center of our milky way galaxy, with a mass about 4 million times that of the sun.",
+            "latency": 6.617,
+            "answer_preview": "the provided context documents are from the black holes section of \"a knowledge guide\" published by the event horizon telescope in 2019. these documen",
             "keywords_found": [
-                "milky",
                 "supermassive"
             ],
             "keywords_expected": [
@@ -202,8 +201,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 8.627,
-            "answer_preview": "delhi has been built, destroyed, and rebuilt at least seven times. the city's roots can be traced back to the epic mahabharata, where it is believed t",
+            "latency": 8.881,
+            "answer_preview": "the historical significance of delhi lies in its role as a political and cultural hub for india. as the capital city of the country, it serves as the ",
             "keywords_found": [
                 "capital",
                 "mughal",
@@ -236,8 +235,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 14.517,
-            "answer_preview": "shah jahan founded the walled city of shahjahanabad (now old delhi) in the 17th century, bestowing the city with the magnificent red fort.",
+            "latency": 5.235,
+            "answer_preview": "the red fort was constructed by shah jahan in the 17th century, specifically during his reign as the mughal emperor. it is located within delhi, india",
             "keywords_found": [
                 "shah",
                 "jahan",
@@ -261,7 +260,7 @@
             "sources_found": [
                 "1765007523589-delhi_.pdf",
                 "1765007523589-delhi_.pdf",
-                "love.pdf"
+                "Black Holes â A Knowledge Guide.pdf"
             ]
         },
         {
@@ -271,8 +270,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.693,
-            "answer_preview": "the british announced the shift of the capital from calcutta to delhi in 1911.",
+            "latency": 4.604,
+            "answer_preview": "the british shifted india's capital from calcutta to delhi in 1911.",
             "keywords_found": [
                 "1911",
                 "calcutta"
@@ -297,8 +296,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.79,
-            "answer_preview": "navratri, which literally translates to \"nine nights\" in sanskrit, is a major hindu festival celebrating the divine feminine power, or shakti. it span",
+            "latency": 5.251,
+            "answer_preview": "the festival of navratri celebrates the divine feminine power or shakti and honors goddess durga's triumph over mahishasura. it spans nine nights and ",
             "keywords_found": [
                 "nine",
                 "durga",
@@ -331,8 +330,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.703,
-            "answer_preview": "mahishasura is a buffalo demon who was granted a boon of near-invincibility. after receiving this boon, he created havoc across the universe. the gods",
+            "latency": 4.776,
+            "answer_preview": "the goddess durga's triumph over the powerful buffalo demon, mahishasura, symbolizes the ultimate victory of good over evil.",
             "keywords_found": [
                 "demon",
                 "mahishasura",
@@ -365,8 +364,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.868,
-            "answer_preview": "rag (retrieval-augmented generation) fetches updated answers from uploaded circulars, pdfs, notices, faqs.",
+            "latency": 7.244,
+            "answer_preview": "the answer to your question is \"rag's role in the sih 2025 chatbot\". rag (retrieval-augmented generation) is a crucial component of the chatbot that h",
             "keywords_found": [
                 "retrieval",
                 "augmented",
@@ -398,15 +397,11 @@
             "query": "What caused dinosaur extinction 66 million years ago?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.0,
             "neg": 1,
-            "latency": 6.137,
-            "answer_preview": "scientists believe that around 66 million years ago, most dinosaurs went extinct, likely due to a massive asteroid impact combined with volcanic activ",
-            "keywords_found": [
-                "asteroid",
-                "extinct",
-                "impact"
-            ],
+            "latency": 4.183,
+            "answer_preview": "the document does not contain this information.",
+            "keywords_found": [],
             "keywords_expected": [
                 [
                     "asteroid",
@@ -434,8 +429,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.815,
-            "answer_preview": "robert sternberg proposed the triangular theory of love, which defines love through three components: intimacy, passion, and commitment. different com",
+            "latency": 6.044,
+            "answer_preview": "the triangular theory of love proposed by psychologist robert sternberg suggests that love can be categorized into three components: intimacy, passion",
             "keywords_found": [
                 "triangular",
                 "intimacy",
@@ -468,7 +463,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.437,
+            "latency": 4.946,
             "answer_preview": "the mars mission is critical for humanity. the rocket uses liquid hydrogen fuel. launch is scheduled for 0900 hours. astronauts must wear pressurized ",
             "keywords_found": [
                 "mars",
@@ -493,8 +488,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.366,
-            "answer_preview": "liquid hydrogen fuel.",
+            "latency": 4.31,
+            "answer_preview": "the mars rocket uses liquid hydrogen fuel.",
             "keywords_found": [
                 "liquid",
                 "hydrogen",
@@ -507,7 +502,7 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "love.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
                 "love.pdf"
             ]
         },
@@ -518,7 +513,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.037,
+            "latency": 4.433,
             "answer_preview": "the landing zone for the mars mission is jezero crater.",
             "keywords_found": [
                 "jezero",
@@ -539,21 +534,18 @@
             "query": "How long do you bake Apple Pie?",
             "is_stress": true,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.0,
             "neg": 1,
-            "latency": 5.394,
-            "answer_preview": "bake for 45 minutes until golden brown.",
-            "keywords_found": [
-                "45",
-                "golden"
-            ],
+            "latency": 4.233,
+            "answer_preview": "the documents do not contain this information.",
+            "keywords_found": [],
             "keywords_expected": [
                 "45",
                 "golden"
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "love.pdf",
+                "1759248623779-navratri.pdf",
                 "love.pdf"
             ]
         },
@@ -562,14 +554,11 @@
             "query": "What temperature to preheat oven for Apple Pie?",
             "is_stress": true,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.0,
             "neg": 1,
-            "latency": 5.017,
-            "answer_preview": "375 degrees.",
-            "keywords_found": [
-                "375",
-                "degrees"
-            ],
+            "latency": 8.308,
+            "answer_preview": "the documents do not contain this information.",
+            "keywords_found": [],
             "keywords_expected": [
                 "375",
                 "degrees"
@@ -577,47 +566,47 @@
             "sources_found": [
                 "stress_test.pdf",
                 "love.pdf",
-                "love.pdf"
+                "1759248623779-navratri.pdf"
             ]
         },
         {
             "id": "Q19",
             "query": "Which department had the highest profit in Q3 2025?",
             "is_stress": true,
-            "rhr": 0,
+            "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 6.199,
-            "answer_preview": "i couldn't find any information about a company's profit in q3 2025 from the provided documents.",
+            "latency": 6.515,
+            "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
                 "security",
                 "400"
             ],
             "sources_found": [
-                "love.pdf",
-                "love.pdf",
-                "1759248623779-navratri.pdf"
+                "stress_test.pdf",
+                "SIH_2025_Blueprint.pdf",
+                "love.pdf"
             ]
         },
         {
             "id": "Q20",
             "query": "Which department has the lowest margin in the Q3 2025 report?",
             "is_stress": true,
-            "rhr": 0,
+            "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 6.009,
-            "answer_preview": "i'm sorry i can't provide an answer to your question.",
+            "latency": 5.627,
+            "answer_preview": "the documents do not contain this information.",
             "keywords_found": [],
             "keywords_expected": [
                 "logistics",
                 "margin"
             ],
             "sources_found": [
-                "love.pdf",
-                "love.pdf",
-                "Untitled document (6).pdf"
+                "stress_test.pdf",
+                "SIH_2025_Blueprint.pdf",
+                "love.pdf"
             ]
         }
     ]

@@ -1,26 +1,26 @@
 {
     "mbs_version": "1.0",
-    "test_name": "Lat-Optimized Llama3 (k40, Relaxed Prompt)",
-    "timestamp": "2026-03-04 17:08:13",
-    "tms_score": 85.87,
+    "test_name": "Llama-3 Comparison (Temp 0.0)",
+    "timestamp": "2026-03-04 08:21:03",
+    "tms_score": 87.53,
     "breakdown": {
-        "avg_rhr": 0.9,
-        "avg_sec": 0.9,
+        "avg_rhr": 1.0,
+        "avg_sec": 0.8916,
         "avg_neg": 1.0,
-        "avg_latency_s": 6.958,
+        "avg_latency_s": 25.675,
         "vram_mb": 0,
-        "lat_score": 0.2875,
+        "lat_score": 0.0779,
         "vram_score": 1.0
     },
     "system_snapshot": {
         "embedding_model": "ai4bharat/IndicBERT-v3-1B",
         "embedding_library": "Custom Wrapper (Transformers + Mean Pooling)",
         "embedding_dims": 1024,
-        "generation_model": "llama3.2:3b",
+        "generation_model": "llama3",
         "generation_pipeline": "unknown",
         "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
         "confidence_threshold": 0.0,
-        "retrieval_k": 40,
+        "retrieval_k": 60,
         "translation_models": {
             "hi": "Helsinki-NLP/opus-mt-en-hi"
         },
@@ -57,8 +57,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 12.148,
-            "answer_preview": "black holes are regions in space where gravity is so strong that nothing, not even light, can escape. they form when massive stars collapse under thei",
+            "latency": 25.596,
+            "answer_preview": "black holes are among the most mysterious and fascinating objects in the universe. they are regions in space where gravity is so strong that nothing n",
             "keywords_found": [
                 "gravity",
                 "escape",
@@ -92,8 +92,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.234,
-            "answer_preview": "john wheeler coined the term \"black hole\" in 1967.",
+            "latency": 10.304,
+            "answer_preview": "in 1967, physicist john wheeler coined the term \"black hole.\"",
             "keywords_found": [
                 "wheeler",
                 "1967"
@@ -118,8 +118,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.85,
-            "answer_preview": "the event horizon is the point of no return once crossed, beyond which nothing can escape.",
+            "latency": 10.585,
+            "answer_preview": "the point of no return once crossed, nothing can escape.",
             "keywords_found": [
                 "point",
                 "return",
@@ -152,8 +152,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.74,
-            "answer_preview": "in 1974, stephen hawking proposed that black holes are not entirely black. due to quantum effects near the event horizon, they emit radiation now call",
+            "latency": 23.426,
+            "answer_preview": "\"in 1974, stephen hawking proposed that black holes are not entirely black. due to quantum effects near the event horizon, they emit radiation now cal",
             "keywords_found": [
                 "hawking",
                 "radiation"
@@ -179,8 +179,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.572,
-            "answer_preview": "sagittarius a* is a supermassive black hole at the center of our milky way galaxy, with a mass about 4 million times that of the sun.",
+            "latency": 18.392,
+            "answer_preview": "sagittarius a*: the supermassive black hole at the center of our milky way galaxy, with a mass about 4 million times that of the sun.",
             "keywords_found": [
                 "milky",
                 "supermassive"
@@ -200,14 +200,12 @@
             "query": "What is the historical significance of Delhi?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.333,
             "neg": 1,
-            "latency": 8.627,
-            "answer_preview": "delhi has been built, destroyed, and rebuilt at least seven times. the city's roots can be traced back to the epic mahabharata, where it is believed t",
+            "latency": 35.513,
+            "answer_preview": "the history of delhi is as complex as it is ancient. often described as a \"palimpsest\" a manuscript on which earlier writing has been effaced to make ",
             "keywords_found": [
-                "capital",
-                "mughal",
-                "sultanate"
+                "capital"
             ],
             "keywords_expected": [
                 [
@@ -236,8 +234,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 14.517,
-            "answer_preview": "shah jahan founded the walled city of shahjahanabad (now old delhi) in the 17th century, bestowing the city with the magnificent red fort.",
+            "latency": 17.788,
+            "answer_preview": "shah jahan founded the walled city of shahjahanabad (now old delhi) in the 17th century, bestowing the city with the magnificent red fort and the jama",
             "keywords_found": [
                 "shah",
                 "jahan",
@@ -261,7 +259,7 @@
             "sources_found": [
                 "1765007523589-delhi_.pdf",
                 "1765007523589-delhi_.pdf",
-                "love.pdf"
+                "Black Holes â A Knowledge Guide.pdf"
             ]
         },
         {
@@ -269,14 +267,11 @@
             "query": "When did the British shift India's capital to Delhi?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.0,
             "neg": 1,
-            "latency": 5.693,
-            "answer_preview": "the british announced the shift of the capital from calcutta to delhi in 1911.",
-            "keywords_found": [
-                "1911",
-                "calcutta"
-            ],
+            "latency": 18.609,
+            "answer_preview": "the documents do not contain this information.",
+            "keywords_found": [],
             "keywords_expected": [
                 "1911",
                 [
@@ -297,7 +292,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.79,
+            "latency": 25.765,
             "answer_preview": "navratri, which literally translates to \"nine nights\" in sanskrit, is a major hindu festival celebrating the divine feminine power, or shakti. it span",
             "keywords_found": [
                 "nine",
@@ -331,8 +326,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.703,
-            "answer_preview": "mahishasura is a buffalo demon who was granted a boon of near-invincibility. after receiving this boon, he created havoc across the universe. the gods",
+            "latency": 19.062,
+            "answer_preview": "at the heart of the festival lies the legend of goddess durga's triumph over the powerful buffalo demon, mahishasura.",
             "keywords_found": [
                 "demon",
                 "mahishasura",
@@ -365,8 +360,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.868,
-            "answer_preview": "rag (retrieval-augmented generation) fetches updated answers from uploaded circulars, pdfs, notices, faqs.",
+            "latency": 88.181,
+            "answer_preview": "### document 1: sih 2025 prototype (1).pdf (page 1) uses langchain + rag (retrieval-augmented generation) for document-based q&a.  ### document 2: sih",
             "keywords_found": [
                 "retrieval",
                 "augmented",
@@ -400,7 +395,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.137,
+            "latency": 41.826,
             "answer_preview": "scientists believe that around 66 million years ago, most dinosaurs went extinct, likely due to a massive asteroid impact combined with volcanic activ",
             "keywords_found": [
                 "asteroid",
@@ -434,8 +429,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.815,
-            "answer_preview": "robert sternberg proposed the triangular theory of love, which defines love through three components: intimacy, passion, and commitment. different com",
+            "latency": 40.4,
+            "answer_preview": "psychologist robert sternberg proposed the triangular theory of love, which defines love through three components: intimacy, passion, and commitment. ",
             "keywords_found": [
                 "triangular",
                 "intimacy",
@@ -468,7 +463,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.437,
+            "latency": 28.842,
             "answer_preview": "the mars mission is critical for humanity. the rocket uses liquid hydrogen fuel. launch is scheduled for 0900 hours. astronauts must wear pressurized ",
             "keywords_found": [
                 "mars",
@@ -493,8 +488,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.366,
-            "answer_preview": "liquid hydrogen fuel.",
+            "latency": 23.173,
+            "answer_preview": "the rocket uses liquid hydrogen fuel.",
             "keywords_found": [
                 "liquid",
                 "hydrogen",
@@ -507,7 +502,7 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "love.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
                 "love.pdf"
             ]
         },
@@ -518,7 +513,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 6.037,
+            "latency": 12.886,
             "answer_preview": "the landing zone for the mars mission is jezero crater.",
             "keywords_found": [
                 "jezero",
@@ -541,8 +536,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.394,
-            "answer_preview": "bake for 45 minutes until golden brown.",
+            "latency": 12.987,
+            "answer_preview": "\"preheat the oven to 375 degrees. bake for 45 minutes until golden brown.\"",
             "keywords_found": [
                 "45",
                 "golden"
@@ -553,7 +548,7 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "love.pdf",
+                "1759248623779-navratri.pdf",
                 "love.pdf"
             ]
         },
@@ -564,8 +559,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.017,
-            "answer_preview": "375 degrees.",
+            "latency": 21.96,
+            "answer_preview": "\"preheat the oven to 375 degrees.\"",
             "keywords_found": [
                 "375",
                 "degrees"
@@ -577,47 +572,52 @@
             "sources_found": [
                 "stress_test.pdf",
                 "love.pdf",
-                "love.pdf"
+                "1759248623779-navratri.pdf"
             ]
         },
         {
             "id": "Q19",
             "query": "Which department had the highest profit in Q3 2025?",
             "is_stress": true,
-            "rhr": 0,
-            "sec": 0.0,
+            "rhr": 1,
+            "sec": 0.5,
             "neg": 1,
-            "latency": 6.199,
-            "answer_preview": "i couldn't find any information about a company's profit in q3 2025 from the provided documents.",
-            "keywords_found": [],
+            "latency": 17.784,
+            "answer_preview": "\"security is the most profitable sector.\"",
+            "keywords_found": [
+                "security"
+            ],
             "keywords_expected": [
                 "security",
                 "400"
             ],
             "sources_found": [
-                "love.pdf",
-                "love.pdf",
-                "1759248623779-navratri.pdf"
+                "stress_test.pdf",
+                "SIH_2025_Blueprint.pdf",
+                "love.pdf"
             ]
         },
         {
             "id": "Q20",
             "query": "Which department has the lowest margin in the Q3 2025 report?",
             "is_stress": true,
-            "rhr": 0,
-            "sec": 0.0,
+            "rhr": 1,
+            "sec": 1.0,
             "neg": 1,
-            "latency": 6.009,
-            "answer_preview": "i'm sorry i can't provide an answer to your question.",
-            "keywords_found": [],
+            "latency": 20.429,
+            "answer_preview": "logistics has the lowest margin.",
+            "keywords_found": [
+                "logistics",
+                "margin"
+            ],
             "keywords_expected": [
                 "logistics",
                 "margin"
             ],
             "sources_found": [
-                "love.pdf",
-                "love.pdf",
-                "Untitled document (6).pdf"
+                "stress_test.pdf",
+                "SIH_2025_Blueprint.pdf",
+                "love.pdf"
             ]
         }
     ]

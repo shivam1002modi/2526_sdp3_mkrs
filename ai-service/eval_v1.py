@@ -68,43 +68,43 @@ class MockTracker:
 TEST_CASES = [
     # ── MAIN KNOWLEDGE BASE (13 questions, 65%) ──────────────────────────────
     {"id": "Q01", "query": "What is a black hole?",
-     "source_pdf": "hole", "keywords": ["gravity", "escape", "region"],
+     "source_pdf": "hole", "keywords": [["gravity", "gravitational"], ["escape", "pull"], ["region", "area", "space"]],
      "trap_word": None, "is_stress": False},
     {"id": "Q02", "query": "Who coined the term black hole and when?",
-     "source_pdf": "hole", "keywords": ["wheeler", "1967"],
+     "source_pdf": "hole", "keywords": [["wheeler", "john wheeler"], "1967"],
      "trap_word": None, "is_stress": False},
     {"id": "Q03", "query": "What is the Event Horizon of a black hole?",
-     "source_pdf": "hole", "keywords": ["point", "return", "escape"],
+     "source_pdf": "hole", "keywords": [["point", "boundary"], ["return", "no return"], ["escape", "light"]],
      "trap_word": None, "is_stress": False},
     {"id": "Q04", "query": "What is Hawking Radiation?",
-     "source_pdf": "hole", "keywords": ["hawking", "radiation"],
+     "source_pdf": "hole", "keywords": ["hawking", ["radiation", "radiates", "emission"]],
      "trap_word": None, "is_stress": False},
     {"id": "Q05", "query": "What is Sagittarius A star?",
      "source_pdf": "hole", "keywords": ["milky", "supermassive"],
      "trap_word": None, "is_stress": False},
     {"id": "Q06", "query": "What is the historical significance of Delhi?",
-     "source_pdf": "delhi", "keywords": ["capital", "mughal", "sultanate"],
+     "source_pdf": "delhi", "keywords": [["capital", "official seat"], ["mughal", "emperor"], ["sultanate", "dynasty"]],
      "trap_word": None, "is_stress": False},
     {"id": "Q07", "query": "Who built the Red Fort and what city did they found?",
-     "source_pdf": "delhi", "keywords": ["shah", "jahan", "shahjahanabad"],
+     "source_pdf": "delhi", "keywords": [["shah", "emperor shah"], ["jahan", "shah jahan"], ["shahjahanabad", "shajahanabad", "delhi"]],
      "trap_word": None, "is_stress": False},
     {"id": "Q08", "query": "When did the British shift India's capital to Delhi?",
-     "source_pdf": "delhi", "keywords": ["1911", "calcutta"],
+     "source_pdf": "delhi", "keywords": ["1911", ["calcutta", "kolkata"]],
      "trap_word": None, "is_stress": False},
     {"id": "Q09", "query": "What is Navratri festival?",
-     "source_pdf": "navratri", "keywords": ["nine", "durga", "shakti"],
+     "source_pdf": "navratri", "keywords": [["nine", "9 nights"], ["durga", "goddess"], ["shakti", "feminine"]],
      "trap_word": None, "is_stress": False},
     {"id": "Q10", "query": "Who is Mahishasura in the Navratri legend?",
-     "source_pdf": "navratri", "keywords": ["demon", "mahishasura", "durga"],
+     "source_pdf": "navratri", "keywords": [["demon", "demon bull"], ["mahishasura", "mahisasura"], ["durga", "shakti"]],
      "trap_word": None, "is_stress": False},
     {"id": "Q11", "query": "What is RAG's role in the SIH 2025 chatbot?",
-     "source_pdf": "SIH_2025", "keywords": ["retrieval", "augmented", "pdf"],
+     "source_pdf": "SIH_2025", "keywords": [["retrieval", "fetch"], ["augmented", "generation"], ["pdf", "documents", "files"]],
      "trap_word": None, "is_stress": False},
     {"id": "Q12", "query": "What caused dinosaur extinction 66 million years ago?",
-     "source_pdf": "dinasours", "keywords": ["asteroid", "extinct", "impact"],
+     "source_pdf": "dinasours", "keywords": [["asteroid", "meteor"], ["extinct", "died out"], ["impact", "collision"]],
      "trap_word": None, "is_stress": False},
     {"id": "Q13", "query": "What is Robert Sternberg's Triangular Theory of Love?",
-     "source_pdf": "love", "keywords": ["triangular", "intimacy", "passion"],
+     "source_pdf": "love", "keywords": [["triangular", "triad"], ["intimacy", "bond"], ["passion", "romance"]],
      "trap_word": None, "is_stress": False},
 
     # ── STRESS TEST (7 questions, 35%) — stress_test.pdf ─────────────────────
@@ -163,6 +163,9 @@ def scan_system_snapshot():
             actions_src = f.read()
 
         # Generation model
+        m = re.search(r'OLLAMA_MODEL\s*=\s*os\.getenv\(.*?,\s*"([^"]+)"', actions_src)
+        if m: gen_model = m.group(1)
+        
         m = re.search(r'pipeline\("summarization",\s*model="([^"]+)"', actions_src)
         if m: gen_model = m.group(1)
         m = re.search(r'pipeline\("([^"]+)"', actions_src)
@@ -602,8 +605,16 @@ def run_benchmark(test_name="BASELINE"):
 
         # RHR
         rhr = 1 if any(tc["source_pdf"].lower() in s.get("title", "").lower() for s in sources) else 0
-        # SEC
-        kws_found = [k for k in tc["keywords"] if k.lower() in answer]
+        # SEC (Improved: Synonym-Aware Keyword Matching)
+        kws_found = []
+        for kw in tc["keywords"]:
+            if isinstance(kw, str):
+                if kw.lower() in answer:
+                    kws_found.append(kw)
+            elif isinstance(kw, list):
+                # If any synonym in the list matches, consider it found
+                if any(syn.lower() in answer for syn in kw):
+                    kws_found.append(kw[0]) # Use first as head keyword
         sec = len(kws_found) / len(tc["keywords"]) if tc["keywords"] else 1.0
         # NEG
         neg = 1

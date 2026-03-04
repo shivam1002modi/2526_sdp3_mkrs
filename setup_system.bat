@@ -63,7 +63,7 @@ echo ============================================================
 echo.
 echo IMPORTANT:
 echo 1. Ensure Ollama is installed and running (https://ollama.com/)
-echo 2. Run 'ollama pull mashriram/sarvam-1' before starting
+echo 2. Run 'ollama pull llama3' before starting
 echo 3. Run 'start_system.bat' to launch all microservices
 echo.
 pause

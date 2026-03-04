@@ -45,7 +45,7 @@ CONFIDENCE_THRESHOLD = 0.00
 
 # --- Ollama Generation Service Configuration ---
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "mashriram/sarvam-1")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3.2:3b")
 OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", "120"))  # seconds
 
 # --- Parent Store Path ---
@@ -195,18 +195,19 @@ class ActionQueryDoc(Action):
         # Structured RAG prompt optimized for FACT ACCURACY (SEC score)
         # ULTRA CONFIG: MAXIMUM DETAIL EXTRACTION
         prompt = (
-            "You are a document assistant that answers questions by DIRECTLY QUOTING "
+            "You are a document assistant that answers questions by extracting and quoting "
             "from the provided context documents.\n\n"
             "RULES:\n"
             "1. NO PREAMBLE. Start the answer immediately.\n"
-            "2. QUOTE VERBATIM. Use EXACT words, names, dates, and technical figures. If you see a table, extract the specific value requested.\n"
-            "3. BE EXHAUSTIVE. Include ALL relevant facts, even if they are in different documents.\n"
-            "4. Only use facts from the document relevant to the question.\n"
-            "5. If the answer is not present, say exactly: 'The documents do not contain this information.'\n"
-            "6. Max 5 sentences. Focus only on the direct answer.\n\n"
+            "2. DATA ACCURACY. Use EXACT words, names, dates, and technical figures. If a table is present, look up the values requested.\n"
+            "3. BE COMPREHENSIVE. Include all relevant facts found in the context provided.\n"
+            "4. Only use provided documents to answer the question.\n"
+            "5. BE HELPFUL. If the answer is partially available, provide the available portion accurately. "
+            "Only say 'The documents do not contain this information.' if there is absolutely no relevant context at all.\n"
+            "6. Max 5 sentences. Focus on high-density information.\n\n"
             f"CONTEXT:\n{context}\n\n"
             f"QUESTION: {question}\n\n"
-            "ANSWER (exhaustive, verbatim, start immediately):"
+            "ANSWER (accurate, comprehensive, start immediately):"
         )
 
         try:
@@ -218,7 +219,7 @@ class ActionQueryDoc(Action):
                     "stream": False,
                     "keep_alive": "10m",
                     "options": {
-                        "temperature": 0.1,
+                        "temperature": 0.0,
                         "top_p": 0.9,
                         "num_predict": 500,
                         "repeat_penalty": 1.05,
@@ -264,7 +265,7 @@ class ActionQueryDoc(Action):
         # STEP 1: RETRIEVE — Get top-60 CHILD chunks (Record Breaker Config)
         # ══════════════════════════════════════════════════════════════════
         try:
-            retrieved_docs = self.db.similarity_search(original_query, k=60)
+            retrieved_docs = self.db.similarity_search(original_query, k=40)
         except Exception:
             retrieved_docs = []
 
