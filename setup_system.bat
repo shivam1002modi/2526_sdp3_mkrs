@@ -7,7 +7,7 @@ echo ============================================================
 echo.
 
 :: --- Check for Python ---
-echo [1/4] Checking Python environment...
+echo [1/5] Checking Python environment...
 python --version >nul 2>&1
 if %errorlevel% neq 0 (
     echo [ERROR] Python not found. Please install Python 3.8-3.11 and add to PATH.
@@ -16,7 +16,7 @@ if %errorlevel% neq 0 (
 )
 
 :: --- Setup AI Service (Python) ---
-echo [2/4] Setting up AI Service (Python Virtual Environment)...
+echo [2/5] Setting up AI Service (Python Virtual Environment)...
 cd ai-service
 if not exist venv (
     python -m venv venv
@@ -34,7 +34,7 @@ if %errorlevel% neq 0 (
 cd ..
 
 :: --- Setup Backend (Node.js) ---
-echo [3/4] Installing Backend dependencies...
+echo [3/5] Installing Backend dependencies...
 cd backend
 call npm install
 if %errorlevel% neq 0 (
@@ -45,7 +45,7 @@ if %errorlevel% neq 0 (
 cd ..
 
 :: --- Setup Frontend (Node.js) ---
-echo [4/4] Installing Frontend dependencies...
+echo [4/5] Installing Frontend dependencies...
 cd frontend
 call npm install
 if %errorlevel% neq 0 (
@@ -55,6 +55,15 @@ if %errorlevel% neq 0 (
 )
 cd ..
 
+:: --- Ollama Model Pull ---
+echo [5/5] Ensuring Ollama model is available...
+echo Attempting to pull llama3.2:3b (this may take a while if not present)...
+ollama pull llama3.2:3b
+if %errorlevel% neq 0 (
+    echo [WARNING] Could not pull model automatically. 
+    echo Please ensure Ollama is running and manually run 'ollama pull llama3.2:3b'
+)
+
 :: --- Final Checks ---
 echo.
 echo ============================================================
@@ -63,7 +72,7 @@ echo ============================================================
 echo.
 echo IMPORTANT:
 echo 1. Ensure Ollama is installed and running (https://ollama.com/)
-echo 2. Run 'ollama pull llama3' before starting
+echo 2. Verified model: llama3.2:3b
 echo 3. Run 'start_system.bat' to launch all microservices
 echo.
 pause
