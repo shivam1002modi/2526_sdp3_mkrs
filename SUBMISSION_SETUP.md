@@ -75,5 +75,19 @@ To reproduce the TMS 88 score, run the MBS test:
 .\ai-service\venv\Scripts\python.exe ai-service\eval_v1.py --name "Final Submission Run"
 ```
 
+## 8. Performance Optimizations
+The system includes advanced optimizations to minimize latency and maximize throughput:
+
+### A. Tiered Re-Ranking (The "Early Exit" Strategy)
+Located in `ai-service/actions/actions.py`:
+- The system re-ranks the top 10 candidates first.
+- If a match exceeds a confidence score of **0.95**, it performs an "Early Exit."
+- This saves ~1-2 seconds per query by skipping the remaining 50 candidates when a high-quality match is found.
+
+### B. CPU Thread-Pinning & Priority
+Managed via `start_system.bat`:
+- **OLLAMA_NUM_THREADS=8**: Pins Ollama to 8 physical cores to avoid context-switching overhead.
+- **Process Priority (HIGH)**: The script automatically elevates Ollama's priority in Windows to ensure it gets CPU cycles before background tasks.
+
 ## ⚠️ Critical Dependency Note
 **Do NOT upgrade `transformers` above 4.45.0**. The Rasa 3.6.x server relies on TensorFlow utilities that were removed in later versions of the `transformers` library. The current `requirements.txt` is pinned to the functional "sweet spot."
