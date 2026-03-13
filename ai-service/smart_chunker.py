@@ -217,7 +217,7 @@ class SmartChunker:
     # ── Table Detection Regexes ───────────────────────────────────────────
     # Markdown tables: | col1 | col2 |\n|---|---|\n| val | val |
     TABLE_MD_REGEX = re.compile(
-        r'(\|[^\n]+\|\n\|[\s\-:]+\|(?:\n\|[^\n]+\|)+)',
+        r'(\|[^\n]+\|\r?\n\|[\s\-|: ]+\|(?:\r?\n\|[^\n]+\|)+)',
         re.MULTILINE
     )
 
