@@ -1,15 +1,15 @@
 {
     "mbs_version": "1.0",
     "test_name": "Optimized Brain Run",
-    "timestamp": "2026-03-13 13:04:08",
-    "tms_score": 84.39,
+    "timestamp": "2026-03-13 11:51:18",
+    "tms_score": 84.54,
     "breakdown": {
         "avg_rhr": 0.9846,
-        "avg_sec": 0.762,
+        "avg_sec": 0.7482,
         "avg_neg": 1.0,
-        "avg_latency_s": 9.326,
+        "avg_latency_s": 7.383,
         "vram_mb": 0,
-        "lat_score": 0.2144,
+        "lat_score": 0.2709,
         "vram_score": 1.0
     },
     "system_snapshot": {
@@ -56,7 +56,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.63,
+            "latency": 4.966,
             "answer_preview": "a black hole is a region in space where gravity is so strong that nothing, not even light, can escape. it forms when massive stars collapse under thei",
             "keywords_found": [
                 "gravity",
@@ -91,7 +91,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.327,
+            "latency": 3.055,
             "answer_preview": "john wheeler coined the term \"black hole\" in 1967.",
             "keywords_found": [
                 "wheeler",
@@ -117,7 +117,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.35,
+            "latency": 3.078,
             "answer_preview": "the event horizon is the point of no return once crossed, beyond which nothing can escape.",
             "keywords_found": [
                 "point",
@@ -151,7 +151,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.724,
+            "latency": 3.056,
             "answer_preview": "hawking radiation: proposed by stephen hawking in 1974, it is radiation emitted by black holes due to quantum effects near the event horizon.",
             "keywords_found": [
                 "hawking",
@@ -178,7 +178,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.294,
+            "latency": 3.601,
             "answer_preview": "sagittarius a*: the supermassive black hole at the center of our milky way galaxy, with a mass about 4 million times that of the sun.",
             "keywords_found": [
                 "milky",
@@ -201,7 +201,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 7.345,
+            "latency": 5.016,
             "answer_preview": "delhi has been built, destroyed, and rebuilt at least seven times, with its roots tracing back to the epic mahabharata, where it is believed to be the",
             "keywords_found": [
                 "capital",
@@ -235,7 +235,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.974,
+            "latency": 3.265,
             "answer_preview": "shah jahan founded the walled city of shahjahanabad (now old delhi) in the 17th century and built the magnificent red fort.",
             "keywords_found": [
                 "shah",
@@ -270,7 +270,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.459,
+            "latency": 2.913,
             "answer_preview": "1911. the british raj announced the shift of the capital from calcutta to delhi in 1911.",
             "keywords_found": [
                 "1911",
@@ -295,7 +295,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.488,
+            "latency": 3.64,
             "answer_preview": "navratri is a major hindu festival celebrating the divine feminine power, or shakti, spanning nine nights and ten days, dedicated to the worship of go",
             "keywords_found": [
                 "nine",
@@ -329,7 +329,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.484,
+            "latency": 3.529,
             "answer_preview": "mahishasura is a buffalo demon who was granted a boon of near-invincibility and created havoc across the universe. he was defeated by goddess durga af",
             "keywords_found": [
                 "demon",
@@ -362,7 +362,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.807,
+            "latency": 4.338,
             "answer_preview": "• rag (retrieval-augmented generation): fetches updated answers from uploaded circulars, pdfs, notices, faqs.",
             "keywords_found": [
                 "retrieval",
@@ -397,7 +397,7 @@
             "rhr": 1,
             "sec": 0.8,
             "neg": 1,
-            "latency": 3.315,
+            "latency": 3.118,
             "answer_preview": "a massive asteroid impact combined with volcanic activity and climate changes.",
             "keywords_found": [
                 "asteroid",
@@ -430,7 +430,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.661,
+            "latency": 3.685,
             "answer_preview": "robert sternberg's triangular theory of love defines love through three components: intimacy, passion, and commitment. different combinations of these",
             "keywords_found": [
                 "triangular",
@@ -463,7 +463,7 @@
             "rhr": 1,
             "sec": 0.333,
             "neg": 1,
-            "latency": 3.884,
+            "latency": 3.405,
             "answer_preview": "the mars mission uses liquid hydrogen fuel and is scheduled for launch at 0900 hours. astronauts must wear pressurized suits. the landing zone is jeze",
             "keywords_found": [
                 "mars"
@@ -486,7 +486,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.161,
+            "latency": 3.045,
             "answer_preview": "liquid hydrogen fuel.",
             "keywords_found": [
                 "liquid",
@@ -511,7 +511,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.156,
+            "latency": 2.986,
             "answer_preview": "jezero crater.",
             "keywords_found": [
                 "jezero",
@@ -534,7 +534,7 @@
             "rhr": 1,
             "sec": 0.5,
             "neg": 1,
-            "latency": 2.929,
+            "latency": 2.842,
             "answer_preview": "45 minutes.",
             "keywords_found": [
                 "45"
@@ -556,7 +556,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.072,
+            "latency": 3.073,
             "answer_preview": "375 degrees.",
             "keywords_found": [
                 "375",
@@ -579,7 +579,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.253,
+            "latency": 3.053,
             "answer_preview": "security ($400m)",
             "keywords_found": [
                 "security",
@@ -602,7 +602,7 @@
             "rhr": 1,
             "sec": 0.5,
             "neg": 1,
-            "latency": 6.741,
+            "latency": 6.918,
             "answer_preview": "logistics.",
             "keywords_found": [
                 "logistics"
@@ -624,7 +624,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.917,
+            "latency": 3.329,
             "answer_preview": "docker run command takes image as input and creates a new container  docker start command takes container as input and starts the container",
             "keywords_found": [
                 "image",
@@ -655,7 +655,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.18,
+            "latency": 3.054,
             "answer_preview": "the -a flag shows all the containers, stopped or running.",
             "keywords_found": [
                 "all",
@@ -683,7 +683,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.206,
+            "latency": 3.536,
             "answer_preview": "a dockerfile is a text-based document that's used to create a container image. its primary purpose is to provide instructions to the image builder on ",
             "keywords_found": [
                 "text-based",
@@ -711,7 +711,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.243,
+            "latency": 2.989,
             "answer_preview": "docker run --name <container_name> <image_name>",
             "keywords_found": [
                 "--name",
@@ -737,7 +737,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.782,
+            "latency": 3.101,
             "answer_preview": "create a file named dockerfile add instructions in the dockerfile build dockerfile to create an image run the image to create a container",
             "keywords_found": [
                 "Create",
@@ -767,7 +767,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.116,
+            "latency": 3.905,
             "answer_preview": "docker volumes provide persistent storage that is independent of individual containers, allowing stateful applications such as databases and file serv",
             "keywords_found": [
                 "persistent",
@@ -797,7 +797,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.032,
+            "latency": 2.978,
             "answer_preview": "/var/lib/docker/volumes",
             "keywords_found": [
                 "/var/lib/docker/volumes"
@@ -818,7 +818,7 @@
             "rhr": 1,
             "sec": 0.7,
             "neg": 1,
-            "latency": 3.678,
+            "latency": 3.193,
             "answer_preview": "bind mounts are directly mounted host directories into containers, while volumes are a better solution for providing permanent storage to operational ",
             "keywords_found": [
                 "host",
@@ -845,10 +845,11 @@
             "rhr": 1,
             "sec": 0.8,
             "neg": 1,
-            "latency": 5.428,
+            "latency": 4.395,
             "answer_preview": "docker compose is a tool that makes it easier to create and run multi-container applications. it automates the process of managing several docker cont",
             "keywords_found": [
-                "multi-container"
+                "multi-container",
+                "single"
             ],
             "keywords_expected": [
                 "multi-container",
@@ -872,7 +873,7 @@
             "rhr": 1,
             "sec": 0.8,
             "neg": 1,
-            "latency": 5.615,
+            "latency": 4.128,
             "answer_preview": "• docker compose is a tool that makes it easier to create and run multi-container applications by automating the process of managing several docker co",
             "keywords_found": [
                 "relationships",
@@ -900,7 +901,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 12.572,
+            "latency": 9.804,
             "answer_preview": "काला धब्बा एक ऐसा क्षेत्र है जहां गुरुत्वाकर्षण इतना मजबूत होता है कि कुछ भी नहीं भाग सकता, न ही तो किरणें भी। यह तब बनता है जब बड़े तारे अपने गुरुत्व",
             "keywords_found": [
                 "gravity",
@@ -932,7 +933,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 20.279,
+            "latency": 13.585,
             "answer_preview": "दिल्ली को कम से कम सात बार बनाया और नष्ट किया गया है। शहर की जड़ें महाभारत में पाई जा सकती हैं, जहां यह इंद्रप्रस्थ के पौराणिक राजधानी के रूप में माना",
             "keywords_found": [
                 "capital",
@@ -960,12 +961,11 @@
             "query": "নবরাত্রির তাৎপর্য কি?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.8,
             "neg": 1,
-            "latency": 20.497,
-            "answer_preview": "নবরাত্রি হলো একটি প্রধান হিন্দু উৎসব যা দেবীন্দ্রী শক্তির প্রতি প্রতিষ্ঠিত প্রতিরোধশক্তি প্রতিষ্ঠার প্রতীক, এবং দর্পণের শাসনের সমাপ্তি প্রতিনিধিত্ব কর",
+            "latency": 13.603,
+            "answer_preview": "নবরাত্রি হলো একটি প্রধান হিন্দু উৎসব যা দেবীন্দ্রী শক্তির প্রতি প্রতিষ্ঠিত প্রতিরোধশক্তি প্রতিষ্ঠার প্রতীক, এবং দর্পণের শাসন ওজনে দর্পণের শাসন ওজনে দর",
             "keywords_found": [
-                "durga",
                 "festival"
             ],
             "keywords_expected": [
@@ -992,8 +992,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 19.111,
-            "answer_preview": "হকিং বিকিরণ হলো একটি তত্ত্বযুক্ত পূর্বাভাস যে ক্ষুদ্রতর কল্পনা করা কল্পনা করা কল্পনা করা কল্পনা করা কল্পনা করা কল্পনা করা কল্পনা করা কল্পনা করা কল্পনা",
+            "latency": 12.389,
+            "answer_preview": "হকিং বিকিরণ: স্টিফেন হকিং দ্বারা ১৯৭৪ সালে প্রস্তাবিত, এটি কণা ঘনত্বের কারণে ঘটনা ঘাঁটির নিকটে তত্ত্ব পরিবর্তনের কারণে কণা ঘনত্বের কারণে কণা ঘনত্বের ক",
             "keywords_found": [
                 "hawking",
                 "radiation"
@@ -1022,8 +1022,8 @@
             "rhr": 1,
             "sec": 0.7,
             "neg": 1,
-            "latency": 12.968,
-            "answer_preview": "डॉकरफाइल नाही perl भाषेत वापरल्या जाणार्‍या फाइल फॉर्मॅटचे प्रकार नाही. ते एक टेक्स्ट-आधारित दस्तऐवज आहे जे एक कंटेनर इमेज तयार करण्यास वापरले जाते.",
+            "latency": 10.649,
+            "answer_preview": "डॉकरफाइल नाही पॅर्लच्या संगणक कौशल्यातील फाइल फॉर्मॅटचा प्रकार नाही. ते एक टेक्स्ट-आधारित दस्तऐवज आहे ज्याने एक कंटेनर इमेज तयार करण्यासाठी वापरले जात",
             "keywords_found": [],
             "keywords_expected": [
                 [
@@ -1049,7 +1049,7 @@
             "rhr": 1,
             "sec": 0.5,
             "neg": 1,
-            "latency": 9.713,
+            "latency": 9.409,
             "answer_preview": "शाहजहां",
             "keywords_found": [
                 "shah"
@@ -1078,7 +1078,7 @@
             "rhr": 0,
             "sec": 0.0,
             "neg": 1,
-            "latency": 12.842,
+            "latency": 10.847,
             "answer_preview": "பதிவுகளில் \"கருண்டையார்\" என்ற சொல்லின் பொருள் தொடர்பான தகவல்கள் இல்லை.",
             "keywords_found": [],
             "keywords_expected": [
@@ -1105,7 +1105,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 18.865,
+            "latency": 13.496,
             "answer_preview": "தொடர்புடைய வாலியம் வாலியம் நிரல் மற்றும் வாலியம் வாலியம் நிரல் மற்றும் வாலியம் வாலியம் நிரல் மற்றும் வாலியம் வாலியம் நிரல் மற்றும் வாலியம் வாலியம் நிர",
             "keywords_found": [],
             "keywords_expected": [
@@ -1126,7 +1126,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 14.182,
+            "latency": 10.514,
             "answer_preview": "పెద్ద కాలపురుగు పతనంతో పాటు భూమిశైల కార్యకలాపాలు, క్లైమేట్ మార్పులు సంభవించినట్లు అనుమానించబడుతుంది.",
             "keywords_found": [],
             "keywords_expected": [
@@ -1153,7 +1153,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 10.279,
+            "latency": 8.741,
             "answer_preview": "ఈ సమాచారం పత్రాలలో ఉండదు.",
             "keywords_found": [],
             "keywords_expected": [
@@ -1178,7 +1178,7 @@
             "rhr": 1,
             "sec": 0.8,
             "neg": 1,
-            "latency": 18.591,
+            "latency": 12.744,
             "answer_preview": "નવરાત્રી, જેનું સંસ્કૃતમાં \"નવ રાત્રી\" તરીકે અર્થ પડે છે, તે એક મહત્વપૂર્ણ હિન્દુ તહેવાર છે જે દેવીની સ્ત્રીશક્તિને સમર્પિત છે, અથવા શક્તિ. તે નવ રાત્",
             "keywords_found": [],
             "keywords_expected": [
@@ -1204,7 +1204,7 @@
             "rhr": 1,
             "sec": 0.7,
             "neg": 1,
-            "latency": 11.033,
+            "latency": 9.242,
             "answer_preview": "કોઈ પણ છોડી ન શકે એ બિન-પરિણામ બિંદુ જેની પાછળ કોઈ છોડી ન શકે.",
             "keywords_found": [],
             "keywords_expected": [
@@ -1231,8 +1231,8 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 13.589,
-            "answer_preview": "ಉಚಿತ ದಾಖಲೆಗಳಲ್ಲಿ \"ಡಾಕ್ಟರ್ ಕಾಮ್ಪೋಸ್\" ಬಗ್ಗೆ ಯಾವುದೇ ಮಾಹಿತಿ ಇಲ್ಲ.",
+            "latency": 11.524,
+            "answer_preview": "ಡಾಕ್ಟರ್ ಕಂಪೋಸ್ ಬಗ್ಗೆ ಯಾವುದೇ ಮಾಹಿತಿಯನ್ನು ಪತ್ರಗಳು ಹೊಂದಿವೆ ಕಾದು.",
             "keywords_found": [],
             "keywords_expected": [
                 [
@@ -1255,10 +1255,10 @@
             "query": "ದೆಹಲಿಯ ಐತಿಹಾಸಿಕ ಮಹತ್ವ ಏನು?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.7,
+            "sec": 0.0,
             "neg": 1,
-            "latency": 20.993,
-            "answer_preview": "ದೆಹಲಿಯನ್ನು ಕನಿಷ್ಠ ಏಳು ಬಾರಿ ನಿರ್ಮಿಸಲಾಗಿದೆ ಮತ್ತು ಧ್ವಂಸಗೊಳಿಸಲಾಗಿದೆ. ಇದು ಮಹಾಭಾರತದಿಂದ ತನ್ನ ಮೂಲಗಳನ್ನು ಹಿಂದೆಗೆದುಕೊಳ್ಳಲಾಗುತ್ತದೆ, ಇದು ಇಂದ್ರಪ್ರಸ್ಥ, ಪಾಂಡವರ ಪ್ರಮು",
+            "latency": 13.886,
+            "answer_preview": "ದೆಹಲಿಯನ್ನು ಕನಿಷ್ಠ ಏಳು ಬಾರಿ ನಿರ್ಮಿಸಲಾಗಿದೆ. ಇದು ಮಹಾಭಾರತದ ಕಥೆಯಿಂದ ತನ್ನ ಮೂಲಗಳನ್ನು ಹಿಂದೆಗೆದುಕೊಳ್ಳಬಹುದು, ಇದು ಇಂದ್ರಪ್ರಸ್ಥ, ಪಾಂಡವರ ದೇಶದ ಪ್ರಸಿದ್ಧ ರಾಜಧಾನಿಯಾಗಿ ನ",
             "keywords_found": [],
             "keywords_expected": [
                 [
@@ -1283,7 +1283,7 @@
             "rhr": 1,
             "sec": 0.8,
             "neg": 1,
-            "latency": 20.745,
+            "latency": 13.698,
             "answer_preview": "ആകാശത്തെങ്കിലും ആഴ്ചില്ലാത്ത പ്രദേശങ്ങളാണ് നിറഞ്ഞ കാറ്റുകൾ. അവിടെ ആഴ്ചില്ലാത്ത പ്രവർത്തനങ്ങളും പ്രവർത്തിക്കാത്ത പ്രകാശവും മാത്രമേ പിടിക്കാത്തതാണ്.",
             "keywords_found": [],
             "keywords_expected": [
@@ -1308,8 +1308,8 @@
             "rhr": 1,
             "sec": 0.7,
             "neg": 1,
-            "latency": 21.852,
-            "answer_preview": "1. രാഗ് (രിട്ടീവൽ-ആഗ്മെന്റെഡ് ജനരംഗീകരണം): ഉപലബ്ധതകൾ ചുരുങ്ങിയ സര്ക്കാർ സംസ്കാരങ്ങൾ, പിഡിഎഫ്സ്, നോട്ടീസ്, എഫ്‌എസ്‌കുകൾ എന്നിവയിൽ നിന്നുള്ള പുതിയ ഉത്തര",
+            "latency": 14.488,
+            "answer_preview": "1. രാഗ് (രിട്ടീവൽ-ആഗ്മെന്റെഡ് ജനരംഗീകരണം): ഉപലബ്ധതകൾ ചുരുങ്ങിയ സര്ക്കാർ സംസ്കാരങ്ങൾ, പിഡിഎഫ്സ്, നോട്ടീസ്, എഫ്‌എസ്‌കുകൾ എന്നിവയിൽ നിന്ന് പുതിയ ഉത്തരങ്ങ",
             "keywords_found": [],
             "keywords_expected": [
                 [
@@ -1334,8 +1334,8 @@
             "rhr": 1,
             "sec": 0.8,
             "neg": 1,
-            "latency": 14.298,
-            "answer_preview": "ਸਥਾਨਾਂ ਵਿਚ ਜਿੱਥੇ ਗੁਰੂਤਵਾਕਰਸ਼ ਬਹੁਤ ਜ਼ਿਆਦਾ ਹੈ ਕਿ ਕਿਸੇ ਵੀ ਚੀਜ਼ ਨੂੰ, ਨਹੀਂ ਤੋਂ ਲੈ ਕੇ ਆਲ੍ਹਣਾ ਵੀ ਬਾਹਰ ਨਹੀਂ ਜਾ ਸਕਦਾ।",
+            "latency": 10.62,
+            "answer_preview": "ਸਥਾਨਾਂ ਵਿਚ ਜਿੱਥੇ ਗੁਰੂਤਵਾਕਰਸ਼ ਬਹੁਤ ਜ਼ਿਆਦਾ ਹੈ ਕਿ ਕਿਸੇ ਵੀ ਚੀਜ਼ ਨੂੰ, ਉਸ ਤੋਂ ਵੱਧ ਲਾਈਟ ਦੀ ਕਿਸੇ ਵੀ ਚੀਜ਼ ਦੀ ਤਲਾਸ਼ ਨਹੀਂ ਕਰ ਸਕਦੀ।",
             "keywords_found": [],
             "keywords_expected": [
                 [
@@ -1360,7 +1360,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 16.105,
+            "latency": 13.265,
             "answer_preview": "ਕੋਈ ਵੀ ਜਾਣਕਾਰੀ ਹੈ ਕਿ \"ਹੈਕਿੰਗ ਰੇਡੀਓ\" ਬਾਰੇ ਪ੍ਰਦਤ ਦੋਕੂਮੈਂਟਾਂ ਵਿਚ ਨਹੀਂ ਹੈ।",
             "keywords_found": [],
             "keywords_expected": [
@@ -1385,7 +1385,7 @@
             "rhr": 1,
             "sec": 0.7,
             "neg": 1,
-            "latency": 12.424,
+            "latency": 9.964,
             "answer_preview": "مغل سلطنت 16ویں سے 19ویں صدی تک ہندوستانی خطے میں سب سے بڑی اور سب سے متاثر کن سلطنت تھی۔",
             "keywords_found": [
                 "mughal"
@@ -1412,7 +1412,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 11.113,
+            "latency": 9.918,
             "answer_preview": "دستاویز میں \"پانی کا تہوار\" کے بارے میں کوئی معلومات نہیں ہیں۔",
             "keywords_found": [],
             "keywords_expected": [
@@ -1438,7 +1438,7 @@
             "rhr": 1,
             "sec": 0.8,
             "neg": 1,
-            "latency": 15.073,
+            "latency": 10.816,
             "answer_preview": "docker compose est un outil qui rend plus facile la création et l'exécution d'applications multi-conteneuses. il automatiser le processus de gestion d",
             "keywords_found": [],
             "keywords_expected": [
@@ -1464,7 +1464,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 11.268,
+            "latency": 9.29,
             "answer_preview": "un agujero negro es una región en el espacio donde la gravedad es tan fuerte que nada, ni siquiera la luz, puede escapar. se forma cuando estrellas ma",
             "keywords_found": [
                 "gravity",
@@ -1494,7 +1494,7 @@
             "rhr": 1,
             "sec": 0.8,
             "neg": 1,
-            "latency": 11.158,
+            "latency": 9.438,
             "answer_preview": "un trou noir est une région dans l'espace où la gravité est si forte que rien, même la lumière, ne peut s'échapper. il se forme lorsque des étoiles ma",
             "keywords_found": [
                 "gravity"
@@ -1523,7 +1523,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 12.03,
+            "latency": 9.865,
             "answer_preview": "robert sternberg a proposé la théorie triangulaire de l'amour, qui définit l'amour à travers trois composantes : intimité, passion et engagement. des ",
             "keywords_found": [
                 "triangular",
@@ -1551,7 +1551,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 11.421,
+            "latency": 9.588,
             "answer_preview": "ein schwarzwinkel ist eine region im weltraum, in der die schwerkraft so stark ist, dass nichts, nicht einmal licht, entkommen kann. es bildet sich, w",
             "keywords_found": [
                 "gravity",
@@ -1580,7 +1580,7 @@
             "rhr": 1,
             "sec": 0.8,
             "neg": 1,
-            "latency": 13.013,
+            "latency": 10.242,
             "answer_preview": "ein dockerfile ist ein textdokument, das anweisungen für den bilderrichter liefert, um befehle auszuführen, dateien zu kopieren, den startbefehl und m",
             "keywords_found": [
                 "text-based"
@@ -1609,8 +1609,8 @@
             "rhr": 1,
             "sec": 0.8,
             "neg": 1,
-            "latency": 11.095,
-            "answer_preview": "黒い孔は、宇宙のある領域で、重力が強すぎて、光や他の物質も逃げることができない場所です。質量の多い星が自らの重力で崩壊し、核燃料を消費した後、形成されます。",
+            "latency": 9.344,
+            "answer_preview": "黒い孔は、宇宙のある領域で、重力が強すぎて、光や他の物質も逃げることができない。質量の多い星が自らの重力に負担を負い、核燃料を消費した後、崩壊することで形成される。",
             "keywords_found": [
                 "gravity"
             ],
@@ -1638,8 +1638,8 @@
             "rhr": 1,
             "sec": 0.8,
             "neg": 1,
-            "latency": 14.165,
-            "answer_preview": "ハッキング放射は、1974年にステップン・ハッキングによって提唱された、 schwarzschild black hole の近くで量子効果が発生することによる、放射が発生する予測的な理論的予測である。 この放射は、ブラックホールが数億年間にわたってゆっくり消えることを示唆している。 このプロセスは",
+            "latency": 10.75,
+            "answer_preview": "ハッキング放射は、1974年にステップン・ハッキングによって提唱された、 schwarzschild black hole の近くで量子効果が発生することによる、放射を生み出す理論的予測である。 この放射は、ブラックホールが数億年間にわたってゆっくり消えることを示唆している。 このプロセスは、虚実粒",
             "keywords_found": [
                 "radiation"
             ],
@@ -1667,7 +1667,7 @@
             "rhr": 1,
             "sec": 0.8,
             "neg": 1,
-            "latency": 10.861,
+            "latency": 9.239,
             "answer_preview": "黑洞是空间中一种强度极大的区域，重力如此强烈，以至于不仅光线也无法逃脱。它形成于大型星球在自身重力下面崩溃后，耗尽核燃料。",
             "keywords_found": [],
             "keywords_expected": [
@@ -1694,7 +1694,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.989,
+            "latency": 3.331,
             "answer_preview": "docker compose是一种工具，用于创建和运行多容器应用。它可以自动管理多个docker容器，例如前端、api和数据库服务。",
             "keywords_found": [
                 "tool",
@@ -1723,7 +1723,7 @@
             "rhr": 1,
             "sec": 0.7,
             "neg": 1,
-            "latency": 10.854,
+            "latency": 10.552,
             "answer_preview": "स्वादिस्थित हाइड्रोजन का तेल",
             "keywords_found": [
                 "hydrogen"
@@ -1755,7 +1755,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 8.648,
+            "latency": 8.177,
             "answer_preview": "cráter de jezero.",
             "keywords_found": [
                 "jezero",
@@ -1784,7 +1784,7 @@
             "rhr": 1,
             "sec": 0.0,
             "neg": 1,
-            "latency": 17.707,
+            "latency": 12.299,
             "answer_preview": "• দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ",
             "keywords_found": [],
             "keywords_expected": [
@@ -1809,7 +1809,7 @@
             "rhr": 1,
             "sec": 0.7,
             "neg": 1,
-            "latency": 8.718,
+            "latency": 8.075,
             "answer_preview": "cybernétique (300 millions de dollars)",
             "keywords_found": [],
             "keywords_expected": [
@@ -1834,7 +1834,7 @@
             "rhr": 1,
             "sec": 0.5,
             "neg": 1,
-            "latency": 9.922,
+            "latency": 9.32,
             "answer_preview": "ジェゼロクレーター",
             "keywords_found": [],
             "keywords_expected": [
