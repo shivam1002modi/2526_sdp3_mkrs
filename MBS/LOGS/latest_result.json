@@ -1,15 +1,15 @@
 {
     "mbs_version": "1.0",
-    "test_name": "Optimized Brain Run",
-    "timestamp": "2026-03-13 11:51:18",
-    "tms_score": 84.54,
+    "test_name": "MBS_DOCKER_EXPANSION_V1",
+    "timestamp": "2026-03-13 09:28:22",
+    "tms_score": 88.0,
     "breakdown": {
-        "avg_rhr": 0.9846,
-        "avg_sec": 0.7482,
+        "avg_rhr": 1.0,
+        "avg_sec": 0.8417,
         "avg_neg": 1.0,
-        "avg_latency_s": 7.383,
+        "avg_latency_s": 7.279,
         "vram_mb": 0,
-        "lat_score": 0.2709,
+        "lat_score": 0.2748,
         "vram_score": 1.0
     },
     "system_snapshot": {
@@ -21,13 +21,15 @@
         "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
         "confidence_threshold": 0.0,
         "retrieval_k": 75,
-        "translation_models": {},
+        "translation_models": {
+            "hi": "Helsinki-NLP/opus-mt-en-hi"
+        },
         "chunk_size": 1500,
         "chunk_overlap": 200,
         "ingestion_method": "SmartIngest (: )",
         "nlu_model": "bert-base-multilingual-cased",
         "vector_store": "ChromaDB",
-        "vector_store_path": "D:\\MKRS\\ai-service\\documents\\chroma_db",
+        "vector_store_path": "d:\\MKRS\\ai-service\\documents\\chroma_db",
         "vector_store_exists": true,
         "pdf_count": 13,
         "pdf_files": [
@@ -56,7 +58,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 4.966,
+            "latency": 8.53,
             "answer_preview": "a black hole is a region in space where gravity is so strong that nothing, not even light, can escape. it forms when massive stars collapse under thei",
             "keywords_found": [
                 "gravity",
@@ -91,7 +93,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.055,
+            "latency": 5.488,
             "answer_preview": "john wheeler coined the term \"black hole\" in 1967.",
             "keywords_found": [
                 "wheeler",
@@ -117,8 +119,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.078,
-            "answer_preview": "the event horizon is the point of no return once crossed, beyond which nothing can escape.",
+            "latency": 7.551,
+            "answer_preview": "the event horizon of a black hole is the point of no return around a black hole where the gravitational pull is so strong that nothing, including ligh",
             "keywords_found": [
                 "point",
                 "return",
@@ -151,8 +153,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.056,
-            "answer_preview": "hawking radiation: proposed by stephen hawking in 1974, it is radiation emitted by black holes due to quantum effects near the event horizon.",
+            "latency": 6.777,
+            "answer_preview": "in 1974, stephen hawking proposed that black holes are not entirely black. due to quantum effects near the event horizon, they emit radiation now call",
             "keywords_found": [
                 "hawking",
                 "radiation"
@@ -178,7 +180,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.601,
+            "latency": 7.659,
             "answer_preview": "sagittarius a*: the supermassive black hole at the center of our milky way galaxy, with a mass about 4 million times that of the sun.",
             "keywords_found": [
                 "milky",
@@ -201,7 +203,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 5.016,
+            "latency": 8.887,
             "answer_preview": "delhi has been built, destroyed, and rebuilt at least seven times, with its roots tracing back to the epic mahabharata, where it is believed to be the",
             "keywords_found": [
                 "capital",
@@ -235,7 +237,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.265,
+            "latency": 6.814,
             "answer_preview": "shah jahan founded the walled city of shahjahanabad (now old delhi) in the 17th century and built the magnificent red fort.",
             "keywords_found": [
                 "shah",
@@ -268,13 +270,12 @@
             "query": "When did the British shift India's capital to Delhi?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.5,
             "neg": 1,
-            "latency": 2.913,
-            "answer_preview": "1911. the british raj announced the shift of the capital from calcutta to delhi in 1911.",
+            "latency": 5.891,
+            "answer_preview": "1911.",
             "keywords_found": [
-                "1911",
-                "calcutta"
+                "1911"
             ],
             "keywords_expected": [
                 "1911",
@@ -284,6 +285,7 @@
                 ]
             ],
             "sources_found": [
+                "1765007523589-delhi_.pdf",
                 "1765007523589-delhi_.pdf",
                 "1765007523589-delhi_.pdf"
             ]
@@ -295,8 +297,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.64,
-            "answer_preview": "navratri is a major hindu festival celebrating the divine feminine power, or shakti, spanning nine nights and ten days, dedicated to the worship of go",
+            "latency": 7.705,
+            "answer_preview": "navratri, which translates to \"nine nights\" in sanskrit, is a major hindu festival celebrating the divine feminine power, or shakti. it spans nine nig",
             "keywords_found": [
                 "nine",
                 "durga",
@@ -329,8 +331,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.529,
-            "answer_preview": "mahishasura is a buffalo demon who was granted a boon of near-invincibility and created havoc across the universe. he was defeated by goddess durga af",
+            "latency": 6.754,
+            "answer_preview": "mahishasura was a powerful buffalo demon who was granted a boon of near-invincibility. he created havoc across the universe and was eventually defeate",
             "keywords_found": [
                 "demon",
                 "mahishasura",
@@ -352,6 +354,7 @@
             ],
             "sources_found": [
                 "1759248623779-navratri.pdf",
+                "1759248623779-navratri.pdf",
                 "1759248623779-navratri.pdf"
             ]
         },
@@ -360,13 +363,11 @@
             "query": "What is RAG's role in the SIH 2025 chatbot?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.333,
             "neg": 1,
-            "latency": 4.338,
-            "answer_preview": "• rag (retrieval-augmented generation): fetches updated answers from uploaded circulars, pdfs, notices, faqs.",
+            "latency": 11.973,
+            "answer_preview": "• langchain document loader parse uploaded pdfs/circulars.  • store embeddings in faiss vector db.  • query embedding matched against db.  • return to",
             "keywords_found": [
-                "retrieval",
-                "augmented",
                 "pdf"
             ],
             "keywords_expected": [
@@ -395,9 +396,9 @@
             "query": "What caused dinosaur extinction 66 million years ago?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.8,
+            "sec": 0.667,
             "neg": 1,
-            "latency": 3.118,
+            "latency": 5.978,
             "answer_preview": "a massive asteroid impact combined with volcanic activity and climate changes.",
             "keywords_found": [
                 "asteroid",
@@ -419,8 +420,8 @@
             ],
             "sources_found": [
                 "dinasours.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
             ]
         },
         {
@@ -430,7 +431,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.685,
+            "latency": 10.057,
             "answer_preview": "robert sternberg's triangular theory of love defines love through three components: intimacy, passion, and commitment. different combinations of these",
             "keywords_found": [
                 "triangular",
@@ -453,6 +454,7 @@
             ],
             "sources_found": [
                 "love.pdf",
+                "love.pdf",
                 "love.pdf"
             ]
         },
@@ -463,8 +465,8 @@
             "rhr": 1,
             "sec": 0.333,
             "neg": 1,
-            "latency": 3.405,
-            "answer_preview": "the mars mission uses liquid hydrogen fuel and is scheduled for launch at 0900 hours. astronauts must wear pressurized suits. the landing zone is jeze",
+            "latency": 7.619,
+            "answer_preview": "the mars mission uses liquid hydrogen fuel and is scheduled for launch at 0900 hours. astronauts must wear pressurized suits due to the planet's gravi",
             "keywords_found": [
                 "mars"
             ],
@@ -486,7 +488,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.045,
+            "latency": 6.065,
             "answer_preview": "liquid hydrogen fuel.",
             "keywords_found": [
                 "liquid",
@@ -501,7 +503,7 @@
             "sources_found": [
                 "stress_test.pdf",
                 "1773373095022-Docker.pdf",
-                "sih 2025 prototype.pdf"
+                "1773373095022-Docker.pdf"
             ]
         },
         {
@@ -511,7 +513,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 2.986,
+            "latency": 5.808,
             "answer_preview": "jezero crater.",
             "keywords_found": [
                 "jezero",
@@ -532,12 +534,13 @@
             "query": "How long do you bake Apple Pie?",
             "is_stress": true,
             "rhr": 1,
-            "sec": 0.5,
+            "sec": 1.0,
             "neg": 1,
-            "latency": 2.842,
-            "answer_preview": "45 minutes.",
+            "latency": 9.661,
+            "answer_preview": "bake for 45 minutes until golden brown.",
             "keywords_found": [
-                "45"
+                "45",
+                "golden"
             ],
             "keywords_expected": [
                 "45",
@@ -545,8 +548,8 @@
             ],
             "sources_found": [
                 "stress_test.pdf",
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf"
+                "1759248623779-navratri.pdf",
+                "1759248623779-navratri.pdf"
             ]
         },
         {
@@ -556,7 +559,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.073,
+            "latency": 5.646,
             "answer_preview": "375 degrees.",
             "keywords_found": [
                 "375",
@@ -577,13 +580,12 @@
             "query": "Which department had the highest profit in Q3 2025?",
             "is_stress": true,
             "rhr": 1,
-            "sec": 1.0,
+            "sec": 0.5,
             "neg": 1,
-            "latency": 3.053,
-            "answer_preview": "security ($400m)",
+            "latency": 9.287,
+            "answer_preview": "security.",
             "keywords_found": [
-                "security",
-                "400"
+                "security"
             ],
             "keywords_expected": [
                 "security",
@@ -602,7 +604,7 @@
             "rhr": 1,
             "sec": 0.5,
             "neg": 1,
-            "latency": 6.918,
+            "latency": 9.016,
             "answer_preview": "logistics.",
             "keywords_found": [
                 "logistics"
@@ -624,8 +626,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.329,
-            "answer_preview": "docker run command takes image as input and creates a new container  docker start command takes container as input and starts the container",
+            "latency": 6.049,
+            "answer_preview": "docker run command takes image as input and creates a new container, while docker start command takes container as input and starts the container. the",
             "keywords_found": [
                 "image",
                 "container",
@@ -655,8 +657,8 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.054,
-            "answer_preview": "the -a flag shows all the containers, stopped or running.",
+            "latency": 5.806,
+            "answer_preview": "shows all the containers, stopped or running.",
             "keywords_found": [
                 "all",
                 "containers",
@@ -683,7 +685,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.536,
+            "latency": 6.487,
             "answer_preview": "a dockerfile is a text-based document that's used to create a container image. its primary purpose is to provide instructions to the image builder on ",
             "keywords_found": [
                 "text-based",
@@ -711,7 +713,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 2.989,
+            "latency": 5.354,
             "answer_preview": "docker run --name <container_name> <image_name>",
             "keywords_found": [
                 "--name",
@@ -737,7 +739,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.101,
+            "latency": 6.058,
             "answer_preview": "create a file named dockerfile add instructions in the dockerfile build dockerfile to create an image run the image to create a container",
             "keywords_found": [
                 "Create",
@@ -767,7 +769,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 3.905,
+            "latency": 9.321,
             "answer_preview": "docker volumes provide persistent storage that is independent of individual containers, allowing stateful applications such as databases and file serv",
             "keywords_found": [
                 "persistent",
@@ -797,7 +799,7 @@
             "rhr": 1,
             "sec": 1.0,
             "neg": 1,
-            "latency": 2.978,
+            "latency": 5.475,
             "answer_preview": "/var/lib/docker/volumes",
             "keywords_found": [
                 "/var/lib/docker/volumes"
@@ -816,9 +818,9 @@
             "query": "What is the difference between Bind Mounts and Docker Volumes?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.7,
+            "sec": 0.667,
             "neg": 1,
-            "latency": 3.193,
+            "latency": 5.573,
             "answer_preview": "bind mounts are directly mounted host directories into containers, while volumes are a better solution for providing permanent storage to operational ",
             "keywords_found": [
                 "host",
@@ -843,13 +845,13 @@
             "query": "What is Docker Compose and why is it useful for multi-container applications?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.8,
+            "sec": 0.5,
             "neg": 1,
-            "latency": 4.395,
+            "latency": 7.319,
             "answer_preview": "docker compose is a tool that makes it easier to create and run multi-container applications. it automates the process of managing several docker cont",
             "keywords_found": [
                 "multi-container",
-                "single"
+                "YAML"
             ],
             "keywords_expected": [
                 "multi-container",
@@ -871,13 +873,12 @@
             "query": "How does Docker Compose differ from using the standard Docker CLI for managing individual containers?",
             "is_stress": false,
             "rhr": 1,
-            "sec": 0.8,
+            "sec": 0.25,
             "neg": 1,
-            "latency": 4.128,
-            "answer_preview": "• docker compose is a tool that makes it easier to create and run multi-container applications by automating the process of managing several docker co",
+            "latency": 7.767,
+            "answer_preview": "• docker compose integrates with the project and is aware of the relationships between your containers, whereas the docker cli only interacts with one",
             "keywords_found": [
-                "relationships",
-                "individual"
+                "relationships"
             ],
             "keywords_expected": [
                 "relationships",
@@ -890,963 +891,6 @@
             ],
             "sources_found": [
                 "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf"
-            ]
-        },
-        {
-            "id": "Q31",
-            "query": "ब्लैक होल क्या है?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 1.0,
-            "neg": 1,
-            "latency": 9.804,
-            "answer_preview": "काला धब्बा एक ऐसा क्षेत्र है जहां गुरुत्वाकर्षण इतना मजबूत होता है कि कुछ भी नहीं भाग सकता, न ही तो किरणें भी। यह तब बनता है जब बड़े तारे अपने गुरुत्व",
-            "keywords_found": [
-                "gravity",
-                "escape"
-            ],
-            "keywords_expected": [
-                [
-                    "gravity",
-                    "गुरुत्वाकर्षण",
-                    "gravitational"
-                ],
-                [
-                    "escape",
-                    "region",
-                    "area",
-                    "क्षेत्र"
-                ]
-            ],
-            "sources_found": [
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q32",
-            "query": "दिल्ली का ऐतिहासिक महत्व क्या है?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 1.0,
-            "neg": 1,
-            "latency": 13.585,
-            "answer_preview": "दिल्ली को कम से कम सात बार बनाया और नष्ट किया गया है। शहर की जड़ें महाभारत में पाई जा सकती हैं, जहां यह इंद्रप्रस्थ के पौराणिक राजधानी के रूप में माना",
-            "keywords_found": [
-                "capital",
-                "mughal"
-            ],
-            "keywords_expected": [
-                [
-                    "capital",
-                    "राजधानी"
-                ],
-                [
-                    "mughal",
-                    "मुगल",
-                    "emperor"
-                ]
-            ],
-            "sources_found": [
-                "1765007523589-delhi_.pdf",
-                "1765007523589-delhi_.pdf",
-                "1765007523589-delhi_.pdf"
-            ]
-        },
-        {
-            "id": "Q33",
-            "query": "নবরাত্রির তাৎপর্য কি?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.8,
-            "neg": 1,
-            "latency": 13.603,
-            "answer_preview": "নবরাত্রি হলো একটি প্রধান হিন্দু উৎসব যা দেবীন্দ্রী শক্তির প্রতি প্রতিষ্ঠিত প্রতিরোধশক্তি প্রতিষ্ঠার প্রতীক, এবং দর্পণের শাসন ওজনে দর্পণের শাসন ওজনে দর",
-            "keywords_found": [
-                "festival"
-            ],
-            "keywords_expected": [
-                [
-                    "durga",
-                    "দুর্গা",
-                    "goddess"
-                ],
-                [
-                    "festival",
-                    "উৎসব",
-                    "nine"
-                ]
-            ],
-            "sources_found": [
-                "1759248623779-navratri.pdf",
-                "1759248623779-navratri.pdf"
-            ]
-        },
-        {
-            "id": "Q34",
-            "query": "হকিং বিকিরণ কি?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 1.0,
-            "neg": 1,
-            "latency": 12.389,
-            "answer_preview": "হকিং বিকিরণ: স্টিফেন হকিং দ্বারা ১৯৭৪ সালে প্রস্তাবিত, এটি কণা ঘনত্বের কারণে ঘটনা ঘাঁটির নিকটে তত্ত্ব পরিবর্তনের কারণে কণা ঘনত্বের কারণে কণা ঘনত্বের ক",
-            "keywords_found": [
-                "hawking",
-                "radiation"
-            ],
-            "keywords_expected": [
-                [
-                    "hawking",
-                    "হকিং"
-                ],
-                [
-                    "radiation",
-                    "বিকিরণ",
-                    "emission"
-                ]
-            ],
-            "sources_found": [
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q35",
-            "query": "डॉकरफाइल म्हणजे काय?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.7,
-            "neg": 1,
-            "latency": 10.649,
-            "answer_preview": "डॉकरफाइल नाही पॅर्लच्या संगणक कौशल्यातील फाइल फॉर्मॅटचा प्रकार नाही. ते एक टेक्स्ट-आधारित दस्तऐवज आहे ज्याने एक कंटेनर इमेज तयार करण्यासाठी वापरले जात",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "dockerfile",
-                    "text-based",
-                    "document"
-                ],
-                [
-                    "image",
-                    "instructions"
-                ]
-            ],
-            "sources_found": [
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf"
-            ]
-        },
-        {
-            "id": "Q36",
-            "query": "लाल किल्ला कोणी बांधला?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.5,
-            "neg": 1,
-            "latency": 9.409,
-            "answer_preview": "शाहजहां",
-            "keywords_found": [
-                "shah"
-            ],
-            "keywords_expected": [
-                [
-                    "shah",
-                    "शाह"
-                ],
-                [
-                    "jahan",
-                    "जहान",
-                    "shahjahanabad"
-                ]
-            ],
-            "sources_found": [
-                "1765007523589-delhi_.pdf",
-                "1765007523589-delhi_.pdf",
-                "1759248623779-navratri.pdf"
-            ]
-        },
-        {
-            "id": "Q37",
-            "query": "கருந்துளை என்றால் என்ன?",
-            "is_stress": false,
-            "rhr": 0,
-            "sec": 0.0,
-            "neg": 1,
-            "latency": 10.847,
-            "answer_preview": "பதிவுகளில் \"கருண்டையார்\" என்ற சொல்லின் பொருள் தொடர்பான தகவல்கள் இல்லை.",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "gravity",
-                    "gravitational"
-                ],
-                [
-                    "escape",
-                    "region",
-                    "space"
-                ]
-            ],
-            "sources_found": [
-                "1759248623779-navratri.pdf",
-                "1759248623779-navratri.pdf",
-                "love.pdf"
-            ]
-        },
-        {
-            "id": "Q38",
-            "query": "டோக்கர் வால்யூம்கள் எங்கே சேமிக்கப்படுகின்றன?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.0,
-            "neg": 1,
-            "latency": 13.496,
-            "answer_preview": "தொடர்புடைய வாலியம் வாலியம் நிரல் மற்றும் வாலியம் வாலியம் நிரல் மற்றும் வாலியம் வாலியம் நிரல் மற்றும் வாலியம் வாலியம் நிரல் மற்றும் வாலியம் வாலியம் நிர",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "/var/lib/docker/volumes"
-                ]
-            ],
-            "sources_found": [
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf"
-            ]
-        },
-        {
-            "id": "Q39",
-            "query": "డైనోసార్లు ఎందుకు అంతరించిపోయాయి?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.0,
-            "neg": 1,
-            "latency": 10.514,
-            "answer_preview": "పెద్ద కాలపురుగు పతనంతో పాటు భూమిశైల కార్యకలాపాలు, క్లైమేట్ మార్పులు సంభవించినట్లు అనుమానించబడుతుంది.",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "asteroid",
-                    "meteor"
-                ],
-                [
-                    "impact",
-                    "collision",
-                    "extinct"
-                ]
-            ],
-            "sources_found": [
-                "dinasours.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q40",
-            "query": "స్టెర్న్‌బర్గ్ ప్రేమ సిద్ధాంతం ఏమిటి?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.0,
-            "neg": 1,
-            "latency": 8.741,
-            "answer_preview": "ఈ సమాచారం పత్రాలలో ఉండదు.",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "triangular",
-                    "triad"
-                ],
-                [
-                    "intimacy",
-                    "passion"
-                ]
-            ],
-            "sources_found": [
-                "love.pdf",
-                "love.pdf"
-            ]
-        },
-        {
-            "id": "Q41",
-            "query": "નવરાત્રિ શું છે?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.8,
-            "neg": 1,
-            "latency": 12.744,
-            "answer_preview": "નવરાત્રી, જેનું સંસ્કૃતમાં \"નવ રાત્રી\" તરીકે અર્થ પડે છે, તે એક મહત્વપૂર્ણ હિન્દુ તહેવાર છે જે દેવીની સ્ત્રીશક્તિને સમર્પિત છે, અથવા શક્તિ. તે નવ રાત્",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "nine",
-                    "durga",
-                    "goddess"
-                ],
-                [
-                    "festival",
-                    "shakti"
-                ]
-            ],
-            "sources_found": [
-                "1759248623779-navratri.pdf",
-                "1759248623779-navratri.pdf"
-            ]
-        },
-        {
-            "id": "Q42",
-            "query": "ઇવેન્ટ હોરાઇઝન શું છે?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.7,
-            "neg": 1,
-            "latency": 9.242,
-            "answer_preview": "કોઈ પણ છોડી ન શકે એ બિન-પરિણામ બિંદુ જેની પાછળ કોઈ છોડી ન શકે.",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "point",
-                    "boundary"
-                ],
-                [
-                    "return",
-                    "no return",
-                    "escape"
-                ]
-            ],
-            "sources_found": [
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q43",
-            "query": "ಡಾಕರ್ ಕಂಪೋಸ್ ಎಂದರೇನು?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.0,
-            "neg": 1,
-            "latency": 11.524,
-            "answer_preview": "ಡಾಕ್ಟರ್ ಕಂಪೋಸ್ ಬಗ್ಗೆ ಯಾವುದೇ ಮಾಹಿತಿಯನ್ನು ಪತ್ರಗಳು ಹೊಂದಿವೆ ಕಾದು.",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "tool",
-                    "multi-container"
-                ],
-                [
-                    "YAML",
-                    "single"
-                ]
-            ],
-            "sources_found": [
-                "sih 2025 prototype (2).pdf",
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf"
-            ]
-        },
-        {
-            "id": "Q44",
-            "query": "ದೆಹಲಿಯ ಐತಿಹಾಸಿಕ ಮಹತ್ವ ಏನು?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.0,
-            "neg": 1,
-            "latency": 13.886,
-            "answer_preview": "ದೆಹಲಿಯನ್ನು ಕನಿಷ್ಠ ಏಳು ಬಾರಿ ನಿರ್ಮಿಸಲಾಗಿದೆ. ಇದು ಮಹಾಭಾರತದ ಕಥೆಯಿಂದ ತನ್ನ ಮೂಲಗಳನ್ನು ಹಿಂದೆಗೆದುಕೊಳ್ಳಬಹುದು, ಇದು ಇಂದ್ರಪ್ರಸ್ಥ, ಪಾಂಡವರ ದೇಶದ ಪ್ರಸಿದ್ಧ ರಾಜಧಾನಿಯಾಗಿ ನ",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "capital",
-                    "mughal"
-                ],
-                [
-                    "sultanate",
-                    "dynasty"
-                ]
-            ],
-            "sources_found": [
-                "1765007523589-delhi_.pdf",
-                "1765007523589-delhi_.pdf",
-                "1765007523589-delhi_.pdf"
-            ]
-        },
-        {
-            "id": "Q45",
-            "query": "ബ്ലാക്ക് ഹോൾ എന്താണ്?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.8,
-            "neg": 1,
-            "latency": 13.698,
-            "answer_preview": "ആകാശത്തെങ്കിലും ആഴ്ചില്ലാത്ത പ്രദേശങ്ങളാണ് നിറഞ്ഞ കാറ്റുകൾ. അവിടെ ആഴ്ചില്ലാത്ത പ്രവർത്തനങ്ങളും പ്രവർത്തിക്കാത്ത പ്രകാശവും മാത്രമേ പിടിക്കാത്തതാണ്.",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "gravity",
-                    "gravitational"
-                ],
-                [
-                    "escape",
-                    "region"
-                ]
-            ],
-            "sources_found": [
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q46",
-            "query": "SIH 2025 ചാറ്റ്ബോട്ടിൽ RAG-ന്റെ പങ്ക് എന്താണ്?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.7,
-            "neg": 1,
-            "latency": 14.488,
-            "answer_preview": "1. രാഗ് (രിട്ടീവൽ-ആഗ്മെന്റെഡ് ജനരംഗീകരണം): ഉപലബ്ധതകൾ ചുരുങ്ങിയ സര്ക്കാർ സംസ്കാരങ്ങൾ, പിഡിഎഫ്സ്, നോട്ടീസ്, എഫ്‌എസ്‌കുകൾ എന്നിവയിൽ നിന്ന് പുതിയ ഉത്തരങ്ങ",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "retrieval",
-                    "fetch"
-                ],
-                [
-                    "pdf",
-                    "documents"
-                ]
-            ],
-            "sources_found": [
-                "SIH_2025_Blueprint.pdf",
-                "sih 2025 prototype (1).pdf",
-                "sih 2025 prototype.pdf"
-            ]
-        },
-        {
-            "id": "Q47",
-            "query": "ਬਲੈਕ ਹੋਲ ਕੀ ਹੈ?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.8,
-            "neg": 1,
-            "latency": 10.62,
-            "answer_preview": "ਸਥਾਨਾਂ ਵਿਚ ਜਿੱਥੇ ਗੁਰੂਤਵਾਕਰਸ਼ ਬਹੁਤ ਜ਼ਿਆਦਾ ਹੈ ਕਿ ਕਿਸੇ ਵੀ ਚੀਜ਼ ਨੂੰ, ਉਸ ਤੋਂ ਵੱਧ ਲਾਈਟ ਦੀ ਕਿਸੇ ਵੀ ਚੀਜ਼ ਦੀ ਤਲਾਸ਼ ਨਹੀਂ ਕਰ ਸਕਦੀ।",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "gravity",
-                    "gravitational"
-                ],
-                [
-                    "escape",
-                    "region",
-                    "space"
-                ]
-            ],
-            "sources_found": [
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q48",
-            "query": "ਹਾਕਿੰਗ ਰੇਡੀਏਸ਼ਨ ਕੀ ਹੈ?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.0,
-            "neg": 1,
-            "latency": 13.265,
-            "answer_preview": "ਕੋਈ ਵੀ ਜਾਣਕਾਰੀ ਹੈ ਕਿ \"ਹੈਕਿੰਗ ਰੇਡੀਓ\" ਬਾਰੇ ਪ੍ਰਦਤ ਦੋਕੂਮੈਂਟਾਂ ਵਿਚ ਨਹੀਂ ਹੈ।",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "hawking"
-                ],
-                [
-                    "radiation",
-                    "emission"
-                ]
-            ],
-            "sources_found": [
-                "sih 2025 prototype.pdf",
-                "sih 2025 prototype.pdf",
-                "sih 2025 prototype.pdf"
-            ]
-        },
-        {
-            "id": "Q49",
-            "query": "دہلی کی تاریخی اہمیت کیا ہے؟",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.7,
-            "neg": 1,
-            "latency": 9.964,
-            "answer_preview": "مغل سلطنت 16ویں سے 19ویں صدی تک ہندوستانی خطے میں سب سے بڑی اور سب سے متاثر کن سلطنت تھی۔",
-            "keywords_found": [
-                "mughal"
-            ],
-            "keywords_expected": [
-                [
-                    "capital",
-                    "دارالحکومت"
-                ],
-                [
-                    "mughal",
-                    "مغل"
-                ]
-            ],
-            "sources_found": [
-                "1765007523589-delhi_.pdf",
-                "1765007523589-delhi_.pdf"
-            ]
-        },
-        {
-            "id": "Q50",
-            "query": "نوراتری کا تہوار کیا ہے؟",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.0,
-            "neg": 1,
-            "latency": 9.918,
-            "answer_preview": "دستاویز میں \"پانی کا تہوار\" کے بارے میں کوئی معلومات نہیں ہیں۔",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "nine",
-                    "durga"
-                ],
-                [
-                    "festival",
-                    "shakti"
-                ]
-            ],
-            "sources_found": [
-                "1759248623779-navratri.pdf",
-                "1759248623779-navratri.pdf",
-                "1759248623779-navratri.pdf"
-            ]
-        },
-        {
-            "id": "Q51",
-            "query": "¿Qué es Docker Compose?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.8,
-            "neg": 1,
-            "latency": 10.816,
-            "answer_preview": "docker compose est un outil qui rend plus facile la création et l'exécution d'applications multi-conteneuses. il automatiser le processus de gestion d",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "tool",
-                    "herramienta"
-                ],
-                [
-                    "multi-container",
-                    "multi-contenedor"
-                ]
-            ],
-            "sources_found": [
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf"
-            ]
-        },
-        {
-            "id": "Q52",
-            "query": "¿Qué es un agujero negro?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 1.0,
-            "neg": 1,
-            "latency": 9.29,
-            "answer_preview": "un agujero negro es una región en el espacio donde la gravedad es tan fuerte que nada, ni siquiera la luz, puede escapar. se forma cuando estrellas ma",
-            "keywords_found": [
-                "gravity",
-                "escape"
-            ],
-            "keywords_expected": [
-                [
-                    "gravity",
-                    "gravedad"
-                ],
-                [
-                    "escape",
-                    "region",
-                    "espacio"
-                ]
-            ],
-            "sources_found": [
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q53",
-            "query": "Qu'est-ce qu'un trou noir?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.8,
-            "neg": 1,
-            "latency": 9.438,
-            "answer_preview": "un trou noir est une région dans l'espace où la gravité est si forte que rien, même la lumière, ne peut s'échapper. il se forme lorsque des étoiles ma",
-            "keywords_found": [
-                "gravity"
-            ],
-            "keywords_expected": [
-                [
-                    "gravity",
-                    "gravité",
-                    "gravitational"
-                ],
-                [
-                    "escape",
-                    "region"
-                ]
-            ],
-            "sources_found": [
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q54",
-            "query": "Qu'est-ce que la théorie triangulaire de l'amour?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 1.0,
-            "neg": 1,
-            "latency": 9.865,
-            "answer_preview": "robert sternberg a proposé la théorie triangulaire de l'amour, qui définit l'amour à travers trois composantes : intimité, passion et engagement. des ",
-            "keywords_found": [
-                "triangular",
-                "intimacy"
-            ],
-            "keywords_expected": [
-                [
-                    "triangular",
-                    "triangulaire"
-                ],
-                [
-                    "intimacy",
-                    "passion"
-                ]
-            ],
-            "sources_found": [
-                "love.pdf",
-                "love.pdf"
-            ]
-        },
-        {
-            "id": "Q55",
-            "query": "Was ist ein Schwarzes Loch?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 1.0,
-            "neg": 1,
-            "latency": 9.588,
-            "answer_preview": "ein schwarzwinkel ist eine region im weltraum, in der die schwerkraft so stark ist, dass nichts, nicht einmal licht, entkommen kann. es bildet sich, w",
-            "keywords_found": [
-                "gravity",
-                "escape"
-            ],
-            "keywords_expected": [
-                [
-                    "gravity",
-                    "gravitational",
-                    "Schwerkraft"
-                ],
-                [
-                    "escape",
-                    "region"
-                ]
-            ],
-            "sources_found": [
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q56",
-            "query": "Was ist ein Dockerfile?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.8,
-            "neg": 1,
-            "latency": 10.242,
-            "answer_preview": "ein dockerfile ist ein textdokument, das anweisungen für den bilderrichter liefert, um befehle auszuführen, dateien zu kopieren, den startbefehl und m",
-            "keywords_found": [
-                "text-based"
-            ],
-            "keywords_expected": [
-                [
-                    "text-based",
-                    "document",
-                    "Datei"
-                ],
-                [
-                    "image",
-                    "instructions"
-                ]
-            ],
-            "sources_found": [
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf"
-            ]
-        },
-        {
-            "id": "Q57",
-            "query": "ブラックホールとは何ですか?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.8,
-            "neg": 1,
-            "latency": 9.344,
-            "answer_preview": "黒い孔は、宇宙のある領域で、重力が強すぎて、光や他の物質も逃げることができない。質量の多い星が自らの重力に負担を負い、核燃料を消費した後、崩壊することで形成される。",
-            "keywords_found": [
-                "gravity"
-            ],
-            "keywords_expected": [
-                [
-                    "gravity",
-                    "gravitational",
-                    "重力"
-                ],
-                [
-                    "escape",
-                    "region"
-                ]
-            ],
-            "sources_found": [
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q58",
-            "query": "ホーキング放射とは何ですか?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.8,
-            "neg": 1,
-            "latency": 10.75,
-            "answer_preview": "ハッキング放射は、1974年にステップン・ハッキングによって提唱された、 schwarzschild black hole の近くで量子効果が発生することによる、放射を生み出す理論的予測である。 この放射は、ブラックホールが数億年間にわたってゆっくり消えることを示唆している。 このプロセスは、虚実粒",
-            "keywords_found": [
-                "radiation"
-            ],
-            "keywords_expected": [
-                [
-                    "hawking",
-                    "ホーキング"
-                ],
-                [
-                    "radiation",
-                    "放射",
-                    "emission"
-                ]
-            ],
-            "sources_found": [
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q59",
-            "query": "什么是黑洞?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 0.8,
-            "neg": 1,
-            "latency": 9.239,
-            "answer_preview": "黑洞是空间中一种强度极大的区域，重力如此强烈，以至于不仅光线也无法逃脱。它形成于大型星球在自身重力下面崩溃后，耗尽核燃料。",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "gravity",
-                    "gravitational",
-                    "引力"
-                ],
-                [
-                    "escape",
-                    "region"
-                ]
-            ],
-            "sources_found": [
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q60",
-            "query": "Docker Compose是什么?",
-            "is_stress": false,
-            "rhr": 1,
-            "sec": 1.0,
-            "neg": 1,
-            "latency": 3.331,
-            "answer_preview": "docker compose是一种工具，用于创建和运行多容器应用。它可以自动管理多个docker容器，例如前端、api和数据库服务。",
-            "keywords_found": [
-                "tool",
-                "multi-container"
-            ],
-            "keywords_expected": [
-                [
-                    "tool",
-                    "工具"
-                ],
-                [
-                    "multi-container",
-                    "多容器"
-                ]
-            ],
-            "sources_found": [
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf"
-            ]
-        },
-        {
-            "id": "Q61",
-            "query": "मंगल मिशन में कौन सा ईंधन उपयोग होता है?",
-            "is_stress": true,
-            "rhr": 1,
-            "sec": 0.7,
-            "neg": 1,
-            "latency": 10.552,
-            "answer_preview": "स्वादिस्थित हाइड्रोजन का तेल",
-            "keywords_found": [
-                "hydrogen"
-            ],
-            "keywords_expected": [
-                [
-                    "liquid",
-                    "तरल"
-                ],
-                [
-                    "hydrogen",
-                    "हाइड्रोजन"
-                ],
-                [
-                    "fuel",
-                    "ईंधन"
-                ]
-            ],
-            "sources_found": [
-                "stress_test.pdf",
-                "1773373095022-Docker.pdf",
-                "1773373095022-Docker.pdf"
-            ]
-        },
-        {
-            "id": "Q62",
-            "query": "¿Cuál es la zona de aterrizaje de la misión a Marte?",
-            "is_stress": true,
-            "rhr": 1,
-            "sec": 1.0,
-            "neg": 1,
-            "latency": 8.177,
-            "answer_preview": "cráter de jezero.",
-            "keywords_found": [
-                "jezero",
-                "crater"
-            ],
-            "keywords_expected": [
-                [
-                    "jezero",
-                    "Jezero"
-                ],
-                [
-                    "crater",
-                    "cráter"
-                ]
-            ],
-            "sources_found": [
-                "stress_test.pdf",
-                "1773373095022-Docker.pdf",
-                "Black Holes â A Knowledge Guide.pdf"
-            ]
-        },
-        {
-            "id": "Q63",
-            "query": "অ্যাপল পাই বেক করার তাপমাত্রা কত?",
-            "is_stress": true,
-            "rhr": 1,
-            "sec": 0.0,
-            "neg": 1,
-            "latency": 12.299,
-            "answer_preview": "• দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ্বীপপুঞ্জের দক্ষিণ দ",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "375"
-                ],
-                [
-                    "degrees",
-                    "ডিগ্রি"
-                ]
-            ],
-            "sources_found": [
-                "stress_test.pdf",
-                "1773373095022-Docker.pdf",
-                "love.pdf"
-            ]
-        },
-        {
-            "id": "Q64",
-            "query": "Quel département a le profit le plus élevé au T3 2025?",
-            "is_stress": true,
-            "rhr": 1,
-            "sec": 0.7,
-            "neg": 1,
-            "latency": 8.075,
-            "answer_preview": "cybernétique (300 millions de dollars)",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "security",
-                    "sécurité"
-                ],
-                [
-                    "400"
-                ]
-            ],
-            "sources_found": [
-                "stress_test.pdf",
-                "stress_test.pdf",
-                "stress_test.pdf"
-            ]
-        },
-        {
-            "id": "Q65",
-            "query": "火星ミッションの着陸地点はどこですか?",
-            "is_stress": true,
-            "rhr": 1,
-            "sec": 0.5,
-            "neg": 1,
-            "latency": 9.32,
-            "answer_preview": "ジェゼロクレーター",
-            "keywords_found": [],
-            "keywords_expected": [
-                [
-                    "jezero"
-                ],
-                [
-                    "crater"
-                ]
-            ],
-            "sources_found": [
-                "stress_test.pdf",
                 "1773373095022-Docker.pdf",
                 "1773373095022-Docker.pdf"
             ]

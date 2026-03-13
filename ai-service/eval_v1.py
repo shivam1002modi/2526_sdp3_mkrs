@@ -25,8 +25,6 @@ import argparse
 import shutil
 import re
 import torch
-import requests
-import traceback
 
 # ── Path Setup ────────────────────────────────────────────────────────────────
 SCRIPT_DIR  = os.path.dirname(os.path.abspath(__file__))
@@ -163,150 +161,6 @@ TEST_CASES = [
     {"id": "Q30", "query": "How does Docker Compose differ from using the standard Docker CLI for managing individual containers?",
      "source_pdf": "Docker", "keywords": ["relationships", "declaratively", ["project-level", "config file"], "individual"],
      "trap_word": None, "is_stress": False},
-
-    # ══════════════════════════════════════════════════════════════════════
-    # MULTILINGUAL TEST — 2 questions per language (15 languages = 30 Qs)
-    # + 5 Multilingual Stress Test questions
-    # ══════════════════════════════════════════════════════════════════════
-
-    # ── HINDI (hi) ────────────────────────────────────────────────────────
-    {"id": "Q31", "query": "ब्लैक होल क्या है?",  # What is a black hole?
-     "source_pdf": "hole", "keywords": [["gravity", "गुरुत्वाकर्षण", "gravitational"], ["escape", "region", "area", "क्षेत्र"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q32", "query": "दिल्ली का ऐतिहासिक महत्व क्या है?",  # Historical significance of Delhi?
-     "source_pdf": "delhi", "keywords": [["capital", "राजधानी"], ["mughal", "मुगल", "emperor"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── BENGALI (bn) ──────────────────────────────────────────────────────
-    {"id": "Q33", "query": "নবরাত্রির তাৎপর্য কি?",  # What is significance of Navratri?
-     "source_pdf": "navratri", "keywords": [["durga", "দুর্গা", "goddess"], ["festival", "উৎসব", "nine"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q34", "query": "হকিং বিকিরণ কি?",  # What is Hawking Radiation?
-     "source_pdf": "hole", "keywords": [["hawking", "হকিং"], ["radiation", "বিকিরণ", "emission"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── MARATHI (mr) ──────────────────────────────────────────────────────
-    {"id": "Q35", "query": "डॉकरफाइल म्हणजे काय?",  # What is a Dockerfile?
-     "source_pdf": "Docker", "keywords": [["dockerfile", "text-based", "document"], ["image", "instructions"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q36", "query": "लाल किल्ला कोणी बांधला?",  # Who built the Red Fort?
-     "source_pdf": "delhi", "keywords": [["shah", "शाह"], ["jahan", "जहान", "shahjahanabad"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── TAMIL (ta) ────────────────────────────────────────────────────────
-    {"id": "Q37", "query": "கருந்துளை என்றால் என்ன?",  # What is a black hole?
-     "source_pdf": "hole", "keywords": [["gravity", "gravitational"], ["escape", "region", "space"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q38", "query": "டோக்கர் வால்யூம்கள் எங்கே சேமிக்கப்படுகின்றன?",  # Where are Docker volumes stored?
-     "source_pdf": "Docker", "keywords": [["/var/lib/docker/volumes"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── TELUGU (te) ────────────────────────────────────────────────────────
-    {"id": "Q39", "query": "డైనోసార్లు ఎందుకు అంతరించిపోయాయి?",  # Why did dinosaurs go extinct?
-     "source_pdf": "dinasours", "keywords": [["asteroid", "meteor"], ["impact", "collision", "extinct"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q40", "query": "స్టెర్న్‌బర్గ్ ప్రేమ సిద్ధాంతం ఏమిటి?",  # What is Sternberg's theory of love?
-     "source_pdf": "love", "keywords": [["triangular", "triad"], ["intimacy", "passion"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── GUJARATI (gu) ────────────────────────────────────────────────────
-    {"id": "Q41", "query": "નવરાત્રિ શું છે?",  # What is Navratri?
-     "source_pdf": "navratri", "keywords": [["nine", "durga", "goddess"], ["festival", "shakti"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q42", "query": "ઇવેન્ટ હોરાઇઝન શું છે?",  # What is the Event Horizon?
-     "source_pdf": "hole", "keywords": [["point", "boundary"], ["return", "no return", "escape"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── KANNADA (kn) ──────────────────────────────────────────────────────
-    {"id": "Q43", "query": "ಡಾಕರ್ ಕಂಪೋಸ್ ಎಂದರೇನು?",  # What is Docker Compose?
-     "source_pdf": "Docker", "keywords": [["tool", "multi-container"], ["YAML", "single"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q44", "query": "ದೆಹಲಿಯ ಐತಿಹಾಸಿಕ ಮಹತ್ವ ಏನು?",  # Historical significance of Delhi?
-     "source_pdf": "delhi", "keywords": [["capital", "mughal"], ["sultanate", "dynasty"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── MALAYALAM (ml) ────────────────────────────────────────────────────
-    {"id": "Q45", "query": "ബ്ലാക്ക് ഹോൾ എന്താണ്?",  # What is a black hole?
-     "source_pdf": "hole", "keywords": [["gravity", "gravitational"], ["escape", "region"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q46", "query": "SIH 2025 ചാറ്റ്ബോട്ടിൽ RAG-ന്റെ പങ്ക് എന്താണ്?",  # What is RAG's role in SIH 2025?
-     "source_pdf": "SIH_2025", "keywords": [["retrieval", "fetch"], ["pdf", "documents"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── PUNJABI (pa) ──────────────────────────────────────────────────────
-    {"id": "Q47", "query": "ਬਲੈਕ ਹੋਲ ਕੀ ਹੈ?",  # What is a black hole?
-     "source_pdf": "hole", "keywords": [["gravity", "gravitational"], ["escape", "region", "space"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q48", "query": "ਹਾਕਿੰਗ ਰੇਡੀਏਸ਼ਨ ਕੀ ਹੈ?",  # What is Hawking Radiation?
-     "source_pdf": "hole", "keywords": [["hawking"], ["radiation", "emission"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── URDU (ur) ─────────────────────────────────────────────────────────
-    {"id": "Q49", "query": "دہلی کی تاریخی اہمیت کیا ہے؟",  # Historical significance of Delhi?
-     "source_pdf": "delhi", "keywords": [["capital", "دارالحکومت"], ["mughal", "مغل"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q50", "query": "نوراتری کا تہوار کیا ہے؟",  # What is Navratri festival?
-     "source_pdf": "navratri", "keywords": [["nine", "durga"], ["festival", "shakti"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── SPANISH (es) ──────────────────────────────────────────────────────
-    {"id": "Q51", "query": "¿Qué es Docker Compose?",  # What is Docker Compose?
-     "source_pdf": "Docker", "keywords": [["tool", "herramienta"], ["multi-container", "multi-contenedor"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q52", "query": "¿Qué es un agujero negro?",  # What is a black hole?
-     "source_pdf": "hole", "keywords": [["gravity", "gravedad"], ["escape", "region", "espacio"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── FRENCH (fr) ───────────────────────────────────────────────────────
-    {"id": "Q53", "query": "Qu'est-ce qu'un trou noir?",  # What is a black hole?
-     "source_pdf": "hole", "keywords": [["gravity", "gravité", "gravitational"], ["escape", "region"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q54", "query": "Qu'est-ce que la théorie triangulaire de l'amour?",  # Sternberg's theory?
-     "source_pdf": "love", "keywords": [["triangular", "triangulaire"], ["intimacy", "passion"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── GERMAN (de) ───────────────────────────────────────────────────────
-    {"id": "Q55", "query": "Was ist ein Schwarzes Loch?",  # What is a black hole?
-     "source_pdf": "hole", "keywords": [["gravity", "gravitational", "Schwerkraft"], ["escape", "region"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q56", "query": "Was ist ein Dockerfile?",  # What is a Dockerfile?
-     "source_pdf": "Docker", "keywords": [["text-based", "document", "Datei"], ["image", "instructions"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── JAPANESE (ja) ─────────────────────────────────────────────────────
-    {"id": "Q57", "query": "ブラックホールとは何ですか?",  # What is a black hole?
-     "source_pdf": "hole", "keywords": [["gravity", "gravitational", "重力"], ["escape", "region"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q58", "query": "ホーキング放射とは何ですか?",  # What is Hawking Radiation?
-     "source_pdf": "hole", "keywords": [["hawking", "ホーキング"], ["radiation", "放射", "emission"]],
-     "trap_word": None, "is_stress": False},
-
-    # ── CHINESE (zh-cn) ──────────────────────────────────────────────────
-    {"id": "Q59", "query": "什么是黑洞?",  # What is a black hole?
-     "source_pdf": "hole", "keywords": [["gravity", "gravitational", "引力"], ["escape", "region"]],
-     "trap_word": None, "is_stress": False},
-    {"id": "Q60", "query": "Docker Compose是什么?",  # What is Docker Compose?
-     "source_pdf": "Docker", "keywords": [["tool", "工具"], ["multi-container", "多容器"]],
-     "trap_word": None, "is_stress": False},
-
-    # ══════════════════════════════════════════════════════════════════════
-    # MULTILINGUAL STRESS TEST (5 questions from stress_test.pdf)
-    # ══════════════════════════════════════════════════════════════════════
-    {"id": "Q61", "query": "मंगल मिशन में कौन सा ईंधन उपयोग होता है?",  # Hindi: What fuel does Mars rocket use?
-     "source_pdf": "stress_test", "keywords": [["liquid", "तरल"], ["hydrogen", "हाइड्रोजन"], ["fuel", "ईंधन"]],
-     "trap_word": "flour", "is_stress": True},
-    {"id": "Q62", "query": "¿Cuál es la zona de aterrizaje de la misión a Marte?",  # Spanish: Mars landing zone?
-     "source_pdf": "stress_test", "keywords": [["jezero", "Jezero"], ["crater", "cráter"]],
-     "trap_word": "preheat", "is_stress": True},
-    {"id": "Q63", "query": "অ্যাপল পাই বেক করার তাপমাত্রা কত?",  # Bengali: Apple pie temperature?
-     "source_pdf": "stress_test", "keywords": [["375"], ["degrees", "ডিগ্রি"]],
-     "trap_word": "astronaut", "is_stress": True},
-    {"id": "Q64", "query": "Quel département a le profit le plus élevé au T3 2025?",  # French: Highest profit Q3?
-     "source_pdf": "stress_test", "keywords": [["security", "sécurité"], ["400"]],
-     "trap_word": None, "is_stress": True},
-    {"id": "Q65", "query": "火星ミッションの着陸地点はどこですか?",  # Japanese: Mars landing zone?
-     "source_pdf": "stress_test", "keywords": [["jezero"], ["crater"]],
-     "trap_word": "preheat", "is_stress": True},
 ]
 
 
@@ -731,65 +585,6 @@ See [PROCEDURE.md](./PROCEDURE.md) for full scoring rules.
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# AI GRADER — Option A: LLM-based factual verification
-# ══════════════════════════════════════════════════════════════════════════════
-def ai_grade_sec(query, answer, keywords):
-    """
-    Uses Ollama to determine if an answer (potentially in any language) 
-    contains the factual meaning of the expected English keywords.
-    """
-    ollama_url = "http://localhost:11434"
-    ollama_model = "llama3.2:3b"
-    
-    # Flatten keywords for the prompt
-    flattened_kws = []
-    for kw in keywords:
-        if isinstance(kw, list):
-            flattened_kws.append(f"({', '.join(kw)})")
-        else:
-            flattened_kws.append(kw)
-    
-    kw_str = ", ".join(flattened_kws)
-    
-    prompt = (
-        "You are a HIGH-PRECISION FACTUAL GRADER for a RAG system. "
-        "Your task is to determine if the 'Response' below contains the information "
-        "requested by the 'Keywords', even if the response is in a different language or uses synonyms.\n\n"
-        f"QUESTION: {query}\n"
-        f"KEYWORDS TO FIND: {kw_str}\n"
-        f"RESPONSE: {answer}\n\n"
-        "SCORING RULES:\n"
-        "1. If ALL keywords/concepts are clearly present, answer '1.0'.\n"
-        "2. If some are missing, provide a fractional score (e.g., '0.5' for half, '0.7' for most).\n"
-        "3. If NO keywords/concepts are present or the answer says 'info not found', answer '0.0'.\n"
-        "4. OUTPUT ONLY THE NUMBER. ZERO PREAMBLE.\n\n"
-        "SCORE (0.0 to 1.0):"
-    )
-
-    try:
-        resp = requests.post(
-            f"{ollama_url}/api/generate",
-            json={
-                "model": ollama_model, 
-                "prompt": prompt, 
-                "stream": False,
-                "options": {"temperature": 0.0, "num_predict": 10}
-            },
-            timeout=30
-        )
-        if resp.status_code == 200:
-            score_text = resp.json().get("response", "0.0").strip()
-            # Extract number using regex in case LLM added text
-            nums = re.findall(r"(\d+\.\d+|\d+)", score_text)
-            if nums:
-                score = float(nums[0])
-                return min(1.0, max(0.0, score))
-    except Exception as e:
-        print(f"      [AI_GRADER_ERROR] {e}")
-    return 0.0
-
-
-# ══════════════════════════════════════════════════════════════════════════════
 # MAIN BENCHMARK RUNNER
 # ══════════════════════════════════════════════════════════════════════════════
 def run_benchmark(test_name="BASELINE"):
@@ -852,21 +647,7 @@ def run_benchmark(test_name="BASELINE"):
                 # If any synonym in the list matches, consider it found
                 if any(syn.lower() in answer for syn in kw):
                     kws_found.append(kw[0]) # Use first as head keyword
-        
-        base_sec = len(kws_found) / len(tc["keywords"]) if tc["keywords"] else 1.0
-        
-        # --- AI GRADER FALLBACK (Option A) ---
-        # If keyword match is low, use AI to judge the meaning
-        if base_sec < 1.0:
-            print(f"      [AI_GRADER] Performing factual verification for '{qid}'...")
-            ai_sec = ai_grade_sec(query, answer, tc["keywords"])
-            
-            # Use whichever is higher (Keyword match or AI judgment)
-            sec = max(base_sec, ai_sec)
-            if sec > base_sec:
-                print(f"      [AI_GRADER] Score boosted: {base_sec:.2f} -> {sec:.2f}")
-        else:
-            sec = base_sec
+        sec = len(kws_found) / len(tc["keywords"]) if tc["keywords"] else 1.0
         # NEG
         neg = 1
         if tc["trap_word"] and tc["trap_word"].lower() in answer:

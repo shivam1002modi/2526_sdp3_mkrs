@@ -25,8 +25,8 @@ def check_env():
     try:
         import transformers
         from packaging import version
-        if version.parse(transformers.__version__) < version.parse("4.40.0"):
-            print(f"⚠️  OUTDATED: transformers {transformers.__version__}. Need 4.40.0+")
+        if version.parse(transformers.__version__) < version.parse("5.3.0"):
+            print(f"⚠️  OUTDATED: transformers {transformers.__version__}. Need 5.3.0+")
             return False
         print(f"✅  Environment OK (transformers {transformers.__version__})")
         return True

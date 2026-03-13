@@ -28,23 +28,18 @@ from rasa_sdk.executor import CollectingDispatcher
 from langchain_community.vectorstores import Chroma
 
 from langdetect import detect, LangDetectException
+from transformers import pipeline
 # Import the CrossEncoder model for re-ranking
 from sentence_transformers.cross_encoder import CrossEncoder
 import torch
 import traceback
 
-# Language name map for Ollama-based translation
-LANG_NAME_MAP = {
-    'hi': 'Hindi', 'bn': 'Bengali', 'mr': 'Marathi',
-    'es': 'Spanish', 'ta': 'Tamil', 'te': 'Telugu',
-    'gu': 'Gujarati', 'kn': 'Kannada', 'ml': 'Malayalam',
-    'pa': 'Punjabi', 'ur': 'Urdu', 'fr': 'French',
-    'de': 'German', 'ja': 'Japanese', 'zh-cn': 'Chinese',
-}
-
 # --- Configuration ---
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:5001")
 DB_FAISS_PATH = os.path.join(os.path.dirname(__file__), "..", "documents", "vectorstore")
+TRANSLATION_MODEL_MAP = {
+    'hi': 'Helsinki-NLP/opus-mt-en-hi',
+}
 # Disabled confidence threshold to ensure re-ranker always provides its best guess.
 CONFIDENCE_THRESHOLD = 0.00
 
@@ -188,49 +183,6 @@ class ActionQueryDoc(Action):
         # Fallback: return the child content as-is
         return child_doc.page_content
 
-    def translate_with_ollama(self, text: str, target_lang: str, direction: str = "to_english") -> str:
-        """
-        Uses Ollama to translate text. Much faster than loading separate Helsinki-NLP models.
-        direction: 'to_english' = translate foreign query to English for search
-                   'from_english' = translate English answer to user's language
-        """
-        if not self.ollama_available:
-            return text
-
-        lang_name = LANG_NAME_MAP.get(target_lang, target_lang)
-
-        if direction == "to_english":
-            prompt = (
-                f"Translate the following {lang_name} text to English. "
-                f"Output ONLY the English translation, nothing else.\n\n"
-                f"{text}"
-            )
-        else:
-            prompt = (
-                f"Translate the following English text to {lang_name}. "
-                f"Output ONLY the {lang_name} translation, nothing else.\n\n"
-                f"{text}"
-            )
-
-        try:
-            response = requests.post(
-                f"{OLLAMA_URL}/api/generate",
-                json={
-                    "model": OLLAMA_MODEL, "prompt": prompt, "stream": False,
-                    "keep_alive": "10m",
-                    "options": {"temperature": 0.0, "num_predict": 300}
-                },
-                timeout=30
-            )
-            if response.status_code == 200:
-                result = response.json().get("response", "").strip()
-                if result:
-                    print(f"Translation ({direction}): '{text[:50]}' -> '{result[:50]}'")
-                    return result
-        except Exception as e:
-            print(f"Translation error: {e}")
-        return text
-
     def generate_with_ollama(self, question: str, context: str) -> str:
         """
         Sends a structured RAG prompt to Ollama and returns the generated answer.
@@ -315,19 +267,10 @@ class ActionQueryDoc(Action):
             lang = 'en'
 
         # ══════════════════════════════════════════════════════════════════
-        # STEP 0.5: MULTILINGUAL — Translate non-English queries to English
-        # ══════════════════════════════════════════════════════════════════
-        search_query = original_query
-        if lang != 'en' and lang in LANG_NAME_MAP:
-            print(f"🌍 Multilingual query detected (lang={lang}). Translating to English for search...")
-            search_query = self.translate_with_ollama(original_query, lang, direction="to_english")
-            print(f"🔍 Search query (English): '{search_query}'")
-
-        # ══════════════════════════════════════════════════════════════════
-        # STEP 1: RETRIEVE — Get top-75 CHILD chunks (Balanced Precision)
+        # STEP 1: RETRIEVE — Get top-50 CHILD chunks (Balanced Precision)
         # ══════════════════════════════════════════════════════════════════
         try:
-            retrieved_docs = self.db.similarity_search(search_query, k=75)
+            retrieved_docs = self.db.similarity_search(original_query, k=75)
         except Exception:
             retrieved_docs = []
 
@@ -335,28 +278,16 @@ class ActionQueryDoc(Action):
             return []
 
         # ══════════════════════════════════════════════════════════════════
-        # STEP 2: RE-RANK — Cross-Encoder scores each child chunk (Tiered Approach)
+        # STEP 2: RE-RANK — Cross-Encoder scores each child chunk
         # ══════════════════════════════════════════════════════════════════
         if self.reranker:
-            # TIER 1: Re-rank top-10 for "Early Exit" optimization
-            tier1_candidates = retrieved_docs[:10]
-            passages = [doc.page_content for doc in tier1_candidates]
-            tier1_scores = self.reranker.predict([(search_query, p) for p in passages])
-            scored_docs = list(zip(tier1_scores, tier1_candidates))
+            # RECORD BREAKER: Re-rank top-60 candidates for maximum coverage
+            top_candidates = retrieved_docs[:60]
+            passages = [doc.page_content for doc in top_candidates]
+            rerank_scores = self.reranker.predict([(original_query, passage) for passage in passages])
+            scored_docs = list(zip(rerank_scores, top_candidates))
             scored_docs.sort(key=lambda x: x[0], reverse=True)
-
-            # Check for Early Exit (Confidence > 0.95)
-            if scored_docs[0][0] > 0.95:
-                print(f"--- EARLY EXIT TRIGGERED (High Confidence: {scored_docs[0][0]:.4f}) ---")
-            else:
-                # TIER 2: Fallback to full re-ranking (remaining 50)
-                print(f"Confidence low ({scored_docs[0][0]:.4f}), performing full re-ranking...")
-                tier2_candidates = retrieved_docs[10:60]
-                passages2 = [doc.page_content for doc in tier2_candidates]
-                tier2_scores = self.reranker.predict([(search_query, p) for p in passages2])
-                scored_docs.extend(zip(tier2_scores, tier2_candidates))
-                scored_docs.sort(key=lambda x: x[0], reverse=True)
-                print(f"Re-ranked top child chunk score: {scored_docs[0][0]:.4f}")
+            print(f"Re-ranked top child chunk score: {scored_docs[0][0]:.4f}")
         else:
             scored_docs = [(1.0, doc) for doc in retrieved_docs]
 
@@ -396,7 +327,7 @@ class ActionQueryDoc(Action):
         combined_context = "\n\n".join(context_parts)
         print(f"Total context sent to LLM: {len(combined_context)} chars "
               f"(from {len(context_parts)} unique parents)")
-        english_answer = self.generate_with_ollama(search_query, combined_context)
+        english_answer = self.generate_with_ollama(original_query, combined_context)
 
         sources = []
         for i, doc in enumerate(final_docs):
@@ -411,17 +342,24 @@ class ActionQueryDoc(Action):
         print(f"DEBUG: Top source retrieved: {sources[0] if sources else 'N/A'}")
 
         final_answer = english_answer
-        # ══════════════════════════════════════════════════════════════════
-        # STEP 5: TRANSLATE — Convert English answer to user's language
-        # ══════════════════════════════════════════════════════════════════
-        if lang != 'en' and lang in LANG_NAME_MAP:
-            print(f"🌍 Translating answer to {LANG_NAME_MAP[lang]}...")
-            translated = self.translate_with_ollama(english_answer, lang, direction="from_english")
-            if translated and not is_translation_garbled(translated):
-                final_answer = translated
-                print(f"Translated Answer: '{final_answer[:100]}...'")
-            else:
-                print("WARN: Translation appears garbled. Falling back to English.")
+        if lang in TRANSLATION_MODEL_MAP:
+            try:
+                model_name = TRANSLATION_MODEL_MAP[lang]
+                if lang not in self.translator_cache:
+                    print(f"Loading translator for '{lang}': {model_name}")
+                    device_id = 0 if self.device == 'cuda' else -1
+                    self.translator_cache[lang] = pipeline('translation', model=model_name, device=device_id)
+
+                translator = self.translator_cache[lang]
+                translated_output = translator(final_answer)
+                translated_text = translated_output[0].get('translation_text')
+                if translated_text and not is_translation_garbled(translated_text):
+                    final_answer = translated_text
+                    print(f"Translated Answer: '{final_answer[:100]}...'")
+                else:
+                    print("WARN: Translation appears garbled. Falling back to English.")
+            except Exception as e:
+                print("ERROR: Translation failed:", e)
 
         sources_info = []
         for src in sources:
