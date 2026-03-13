@@ -1,0 +1,24 @@
+CONFIDENTIAL - PROJECT ALPHA REPORT
+Section 1: The Multi-Column Test
+Below are two columns. One is about Space, one is about Cooking.
+If the bot reads this wrongly, it will bake a rocket.
+Column A: Space Mission Column B: Apple Pie
+The Mars Mission is critical for humanity. To make a perfect Apple Pie, start with dough.
+The rocket uses liquid hydrogen fuel. Mix flour and butter until crumbly.
+Launch is scheduled for 0900 hours. Preheat the oven to 375 degrees.
+Astronauts must wear pressurized suits. Peel and slice the Granny Smith apples.
+Gravity on Mars is 38% of Earth's. Sprinkle cinnamon and sugar freely.
+The landing zone is Jezero Crater. Bake for 45 minutes until golden brown.
+Page 1 of 2 - DO NOT DISTRIBUTE
+CONFIDENTIAL - PROJECT ALPHA REPORT
+Section 2: The Table Test
+Here is the financial data for Q3 2025.
+Department Revenue (M) Cost (M) Profit (M)
+Cybernetics $500 $200 $300
+Bio-Labs $150 $100 $50
+Security $800 $400 $400
+Logistics $120 $110 $10
+TOTAL $1570 $810 $760
+Key Insight: Security is the most profitable sector.
+Note: Logistics has the lowest margin.
+Page 2 of 2 - DO NOT DISTRIBUTE

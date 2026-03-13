@@ -1,0 +1,900 @@
+{
+    "mbs_version": "1.0",
+    "test_name": "Auto Switch Run",
+    "timestamp": "2026-03-13 10:40:01",
+    "tms_score": 92.34,
+    "breakdown": {
+        "avg_rhr": 1.0,
+        "avg_sec": 0.8889,
+        "avg_neg": 1.0,
+        "avg_latency_s": 3.523,
+        "vram_mb": 0,
+        "lat_score": 0.5677,
+        "vram_score": 1.0
+    },
+    "system_snapshot": {
+        "embedding_model": "ai4bharat/IndicBERT-v3-1B",
+        "embedding_library": "Custom Wrapper (Transformers + Mean Pooling)",
+        "embedding_dims": 1024,
+        "generation_model": "llama3.2:3b",
+        "generation_pipeline": "unknown",
+        "reranker_model": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+        "confidence_threshold": 0.0,
+        "retrieval_k": 75,
+        "translation_models": {
+            "hi": "Helsinki-NLP/opus-mt-en-hi"
+        },
+        "chunk_size": 1500,
+        "chunk_overlap": 200,
+        "ingestion_method": "SmartIngest (: )",
+        "nlu_model": "bert-base-multilingual-cased",
+        "vector_store": "ChromaDB",
+        "vector_store_path": "D:\\MKRS\\ai-service\\documents\\chroma_db",
+        "vector_store_exists": true,
+        "pdf_count": 13,
+        "pdf_files": [
+            "1759248623779-navratri.pdf",
+            "1765007523589-delhi_.pdf",
+            "1773373095022-Docker.pdf",
+            "Black Holes â A Knowledge Guide.pdf",
+            "dinasours.pdf",
+            "love.pdf",
+            "sih 2025 prototype (1).pdf",
+            "sih 2025 prototype (2).pdf",
+            "sih 2025 prototype.pdf",
+            "SIH_2025_Blueprint.pdf",
+            "stress_test.pdf",
+            "Untitled document (5).pdf",
+            "Untitled document (6).pdf"
+        ],
+        "device": "CPU",
+        "gpu_name": "N/A (CPU fallback)"
+    },
+    "per_question": [
+        {
+            "id": "Q01",
+            "query": "What is a black hole?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 4.656,
+            "answer_preview": "a black hole is a region in space where gravity is so strong that nothing, not even light, can escape. it forms when massive stars collapse under thei",
+            "keywords_found": [
+                "gravity",
+                "escape",
+                "region"
+            ],
+            "keywords_expected": [
+                [
+                    "gravity",
+                    "gravitational"
+                ],
+                [
+                    "escape",
+                    "pull"
+                ],
+                [
+                    "region",
+                    "area",
+                    "space"
+                ]
+            ],
+            "sources_found": [
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf"
+            ]
+        },
+        {
+            "id": "Q02",
+            "query": "Who coined the term black hole and when?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.028,
+            "answer_preview": "john wheeler coined the term \"black hole\" in 1967.",
+            "keywords_found": [
+                "wheeler",
+                "1967"
+            ],
+            "keywords_expected": [
+                [
+                    "wheeler",
+                    "john wheeler"
+                ],
+                "1967"
+            ],
+            "sources_found": [
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf"
+            ]
+        },
+        {
+            "id": "Q03",
+            "query": "What is the Event Horizon of a black hole?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.163,
+            "answer_preview": "the event horizon is the point of no return once crossed, beyond which nothing can escape.",
+            "keywords_found": [
+                "point",
+                "return",
+                "escape"
+            ],
+            "keywords_expected": [
+                [
+                    "point",
+                    "boundary"
+                ],
+                [
+                    "return",
+                    "no return"
+                ],
+                [
+                    "escape",
+                    "light"
+                ]
+            ],
+            "sources_found": [
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf"
+            ]
+        },
+        {
+            "id": "Q04",
+            "query": "What is Hawking Radiation?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.223,
+            "answer_preview": "hawking radiation: proposed by stephen hawking in 1974, it is radiation emitted by black holes due to quantum effects near the event horizon.",
+            "keywords_found": [
+                "hawking",
+                "radiation"
+            ],
+            "keywords_expected": [
+                "hawking",
+                [
+                    "radiation",
+                    "radiates",
+                    "emission"
+                ]
+            ],
+            "sources_found": [
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf"
+            ]
+        },
+        {
+            "id": "Q05",
+            "query": "What is Sagittarius A star?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.711,
+            "answer_preview": "sagittarius a*: the supermassive black hole at the center of our milky way galaxy, with a mass about 4 million times that of the sun.",
+            "keywords_found": [
+                "milky",
+                "supermassive"
+            ],
+            "keywords_expected": [
+                "milky",
+                "supermassive"
+            ],
+            "sources_found": [
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
+                "1759248623779-navratri.pdf"
+            ]
+        },
+        {
+            "id": "Q06",
+            "query": "What is the historical significance of Delhi?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 4.954,
+            "answer_preview": "delhi has been built, destroyed, and rebuilt at least seven times, with its roots tracing back to the epic mahabharata, where it is believed to be the",
+            "keywords_found": [
+                "capital",
+                "mughal",
+                "sultanate"
+            ],
+            "keywords_expected": [
+                [
+                    "capital",
+                    "official seat"
+                ],
+                [
+                    "mughal",
+                    "emperor"
+                ],
+                [
+                    "sultanate",
+                    "dynasty"
+                ]
+            ],
+            "sources_found": [
+                "1765007523589-delhi_.pdf",
+                "1765007523589-delhi_.pdf",
+                "1765007523589-delhi_.pdf"
+            ]
+        },
+        {
+            "id": "Q07",
+            "query": "Who built the Red Fort and what city did they found?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.342,
+            "answer_preview": "shah jahan founded the walled city of shahjahanabad (now old delhi) in the 17th century and built the magnificent red fort.",
+            "keywords_found": [
+                "shah",
+                "jahan",
+                "shahjahanabad"
+            ],
+            "keywords_expected": [
+                [
+                    "shah",
+                    "emperor shah"
+                ],
+                [
+                    "jahan",
+                    "shah jahan"
+                ],
+                [
+                    "shahjahanabad",
+                    "shajahanabad",
+                    "delhi"
+                ]
+            ],
+            "sources_found": [
+                "1765007523589-delhi_.pdf",
+                "1765007523589-delhi_.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        },
+        {
+            "id": "Q08",
+            "query": "When did the British shift India's capital to Delhi?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 2.959,
+            "answer_preview": "1911. the british raj announced the shift of the capital from calcutta to delhi in 1911.",
+            "keywords_found": [
+                "1911",
+                "calcutta"
+            ],
+            "keywords_expected": [
+                "1911",
+                [
+                    "calcutta",
+                    "kolkata"
+                ]
+            ],
+            "sources_found": [
+                "1765007523589-delhi_.pdf",
+                "1765007523589-delhi_.pdf"
+            ]
+        },
+        {
+            "id": "Q09",
+            "query": "What is Navratri festival?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.531,
+            "answer_preview": "navratri is a major hindu festival celebrating the divine feminine power, or shakti, spanning nine nights and ten days, dedicated to the worship of go",
+            "keywords_found": [
+                "nine",
+                "durga",
+                "shakti"
+            ],
+            "keywords_expected": [
+                [
+                    "nine",
+                    "9 nights"
+                ],
+                [
+                    "durga",
+                    "goddess"
+                ],
+                [
+                    "shakti",
+                    "feminine"
+                ]
+            ],
+            "sources_found": [
+                "1759248623779-navratri.pdf",
+                "1759248623779-navratri.pdf",
+                "1759248623779-navratri.pdf"
+            ]
+        },
+        {
+            "id": "Q10",
+            "query": "Who is Mahishasura in the Navratri legend?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.533,
+            "answer_preview": "mahishasura is a buffalo demon who was granted a boon of near-invincibility and created havoc across the universe. he was defeated by goddess durga af",
+            "keywords_found": [
+                "demon",
+                "mahishasura",
+                "durga"
+            ],
+            "keywords_expected": [
+                [
+                    "demon",
+                    "demon bull"
+                ],
+                [
+                    "mahishasura",
+                    "mahisasura"
+                ],
+                [
+                    "durga",
+                    "shakti"
+                ]
+            ],
+            "sources_found": [
+                "1759248623779-navratri.pdf",
+                "1759248623779-navratri.pdf"
+            ]
+        },
+        {
+            "id": "Q11",
+            "query": "What is RAG's role in the SIH 2025 chatbot?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 4.422,
+            "answer_preview": "• rag (retrieval-augmented generation): fetches updated answers from uploaded circulars, pdfs, notices, faqs.",
+            "keywords_found": [
+                "retrieval",
+                "augmented",
+                "pdf"
+            ],
+            "keywords_expected": [
+                [
+                    "retrieval",
+                    "fetch"
+                ],
+                [
+                    "augmented",
+                    "generation"
+                ],
+                [
+                    "pdf",
+                    "documents",
+                    "files"
+                ]
+            ],
+            "sources_found": [
+                "SIH_2025_Blueprint.pdf",
+                "sih 2025 prototype (1).pdf",
+                "sih 2025 prototype.pdf"
+            ]
+        },
+        {
+            "id": "Q12",
+            "query": "What caused dinosaur extinction 66 million years ago?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 0.667,
+            "neg": 1,
+            "latency": 3.172,
+            "answer_preview": "a massive asteroid impact combined with volcanic activity and climate changes.",
+            "keywords_found": [
+                "asteroid",
+                "impact"
+            ],
+            "keywords_expected": [
+                [
+                    "asteroid",
+                    "meteor"
+                ],
+                [
+                    "extinct",
+                    "died out"
+                ],
+                [
+                    "impact",
+                    "collision"
+                ]
+            ],
+            "sources_found": [
+                "dinasours.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf"
+            ]
+        },
+        {
+            "id": "Q13",
+            "query": "What is Robert Sternberg's Triangular Theory of Love?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.622,
+            "answer_preview": "robert sternberg's triangular theory of love defines love through three components: intimacy, passion, and commitment. different combinations of these",
+            "keywords_found": [
+                "triangular",
+                "intimacy",
+                "passion"
+            ],
+            "keywords_expected": [
+                [
+                    "triangular",
+                    "triad"
+                ],
+                [
+                    "intimacy",
+                    "bond"
+                ],
+                [
+                    "passion",
+                    "romance"
+                ]
+            ],
+            "sources_found": [
+                "love.pdf",
+                "love.pdf"
+            ]
+        },
+        {
+            "id": "Q14",
+            "query": "What is the Mars Mission about?",
+            "is_stress": true,
+            "rhr": 1,
+            "sec": 0.333,
+            "neg": 1,
+            "latency": 3.432,
+            "answer_preview": "the mars mission uses liquid hydrogen fuel and is scheduled for launch at 0900 hours. astronauts must wear pressurized suits. the landing zone is jeze",
+            "keywords_found": [
+                "mars"
+            ],
+            "keywords_expected": [
+                "mars",
+                "humanity",
+                "rocket"
+            ],
+            "sources_found": [
+                "stress_test.pdf",
+                "Black Holes â A Knowledge Guide.pdf",
+                "Black Holes â A Knowledge Guide.pdf"
+            ]
+        },
+        {
+            "id": "Q15",
+            "query": "What type of fuel does the Mars rocket use?",
+            "is_stress": true,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 2.937,
+            "answer_preview": "liquid hydrogen fuel.",
+            "keywords_found": [
+                "liquid",
+                "hydrogen",
+                "fuel"
+            ],
+            "keywords_expected": [
+                "liquid",
+                "hydrogen",
+                "fuel"
+            ],
+            "sources_found": [
+                "stress_test.pdf",
+                "1773373095022-Docker.pdf",
+                "sih 2025 prototype.pdf"
+            ]
+        },
+        {
+            "id": "Q16",
+            "query": "What is the landing zone for the Mars mission?",
+            "is_stress": true,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.03,
+            "answer_preview": "jezero crater.",
+            "keywords_found": [
+                "jezero",
+                "crater"
+            ],
+            "keywords_expected": [
+                "jezero",
+                "crater"
+            ],
+            "sources_found": [
+                "stress_test.pdf",
+                "1773373095022-Docker.pdf",
+                "Black Holes â A Knowledge Guide.pdf"
+            ]
+        },
+        {
+            "id": "Q17",
+            "query": "How long do you bake Apple Pie?",
+            "is_stress": true,
+            "rhr": 1,
+            "sec": 0.5,
+            "neg": 1,
+            "latency": 2.992,
+            "answer_preview": "45 minutes.",
+            "keywords_found": [
+                "45"
+            ],
+            "keywords_expected": [
+                "45",
+                "golden"
+            ],
+            "sources_found": [
+                "stress_test.pdf",
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        },
+        {
+            "id": "Q18",
+            "query": "What temperature to preheat oven for Apple Pie?",
+            "is_stress": true,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 2.896,
+            "answer_preview": "375 degrees.",
+            "keywords_found": [
+                "375",
+                "degrees"
+            ],
+            "keywords_expected": [
+                "375",
+                "degrees"
+            ],
+            "sources_found": [
+                "stress_test.pdf",
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        },
+        {
+            "id": "Q19",
+            "query": "Which department had the highest profit in Q3 2025?",
+            "is_stress": true,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 2.991,
+            "answer_preview": "security ($400m)",
+            "keywords_found": [
+                "security",
+                "400"
+            ],
+            "keywords_expected": [
+                "security",
+                "400"
+            ],
+            "sources_found": [
+                "stress_test.pdf",
+                "stress_test.pdf",
+                "stress_test.pdf"
+            ]
+        },
+        {
+            "id": "Q20",
+            "query": "Which department has the lowest margin in the Q3 2025 report?",
+            "is_stress": true,
+            "rhr": 1,
+            "sec": 0.5,
+            "neg": 1,
+            "latency": 6.162,
+            "answer_preview": "logistics.",
+            "keywords_found": [
+                "logistics"
+            ],
+            "keywords_expected": [
+                "logistics",
+                "margin"
+            ],
+            "sources_found": [
+                "stress_test.pdf",
+                "stress_test.pdf",
+                "stress_test.pdf"
+            ]
+        },
+        {
+            "id": "Q21",
+            "query": "What is the difference between the docker run and docker start commands?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.193,
+            "answer_preview": "docker run command takes image as input and creates a new container  docker start command takes container as input and starts the container",
+            "keywords_found": [
+                "image",
+                "container",
+                "new"
+            ],
+            "keywords_expected": [
+                [
+                    "image",
+                    "input"
+                ],
+                [
+                    "container",
+                    "starts"
+                ],
+                "new"
+            ],
+            "sources_found": [
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        },
+        {
+            "id": "Q22",
+            "query": "What does the -a flag do when used with the docker ps command?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.009,
+            "answer_preview": "the -a flag shows all the containers, stopped or running.",
+            "keywords_found": [
+                "all",
+                "containers",
+                "stopped"
+            ],
+            "keywords_expected": [
+                "all",
+                "containers",
+                [
+                    "stopped",
+                    "running"
+                ]
+            ],
+            "sources_found": [
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        },
+        {
+            "id": "Q23",
+            "query": "What is a Dockerfile and what is its primary purpose?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.477,
+            "answer_preview": "a dockerfile is a text-based document that's used to create a container image. its primary purpose is to provide instructions to the image builder on ",
+            "keywords_found": [
+                "text-based",
+                "image",
+                "instructions"
+            ],
+            "keywords_expected": [
+                [
+                    "text-based",
+                    "document"
+                ],
+                "image",
+                "instructions"
+            ],
+            "sources_found": [
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        },
+        {
+            "id": "Q24",
+            "query": "How can you give a specific name to a container when running it from an image?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 2.963,
+            "answer_preview": "docker run --name <container_name> <image_name>",
+            "keywords_found": [
+                "--name",
+                "container_name"
+            ],
+            "keywords_expected": [
+                "--name",
+                [
+                    "container_name",
+                    "image_name"
+                ]
+            ],
+            "sources_found": [
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        },
+        {
+            "id": "Q25",
+            "query": "What are the four main steps mentioned to work with a Dockerfile?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.138,
+            "answer_preview": "create a file named dockerfile add instructions in the dockerfile build dockerfile to create an image run the image to create a container",
+            "keywords_found": [
+                "Create",
+                "Build",
+                "Run",
+                "Add instructions"
+            ],
+            "keywords_expected": [
+                "Create",
+                "Build",
+                "Run",
+                [
+                    "Add instructions",
+                    "instructions"
+                ]
+            ],
+            "sources_found": [
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        },
+        {
+            "id": "Q26",
+            "query": "Why are Docker volumes necessary for stateful applications like databases?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 3.867,
+            "answer_preview": "docker volumes provide persistent storage that is independent of individual containers, allowing stateful applications such as databases and file serv",
+            "keywords_found": [
+                "persistent",
+                "storage",
+                "independent",
+                "persists"
+            ],
+            "keywords_expected": [
+                "persistent",
+                "storage",
+                [
+                    "independent",
+                    "failure"
+                ],
+                "persists"
+            ],
+            "sources_found": [
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        },
+        {
+            "id": "Q27",
+            "query": "Where are Docker volumes usually stored on a Linux host system?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 1.0,
+            "neg": 1,
+            "latency": 2.925,
+            "answer_preview": "/var/lib/docker/volumes",
+            "keywords_found": [
+                "/var/lib/docker/volumes"
+            ],
+            "keywords_expected": [
+                "/var/lib/docker/volumes"
+            ],
+            "sources_found": [
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        },
+        {
+            "id": "Q28",
+            "query": "What is the difference between Bind Mounts and Docker Volumes?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 0.667,
+            "neg": 1,
+            "latency": 3.213,
+            "answer_preview": "bind mounts are directly mounted host directories into containers, while volumes are a better solution for providing permanent storage to operational ",
+            "keywords_found": [
+                "host",
+                "directories"
+            ],
+            "keywords_expected": [
+                [
+                    "managed by Docker",
+                    "docker managed"
+                ],
+                "host",
+                "directories"
+            ],
+            "sources_found": [
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        },
+        {
+            "id": "Q29",
+            "query": "What is Docker Compose and why is it useful for multi-container applications?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 0.5,
+            "neg": 1,
+            "latency": 4.127,
+            "answer_preview": "docker compose is a tool that makes it easier to create and run multi-container applications. it automates the process of managing several docker cont",
+            "keywords_found": [
+                "multi-container",
+                "YAML"
+            ],
+            "keywords_expected": [
+                "multi-container",
+                "YAML",
+                "single",
+                [
+                    "productivity",
+                    "isolated"
+                ]
+            ],
+            "sources_found": [
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        },
+        {
+            "id": "Q30",
+            "query": "How does Docker Compose differ from using the standard Docker CLI for managing individual containers?",
+            "is_stress": false,
+            "rhr": 1,
+            "sec": 0.5,
+            "neg": 1,
+            "latency": 4.013,
+            "answer_preview": "• docker compose is a tool that makes it easier to create and run multi-container applications by automating the process of managing several docker co",
+            "keywords_found": [
+                "relationships",
+                "individual"
+            ],
+            "keywords_expected": [
+                "relationships",
+                "declaratively",
+                [
+                    "project-level",
+                    "config file"
+                ],
+                "individual"
+            ],
+            "sources_found": [
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf",
+                "1773373095022-Docker.pdf"
+            ]
+        }
+    ]
+}
