@@ -7,7 +7,13 @@ This document provides exact instructions to set up the MKRS AI Brain system fro
 - **Ollama**: [Download & Install Ollama](https://ollama.com/)
 - **OS**: Windows (Commands below are for PowerShell/Command Prompt)
 
-## 2. Environment Setup
+## 2. Lock to Stable Version
+To ensure you are running the exact configuration that achieved TMS 88+, run this first:
+```powershell
+git checkout 7a70ad0db85d372d2dd001451bebd97cc0a12431
+```
+
+## 3. Environment Setup
 From the project root (`D:\MKRS`), run:
 
 ```powershell
